@@ -7,7 +7,7 @@ var path            = require('path');
 var app = express();
 
 
-mongoose.connect('mongodb://localhost:27017/accapp' || process.env.MONGOLAB_URI);
+mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
 mongoose.connection.once('open', function(){
 
   //Load DB models
