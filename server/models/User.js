@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-  bcrypt = require('bcrypt');
+  bcrypt = require('bcrypt'),
+  SALT_WORK_FACTOR = 10;
 
 var userSchema = new mongoose.Schema({
   username: String,
@@ -9,16 +10,13 @@ var userSchema = new mongoose.Schema({
   updated_at: Date
 });
 
-userSchema.methods.sayHello = function() {
-  return "Hi " + this.first_name;
-};
-
-userSchema.pre('save', function() {
+userSchema.pre('save', function(next) {
   var user = this;
-// only hash the password if it has been modified (or is new)
+
+  // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next();
 
-// generate a salt
+  // generate a salt
   bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
     if (err) return next(err);
 
@@ -32,6 +30,13 @@ userSchema.pre('save', function() {
     });
   })
 });
+
+userSchema.methods.comparePassword = function(userPassword, cb) {
+  bcrypt.compare(userPassword, this.password, function (err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
+};
 
 var User = mongoose.model('User', userSchema);
 
