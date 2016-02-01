@@ -1,0 +1,26 @@
+{
+  "name": "prioritize-travel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rk23/prioritize-travel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rk23/prioritize-travel/issues"
+  },
+  "homepage": "https://github.com/rk23/prioritize-travel#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "lodash": "^4.1.0",
+    "mongoose": "^4.3.7",
+    "path": "^0.12.7",
+    "request": "^2.69.0"
+  }
+}
