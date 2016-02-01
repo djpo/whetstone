@@ -1,21 +1,21 @@
 {
-  "name": "prioritize-travel",
+  "name": "whetstone",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hone your craft",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rk23/prioritize-travel.git"
+    "url": "git+https://github.com/rk23/whetstone.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rk23/prioritize-travel/issues"
+    "url": "https://github.com/rk23/whetstone/issues"
   },
-  "homepage": "https://github.com/rk23/prioritize-travel#readme",
+  "homepage": "https://github.com/rk23/whetstone#readme",
   "dependencies": {
     "express": "^4.13.4",
     "lodash": "^4.1.0",
