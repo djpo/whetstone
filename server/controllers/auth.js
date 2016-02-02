@@ -4,8 +4,8 @@ var express   = require('express'),
     User      = db.user,
     router    = express.Router();
 
-router.get('/', function (req, res) {
-  res.render('index', { user : req.user });
+router.get('/', function(req, res) {
+  res.render('home', { user : req.user });
 });
 
 router.get('/register', function(req, res) {
@@ -14,7 +14,7 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-  console.log(req.body)
+  console.log(req.body);
   User.register(new User(
     {
       username : req.body.username,

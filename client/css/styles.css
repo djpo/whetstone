@@ -1,0 +1,17 @@
+#navbar {
+	height: 100px;
+	width: 300px;
+	background-color: gray;
+}
+
+.brand {
+	font-weight: bold;
+	color: white;
+}
+
+.user{
+	float: right;
+	height: 50px;
+	width: 100px;
+	border: 2px solid white;
+}

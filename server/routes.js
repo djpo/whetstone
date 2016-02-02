@@ -1,10 +1,6 @@
 var path = require('path');
 module.exports = {
-
-  '/' : function(req, res){
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-  },
-  '/user' : require('./controllers/user'),
-  '/auth' : require('./controllers/auth')
-
+  '/'				: require('./controllers/main'),
+  '/user'		: require('./controllers/user'),
+  '/auth'		: require('./controllers/auth')
 };
