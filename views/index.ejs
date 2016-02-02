@@ -1,0 +1,16 @@
+<% include ./partials/header.ejs %>
+
+
+<% if (user) { %>
+	<% include ./partials/navbar.ejs %>
+		<h2>dashboard</h2>
+<% } else { %>
+	<% include ./partials/register.ejs %>
+<% } %>
+
+
+
+<a href="/test">TEST</a>
+
+
+<% include ./partials/footer.ejs %>

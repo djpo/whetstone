@@ -13,11 +13,10 @@ var express     = require('express'),
 var app         = express();
 
 
-//Middleware
+// Middleware
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'client')));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -27,19 +26,25 @@ passport.serializeUser(db.user.serializeUser());
 passport.deserializeUser(db.user.deserializeUser());
 
 
-// Load the routes.
+// Load the routes
 var routes = require('./server/routes');
-//_.each(routes, function(controller, route) {
-//  app.use(route, controller);
-//});
+// _.each(routes, function(controller, route) {
+//   app.use(route, controller);
+// });
+
+app.get('/', function(req, res){
+  res.render('index', {user: req.user});
+});
+app.get('/test', function(req, res){
+  res.render('test');
+});
 
 app.use('/user', require('./server/controllers/user'));
 app.use('/auth', require('./server/controllers/auth'));
 
+
 mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
 mongoose.connection.once('open', function(){
-
-
   console.log("Running on the smooth sounds of port 3000");
   app.listen(process.env.PORT || 3000);
 });

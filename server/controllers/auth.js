@@ -9,6 +9,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/register', function(req, res) {
+  // I moved this maybe?? -DP
   res.render('views/register', { });
 });
 
