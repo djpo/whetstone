@@ -10,10 +10,13 @@ var express     = require('express'),
 var app         = express();
 
 
-//Middleware
+// Middleware
 app.set('view engine', 'ejs');
+
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'client')));
+// app.use('/static', express.static(__dirname + '/client/views'));
+app.use(express.static(__dirname + '/client'));
+
 app.use(session({
   secret: 'this is a secret',
   resave: false,
@@ -24,34 +27,45 @@ app.use(function(req, res, next){
   next();
 });
 
-// Load the routes.
+
+// Load the routes
+
 var routes = require('./server/routes');
-_.each(routes, function(controller, route) {
-  app.use(route, controller);
+// _.each(routes, function(controller, route) {
+//   app.use(route, controller);
+// });
+
+app.get('/', function(req, res){
+  res.render('index');
 });
+
+app.get('/test', function(req, res){
+  res.render('test');
+});
+
 
 
 mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
 mongoose.connection.once('open', function(){
 
 
-  var testUser = new db.user({
-    username: 'reed',
-    email: 'reed.kinning@gmail.com',
-    password: '1234'
-  });
+  // var testUser = new db.user({
+  //   username: 'reed',
+  //   email: 'reed.kinning@gmail.com',
+  //   password: '1234'
+  // });
 
-  testUser.save().then(function(){
-    db.user.findOne({username: 'reed'}, function(err, user){
-      if(err) console.log(err);
-      console.log(user)
+  // testUser.save().then(function(){
+  //   db.user.findOne({username: 'reed'}, function(err, user){
+  //     if(err) console.log(err);
+  //     console.log(user)
 
-      user.comparePassword('124', function(err, isMatch){
-        console.log("Is a match? " + isMatch)
-      })
+  //     user.comparePassword('124', function(err, isMatch){
+  //       console.log("Is a match? " + isMatch)
+  //     })
 
-    })
-  });
+  //   })
+  // });
 
 
   console.log("Running on the smooth sounds of port 3000");
