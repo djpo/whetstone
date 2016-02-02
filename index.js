@@ -5,6 +5,9 @@ var express     = require('express'),
     path        = require('path'),
     session     = require('express-session'),
     bodyParser  = require('body-parser'),
+    passport    = require('passport'),
+    //strategies  = require('./config/strategies'),
+    LocalStrategy = require('passport-local').Strategy,
     db          = require('./server/models/index.js');
 
 var app         = express();
@@ -12,24 +15,18 @@ var app         = express();
 
 // Middleware
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use('/static', express.static(__dirname + '/client/views'));
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(path.join(__dirname, 'client')));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(session({
-  secret: 'this is a secret',
-  resave: false,
-  saveUninitialized: true
-}));
-app.use(function(req, res, next){
-  res.locals.currentUser = req.session.user;
-  next();
-});
+//Passport configuration
+passport.use(new LocalStrategy(db.user.authenticate()));
+passport.serializeUser(db.user.serializeUser());
+passport.deserializeUser(db.user.deserializeUser());
 
 
 // Load the routes
-
 var routes = require('./server/routes');
 // _.each(routes, function(controller, route) {
 //   app.use(route, controller);
@@ -38,36 +35,16 @@ var routes = require('./server/routes');
 app.get('/', function(req, res){
   res.render('index');
 });
-
 app.get('/test', function(req, res){
   res.render('test');
 });
 
+app.use('/user', require('./server/controllers/user'));
+app.use('/auth', require('./server/controllers/auth'));
 
 
 mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
 mongoose.connection.once('open', function(){
-
-
-  // var testUser = new db.user({
-  //   username: 'reed',
-  //   email: 'reed.kinning@gmail.com',
-  //   password: '1234'
-  // });
-
-  // testUser.save().then(function(){
-  //   db.user.findOne({username: 'reed'}, function(err, user){
-  //     if(err) console.log(err);
-  //     console.log(user)
-
-  //     user.comparePassword('124', function(err, isMatch){
-  //       console.log("Is a match? " + isMatch)
-  //     })
-
-  //   })
-  // });
-
-
   console.log("Running on the smooth sounds of port 3000");
   app.listen(process.env.PORT || 3000);
 });

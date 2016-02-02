@@ -4,7 +4,7 @@ module.exports = {
   '/' : function(req, res){
     res.sendFile(path.join(__dirname, '../client/index.html'));
   },
-  '/example' : require('./controllers/delete-this')
-
+  '/user' : require('./controllers/user'),
+  '/auth' : require('./controllers/auth')
 
 };
