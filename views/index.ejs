@@ -5,7 +5,16 @@
 	<% include ./partials/navbar.ejs %>
 		<h2>dashboard</h2>
 <% } else { %>
-	<% include ./partials/register.ejs %>
+<div class="row">
+	<div class="col s6">
+		<h2>Sign Up</h2>
+		<% include ./partials/register.ejs %>
+	</div>
+	<div class="col s6">
+		<h2>Login</h2>
+		<% include ./partials/login.ejs%>
+	</div>
+</div>
 <% } %>
 
 

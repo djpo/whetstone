@@ -32,13 +32,14 @@ var routes = require('./server/routes');
 //   app.use(route, controller);
 // });
 
-app.get('/', function(req, res){
-  res.render('index', {user: req.user});
-});
-app.get('/test', function(req, res){
-  res.render('test');
-});
+//app.get('/', function(req, res){
+//  res.render('index', {user: req.user});
+//});
+//app.get('/test', function(req, res){
+//  res.render('test');
+//});
 
+app.use('/', require('./server/controllers/HomeCtrl'));
 app.use('/user', require('./server/controllers/user'));
 app.use('/auth', require('./server/controllers/auth'));
 
