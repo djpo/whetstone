@@ -1,13 +1,18 @@
 <% include ./partials/header.ejs %>
 <% include ./partials/navbar.ejs %>
 
-
 <h3>create_goal view</h3>
 
-<!-- Goal creation page
-	Draw up goal
-	Invite people to goal
-	Start goal -->
-
+<div class="row">
+    <form class="col s12" method="post" action="/goal/create">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="icon_telephone" type="tel" class="validate">
+                <label for="icon_telephone">Telephone</label>
+            </div>
+        </div>
+    </form>
+</div>
 
 <% include ./partials/footer.ejs %>

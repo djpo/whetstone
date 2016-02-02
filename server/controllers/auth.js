@@ -4,15 +4,6 @@ var express   = require('express'),
     User      = db.user,
     router    = express.Router();
 
-router.get('/', function(req, res) {
-  res.render('home', { user : req.user });
-});
-
-router.get('/register', function(req, res) {
-  // I moved this maybe?? -DP
-  res.render('views/register', { });
-});
-
 router.post('/register', function(req, res) {
   console.log(req.body);
   User.register(new User(
@@ -21,11 +12,7 @@ router.post('/register', function(req, res) {
       email: req.body.email
     }
   ), req.body.password, function(err, user) {
-    if (err) {
-      console.log(err)
-      res.redirect("/")
-      //return res.render('register', { user: user });
-    }
+    if (err) return res.render('error', { message: err });
 
     passport.authenticate('local')(req, res, function () {
       res.redirect('/');
@@ -34,11 +21,11 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.render('login', { user : req.user });
+  res.render('login');
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.render('index', {user: req.user});
+  res.render('index');
 });
 
 router.get('/logout', function(req, res) {
