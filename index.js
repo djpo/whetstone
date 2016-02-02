@@ -6,7 +6,7 @@ var express     = require('express'),
     session     = require('express-session'),
     bodyParser  = require('body-parser'),
     passport    = require('passport'),
-    //strategies  = require('./config/strategies'),
+    // strategies  = require('./config/strategies'),
     LocalStrategy = require('passport-local').Strategy,
     db          = require('./server/models/index.js');
 
@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 //Passport configuration
 passport.use(new LocalStrategy(db.user.authenticate()));
 passport.serializeUser(db.user.serializeUser());
@@ -28,21 +29,12 @@ passport.deserializeUser(db.user.deserializeUser());
 
 // Load the routes
 var routes = require('./server/routes');
-// _.each(routes, function(controller, route) {
-//   app.use(route, controller);
-// });
-
-app.get('/', function(req, res){
-  res.render('index', {user: req.user});
-});
-app.get('/test', function(req, res){
-  res.render('test');
+_.each(routes, function(controller, route) {
+  app.use(route, controller);
 });
 
-app.use('/user', require('./server/controllers/user'));
-app.use('/auth', require('./server/controllers/auth'));
 
-
+// Connect to mongo, run server
 mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
 mongoose.connection.once('open', function(){
   console.log("Running on the smooth sounds of port 3000");
