@@ -1,6 +1,3 @@
-<% include ./partials/header.ejs %>
-
-
 <% if (!user) { %>
 	<% include ./partials/register.ejs %>
 <% } else { %>
@@ -11,6 +8,3 @@
 	<p>for... <%= user.name %></p>
 
 <% } %>
-
-
-<% include ./partials/footer.ejs %>

@@ -5,6 +5,7 @@ var express     = require('express'),
     path        = require('path'),
     session     = require('express-session'),
     bodyParser  = require('body-parser'),
+    ejsLayouts  = require("express-ejs-layouts"),
     passport    = require('passport'),
     // strategies  = require('./config/strategies'),
     LocalStrategy = require('passport-local').Strategy,
@@ -15,6 +16,7 @@ var app         = express();
 
 // Middleware
 app.set('view engine', 'ejs');
+app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(passport.initialize());
