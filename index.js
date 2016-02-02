@@ -33,7 +33,7 @@ var routes = require('./server/routes');
 // });
 
 app.get('/', function(req, res){
-  res.render('index');
+  res.render('index', {user: req.user});
 });
 app.get('/test', function(req, res){
   res.render('test');
