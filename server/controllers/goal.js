@@ -7,20 +7,38 @@ router.get('/create', function(req, res){
   res.render('create_goal');
 });
 
+// not creating new goal yet
 router.post('/create', function(req, res){
   console.log(req.body);
-  // req.body currently looks like this:
-  // {
-  //   name: 'my sweet goal',
-  //   content: 'image',
-  //   frequency: '3',
-  //   period: 'week',
-  //   length: '8',
-  //   publish: 'interval'
-  // }
+
+  // var newGoal = new Goal({
+  //   name: req.body.name,
+  //   content: req.body.content,
+  //   frequency: req.body.frequency,
+  //   period: req.body.period,
+  //   length: req.body.length,
+  //   pulish: req.body.publish
+  // });
+
+  var testGoal = new Goal({
+    name: 'one sick goal',
+    content: 'image',
+    frequency: '5',
+    period: 'week',
+    length: '8',
+    publish: 'all'
+  });
+  console.log(textGoal);
+
+  // testGoal.save(function (err, testGoal){
+  //   if (err) return console.error(err);
+  //   console.log("goal saved!");
+  // });
   
   res.redirect('/goal/dashboard');
 });
+
+
 
 router.get('/dashboard', function(req, res){
   res.render('dashboard');
