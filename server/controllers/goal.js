@@ -1,4 +1,6 @@
 var express   = require('express'),
+    multer    = require('multer'),
+    upload    = multer({ dest: 'uploads/' }),
     router    = express.Router();
 
 router.get('/create', function(req, res){
@@ -28,6 +30,13 @@ router.get('/dashboard', function(req, res){
 
 router.get('/archive', function(req, res){
   res.render('archive');
+});
+
+router.post('/upload', upload.single('submission'), function(req, res, next){
+  var submission = req.file;
+  submission.user_id = req.user.id
+  console.log(submission)
+  res.status(204).end()
 });
 
 module.exports = router;
