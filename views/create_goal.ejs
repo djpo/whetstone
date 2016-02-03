@@ -1,84 +1,82 @@
 <div class="container">
-	<h3>create your goal</h3>
+	<h4>create your goal</h4>
 
 	<div class="row">
-		<form class="col s10" method="post" action="/goal/create">
-
-				<!-- tmeplate input
-			  <div class="row input-field">
-			  	<div class="col s3 goal-label">template</div>
-					<div class="col s9 goal-input">
-						<input placeholder="" id="" type="" class="validate">
-					</div>
-				</div>
-				-->
+		<form class="col m8 s12" method="post" action="/goal/create">
 
 				<div class="row valign-wrapper input-field">
-					<div class="col s3 goal-label">
+					<div class="col s4 goal-label">
 						<div class="valign right">name of goal</div>
 					</div>
-					<div class="col s9 goal-input">
-						<input placeholder="Ima be a sicknastay painter!" id="name" type="text" class="validate">
+					<div class="col s8 goal-input">
+						<input type="text" id="name" placeholder="Ima be a sicknastay painter!" class="validate">
 					</div>
 				</div>
 
 			  <div class="row valign-wrapper input-field">
-			  	<div class="col s3 goal-label">
+			  	<div class="col s4 goal-label">
 			  		<div class="valign right">content type</div>
 			  	</div>
-					<div class="col s9 goal-input">
+					<div class="col s8 goal-input">
 						<select>
-				      <option value="i">image</option>
-				      <option value="t">text</option>
-				      <option value="a">audio</option>
+				      <option value="image">image</option>
+				      <option value="text">text</option>
+				      <option value="audio">audio</option>
 				    </select>
 					</div>
 				</div>
 
 			  <div class="row valign-wrapper input-field">
-			  	<div class="col s3 goal-label">
+			  	<div class="col s4 goal-label">
 			  		<div class="valign right">submissions</div>
 			  	</div>
-					<div class="col s9 goal-input">
-						<input placeholder="5" id="submissions" type="number" min="1" max="10" class="validate">
+					<div class="col s8 goal-input">
+						<input type="number" id="frequency" placeholder="5" min="1" max="10" class="validate">
 					</div>
 				</div>
 
-				<div class="row valign-wrapper input-field">
-			  	<div class="col s3 goal-label">
+			  <div class="row valign-wrapper input-field">
+			  	<div class="col s4 goal-label">
 			  		<div class="valign right">per</div>
 			  	</div>
-					<div class="col s9 goal-input">
-						<select>
-				      <option value="w">week</option>
-				      <option value="m">month</option>
-				    </select>
+					<div class="col s8 goal-input">
+						<input type="radio"name="period_length_group" id="week">
+						<label for="week">week</label>
+						<br>
+						<input type="radio" name="period_length_group" id="month">
+						<label for="month">month</label>
 					</div>
 				</div>
 
-				<!-- Time span
-					Minimum 4 weeks with ability to increase time
-					Optional incentive price based on frequency
-				-->
-
-				<!-- make this radio buttons: auto all, once per week/month, manual -->
 				<div class="row valign-wrapper input-field">
-			  	<div class="col s3 goal-label">
-			  		<div class="valign right">publish to public portfolio</div>
+			  	<div class="col s4 goal-label">
+			  		<div class="valign right">goal length (months)</div>
 			  	</div>
-					<div class="col s9 goal-input">
-				    <p>
-				      <input type="checkbox" class="filled-in" id="box1" checked="checked" />
-				      <label for="box1">box1</label>
-				    </p>
-				    <input type="checkbox" class="filled-in" id="box2" checked="checked" />
-				    <label for="box2">box2</label>
+					<div class="col s8 goal-input">
+						<input type="number" id="total_length" placeholder="6" min="1" max="12" class="validate">
+					</div>
+				</div>
+
+			  <div class="row valign-wrapper input-field">
+			  	<div class="col s4 goal-label">
+			  		<div class="valign right">publish submissions to public portfolio</div>
 			  	</div>
+					<div class="col s8 goal-input">
+						<input type="radio" name="publish_group" id="all">
+						<label for="all">all</label>
+						<br>
+						<input type="radio" name="publish_group" id="interval">
+						<label for="interval">one per week/month</label>
+							<!-- I'd love for the 'week/month' to reflect the period_length selected above -DP -->
+						<br>
+						<input type="radio" name="publish_group" id="manual">
+						<label for="manual">manual only</label>
+					</div>
 				</div>
 
 				<div class="row">
-					<div class="col offset-s3">
-						<button class="btn disabled" type="submit" name="action">submit</button>
+					<div class="col s8 offset-s4">
+						<button type="submit" name="action" class="btn right">submit</button>
 					</div>
 				</div>
 
