@@ -2,6 +2,7 @@ var express   = require('express'),
     multer    = require('multer'),
     upload    = multer({ dest: 'uploads/' }),
     db        = require('../models/index'),
+    dateFormat = require('dateformat'),
     router    = express.Router();
 
 router.get('/create', function(req, res){
@@ -53,20 +54,47 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
   //Find the current user so we can add submission to his/her file
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) console.log(err);
-    //Create new submission and put the current user's id on it
-    var submission = new db.submission(req.file);
-    submission.user_id = user._id;
-    //Save the submission to the db
-    submission.save(function (err) {
+    db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) console.log(err);
-      //Push submission into user table
-      user.submissions.push(submission);
-      user.save(function(err){
+
+      var submission = req.file;
+      submission.user_id = user._id;
+      submission.created_at = new Date();
+      submission.note = req.body.note;
+
+      goal.submissions.push(submission);
+      goal.save(function(err){
         if (err) console.log(err);
         res.status(204).end()
-      });
+      })
+
     });
+
   });
+});
+
+router.get('/:goalid/:subid', function(req, res){
+  var goalid = req.params.goalid;
+  var subid = req.params.subid;
+
+  db.goal.findOne({_id: goalid}, function (err, goal) {
+    if (err) console.log(err);
+
+    for (var i = 0; i < goal.submissions.length; i++){
+      if(goal.submissions[i].filename == subid){
+        return res.render('show_submission',
+          {
+            subDate: dateFormat(goal.submissions[i].created_at, "h:MM TT mmm dd"),
+            subNote: goal.submissions[i].note,
+            subFilename: goal.submissions[i].filename
+          });
+      }
+    }
+
+    console.log('submission not found');
+    //res.status(200).end();
+  })
+
 });
 
 module.exports = router;
