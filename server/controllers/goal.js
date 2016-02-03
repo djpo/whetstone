@@ -5,34 +5,36 @@ var express   = require('express'),
     router    = express.Router();
 
 router.get('/create', function(req, res){
+  if(!req.user) return res.redirect('/');
   res.render('create_goal');
 });
 
-router.get('/savegoal', function(req, res){
-  //TODO: set active goal on user to the new goal id
-  //user.activeGoal = goal.id
+router.post('/savegoal', function(req, res){
   console.log('req.user:', req.user);
   console.log('req.body:', req.body);
 
   var newGoal = new db.goal(
-    // req.body
-    //
+    req.body
+
+    // explicit properties from req.body
     // {
     //   name: req.body.name,
     //   content: req.body.content,
     //   frequency: req.body.frequency,
     //   period: req.body.period,
     //   length: req.body.length,
-    //   pulish: req.body.publish
+    //   publish: req.body.publish
     // }
-    {
-      name: 'supergoal test1',
-      content: 'image',
-      frequency: 4,
-      period: 'week',
-      length: 12,
-      pulish: 'all'
-    }
+
+    // harcoded properties to test without using form
+    // {
+    //   name: 'supergoal test1',
+    //   content: 'image',
+    //   frequency: 4,
+    //   period: 'week',
+    //   length: 12,
+    //   publish: 'all'
+    // }
   );
   console.log('newGoal:', newGoal);
 
@@ -40,10 +42,10 @@ router.get('/savegoal', function(req, res){
     if (err) return console.error(err);
     console.log("goal saved!");
   });
-  
+  //TODO: set active goal on user to the new goal id
+    //user.activeGoal = goal.id
   res.redirect('/goal/dashboard');
 });
-
 
 
 router.get('/dashboard', function(req, res){
