@@ -23,7 +23,7 @@ router.post('/register', function(req, res) {
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
   //Toggle below to test goal dashboard view
-  req.user.activeGoal = "sl98sj30s92k";
+  //req.user.activeGoal = "sl98sj30s92k";
 
   if (req.user.goals > 1) {
     //If user has more than one goal, show all goals
