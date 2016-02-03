@@ -7,7 +7,7 @@ var Submission = new Schema({
   encoding: String,
   mimetype: String,
   destination: String,
-  filename: String,
+  filename: {type: String, require: true, unique: true},
   path: String,
   size: Number,
   user_id: String,
