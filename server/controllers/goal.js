@@ -32,6 +32,7 @@ router.post('/savegoal', function(req, res){
 
 router.get('/dashboard', function(req, res){
   if (!req.user) return res.redirect('/');
+  if (!req.user.activeGoal) return res.redirect('../goal/create');
   // Find current user
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) console.log(err);
