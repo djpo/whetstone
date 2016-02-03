@@ -18,7 +18,7 @@ Submission.pre('save', function(next){
   var now = new Date();
   this.created_at = now;
   next();
-})
+});
 
 // make this available to our other files
 module.exports = mongoose.model('Submission', Submission);
