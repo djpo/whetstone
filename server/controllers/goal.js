@@ -47,6 +47,7 @@ router.get('/savegoal', function(req, res){
 
 
 router.get('/dashboard', function(req, res){
+  if(!req.user) return res.redirect('/');
   res.render('dashboard');
 });
 
