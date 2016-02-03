@@ -13,37 +13,30 @@ router.post('/savegoal', function(req, res){
   console.log('req.user:', req.user);
   console.log('req.body:', req.body);
 
-  var newGoal = new db.goal(
-    req.body
+  // Find the current user
+  db.user.findOne({_id: req.user.id}, function(err, user){
+    if(err) console.log(err);
 
-    // explicit properties from req.body
-    // {
-    //   name: req.body.name,
-    //   content: req.body.content,
-    //   frequency: req.body.frequency,
-    //   period: req.body.period,
-    //   length: req.body.length,
-    //   publish: req.body.publish
-    // }
+    // Create new goal
+    var newGoal = new db.goal(req.body);
+    // Push current user to this goal's members array
+    newGoal.members.push(user._id);
+    console.log('newGoal:', newGoal);
 
-    // harcoded properties to test without using form
-    // {
-    //   name: 'supergoal test1',
-    //   content: 'image',
-    //   frequency: 4,
-    //   period: 'week',
-    //   length: 12,
-    //   publish: 'all'
-    // }
-  );
-  console.log('newGoal:', newGoal);
+    // Save the goal to the db
+    newGoal.save(function (err){
+      if (err) return console.error(err);
+      console.log("goal saved!");
 
-  newGoal.save(function (err, newGoal){
-    if (err) return console.error(err);
-    console.log("goal saved!");
+    // Set user's activeGoal to this goal id, save user
+    // user.activeGoal = goal._id;
+    // user.save(function(err){
+    //   if(err)console.log(err);
+    //   // res.status(204).end()
+    // });
+
+    });
   });
-  //TODO: set active goal on user to the new goal id
-    //user.activeGoal = goal.id
   res.redirect('/goal/dashboard');
 });
 
@@ -61,7 +54,7 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
 
   //Find the current user so we can add submission to his/her file
   db.user.findOne({_id: req.user.id}, function(err, user){
-    if(err) console.log(err)
+    if(err) console.log(err);
 
     //Create new submission and put the current user's id on it
     var submission = new db.submission(req.file);
@@ -76,9 +69,9 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
       user.save(function(err){
         if(err)console.log(err);
         res.status(204).end()
-      })
-    })
-  })
+      });
+    });
+  });
 
 });
 

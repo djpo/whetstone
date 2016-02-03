@@ -8,6 +8,7 @@ var Goal = new Schema({
   period: String,
   length: Number,
   publish: String,
+  members: Array,
   created_at: {type: Date, default: Date.now}
 });
 
