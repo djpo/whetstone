@@ -1,13 +1,72 @@
-<h3>create_goal view</h3>
+<div class="container">
+	<h3>create your goal</h3>
 
-<div class="row">
-	<form class="col s12" method="post" action="/goal/create">
-		<div class="row">
-			<div class="input-field col s6">
-				<i class="material-icons prefix">phone</i>
-				<input id="icon_telephone" type="tel" class="validate">
-				<label for="icon_telephone">Telephone</label>
-			</div>
-		</div>
-	</form>
+	<div class="row">
+		<form class="col s10" method="post" action="/goal/create">
+
+				<!-- tmeplate input
+			  <div class="row input-field">
+			  	<div class="col s3 goal-label">template</div>
+					<div class="col s9 goal-input">
+						<input placeholder="" id="" type="" class="validate">
+					</div>
+				</div>
+				-->
+
+				<div class="row input-field">
+					<div class="col s3 goal-label">name of goal</div>
+					<div class="col s9 goal-input">
+						<input placeholder="Ima be a sicknastay painter!" id="name" type="text" class="validate">
+					</div>
+				</div>
+
+			  <div class="row input-field">
+			  	<div class="col s3 goal-label">content type</div>
+					<div class="col s9 goal-input">
+						<select>
+				      <option value="i">image</option>
+				      <option value="t">text</option>
+				      <option value="a">audio</option>
+				    </select>
+					</div>
+				</div>
+
+			  <div class="row input-field">
+			  	<div class="col s3 goal-label">submissions</div>
+					<div class="col s9 goal-input">
+						<input placeholder="5" id="submissions" type="number" min="1" max="10" class="validate">
+					</div>
+				</div>
+
+				<div class="row input-field">
+			  	<div class="col s3 goal-label">per</div>
+					<div class="col s9 goal-input">
+						<select>
+				      <option value="w">week</option>
+				      <option value="m">month</option>
+				    </select>
+					</div>
+				</div>
+
+				<!-- Time span
+					Minimum 4 weeks with ability to increase time
+					Optional incentive price based on frequency
+				-->
+
+				<!-- make this radio buttons: auto all, once per week/month, manual -->
+				<div class="row input-field">
+			  	<div class="col s3 goal-label">publish to public portfolio</div>
+					<div class="col s9 goal-input">
+				    <p>
+				      <input type="checkbox" class="filled-in" id="box1" checked="checked" />
+				      <label for="box1">box1</label>
+				    </p>
+				    <input type="checkbox" class="filled-in" id="box2" checked="checked" />
+				    <label for="box2">box2</label>
+			  	</div>
+				</div>
+
+			<button class="btn disabled" type="submit" name="action">Submit</button>
+		</form>
+	</div>
 </div>
