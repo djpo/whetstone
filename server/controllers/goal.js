@@ -8,35 +8,38 @@ router.get('/create', function(req, res){
   res.render('create_goal');
 });
 
-// not creating new goal yet
-router.post('/create', function(req, res){
+router.get('/savegoal', function(req, res){
   //TODO: set active goal on user to the new goal id
   //user.activeGoal = goal.id
-  console.log(req.body);
+  console.log('req.user:', req.user);
+  console.log('req.body:', req.body);
 
-  // var newGoal = new Goal({
-  //   name: req.body.name,
-  //   content: req.body.content,
-  //   frequency: req.body.frequency,
-  //   period: req.body.period,
-  //   length: req.body.length,
-  //   pulish: req.body.publish
-  // });
+  var newGoal = new db.goal(
+    // req.body
+    //
+    // {
+    //   name: req.body.name,
+    //   content: req.body.content,
+    //   frequency: req.body.frequency,
+    //   period: req.body.period,
+    //   length: req.body.length,
+    //   pulish: req.body.publish
+    // }
+    {
+      name: 'supergoal test1',
+      content: 'image',
+      frequency: 4,
+      period: 'week',
+      length: 12,
+      pulish: 'all'
+    }
+  );
+  console.log('newGoal:', newGoal);
 
-  var testGoal = new Goal({
-    name: 'one sick goal',
-    content: 'image',
-    frequency: '5',
-    period: 'week',
-    length: '8',
-    publish: 'all'
+  newGoal.save(function (err, newGoal){
+    if (err) return console.error(err);
+    console.log("goal saved!");
   });
-  console.log(textGoal);
-
-  // testGoal.save(function (err, testGoal){
-  //   if (err) return console.error(err);
-  //   console.log("goal saved!");
-  // });
   
   res.redirect('/goal/dashboard');
 });

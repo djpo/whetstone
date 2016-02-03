@@ -8,8 +8,7 @@ var Goal = new Schema({
   period: String,
   length: Number,
   publish: String,
-  created_at: Date,
-  updated_at: Date
+  created_at: {type: Date, default: Date.now}
 });
 
 // make this available to our other files
