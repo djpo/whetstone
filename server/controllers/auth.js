@@ -15,18 +15,24 @@ router.post('/register', function(req, res) {
     if (err) return res.render('error', { message: err });
 
     passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
+      res.redirect('../goal/create');
     });
   });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-  if (!req.user.activeGoal){
-    //Redirect to create a new goal
+  //Toggle below to test goal dashboard view
+  req.user.activeGoal = "sl98sj30s92k";
+
+  if (req.user.goals > 1) {
+    //If user has more than one goal, show all goals
+    res.redirect('user-dashboard')
+  } else if (!req.user.activeGoal){
+    //If user doesn't have an active goal, redirect to create a new goal
     res.redirect('../goal/create');
   } else if (req.user.activeGoal) {
-    //Redirect to active goal
-    res.redirect('')
+    //If user has active goal, redirect to that goal
+    res.redirect('../goal/dashboard')
   }
 });
 
