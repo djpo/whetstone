@@ -52,19 +52,22 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
   //Find the current user so we can add submission to his/her file
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) console.log(err);
-    //Create new submission and put the current user's id on it
-    var submission = new db.submission(req.file);
-    submission.user_id = user._id;
-    //Save the submission to the db
-    submission.save(function (err) {
+    db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) console.log(err);
-      //Push submission into user table
-      user.submissions.push(submission);
-      user.save(function(err){
+
+      var submission = req.file;
+      submission.user_id = user._id;
+      submission.created_at = new Date();
+      submission.note = req.body.note;
+
+      goal.submissions.push(submission);
+      goal.save(function(err){
         if (err) console.log(err);
         res.status(204).end()
-      });
+      })
+
     });
+
   });
 });
 

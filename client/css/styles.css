@@ -26,3 +26,11 @@ body {
 .goal-label {
   text-align: right;
 }
+
+#upload-box {
+	margin-top: 20px;
+	padding: 15px;
+}
+#submit-button {
+	width: 100%;
+}
