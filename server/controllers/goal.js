@@ -5,12 +5,12 @@ var express   = require('express'),
     router    = express.Router();
 
 router.get('/create', function(req, res){
-  //TODO: set active goal on user to the new goal id
-  //user.activeGoal = goal.id
   res.render('create_goal');
 });
 
 router.post('/create', function(req, res){
+  //TODO: set active goal on user to the new goal id
+  //user.activeGoal = goal.id
   console.log(req.body);
   // req.body currently looks like this:
   // {
