@@ -1,11 +1,16 @@
 <div id="navbar">
-
-	<div class="brand">
-		whetstone
-	</div>
-
-	<div class="user">
-		<%= currentUser.username %>
-	</div>
-
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/" class="brand-logo">Whetstone</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a href="#">Sass</a></li>
+				<% if (currentUser) {%>
+					<li><a href="#"><%= currentUser.username%></a></li>
+					<li><a href="../auth/logout">Logout</a></li>
+				<%} else {%>
+					<li><a href="#">Login</a></li>
+				<%}%>
+			</ul>
+		</div>
+	</nav>
 </div>

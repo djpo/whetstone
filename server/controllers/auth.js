@@ -21,11 +21,11 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.render('login');
+  render('login');
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.render('index');
+  res.redirect('../goal/create');
 });
 
 router.get('/logout', function(req, res) {

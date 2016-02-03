@@ -1,21 +1,17 @@
 <% include ./partials/header.ejs %>
+<% include ./partials/navbar.ejs %>
+<section class="body-wrapper">
 
+    <div class="row">
+        <div class="col s6">
+            <h2>Sign Up</h2>
+            <% include ./partials/register.ejs %>
+        </div>
+        <div class="col s6">
+            <h2>Login</h2>
+            <% include ./partials/login.ejs%>
+        </div>
+    </div>
 
-<% if (user) { %>
-	<% include ./partials/navbar.ejs %>
-		<h2>dashboard</h2>
-<% } else { %>
-<div class="row">
-	<div class="col s6">
-		<h2>Sign Up</h2>
-		<% include ./partials/register.ejs %>
-	</div>
-	<div class="col s6">
-		<h2>Login</h2>
-		<% include ./partials/login.ejs%>
-	</div>
-</div>
-<% } %>
-
-
+</section>
 <% include ./partials/footer.ejs %>

@@ -1,7 +1,10 @@
-#navbar {
-	height: 100px;
-	width: 300px;
-	background-color: gray;
+.body-wrapper {
+	padding: 0 20px;
+}
+
+.nav-wrapper{
+	padding: 0 50px;
+	background-color: #4a148c;
 }
 
 .brand {
