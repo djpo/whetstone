@@ -1,16 +1,17 @@
-<div id="navbar">
-	<nav>
-		<div class="nav-wrapper">
-			<a href="/" class="brand-logo">whetstone</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="#">Sass</a></li>
-				<% if (currentUser) {%>
-					<li><a href="#"><%= currentUser.username%></a></li>
-					<li><a href="../auth/logout">Logout</a></li>
-				<%} else {%>
-					<li><a href="#">Login</a></li>
-				<%}%>
-			</ul>
-		</div>
-	</nav>
+<div id="topbar">
+	<div id="top-strip" class="z-depth-2">
+	</div>
+
+	<div id="brand-logo" class="floatbox valign-wrapper z-depth-2">
+		<div class="floatbox-content valign">whetstone</div>
+	</div>
+
+	<div id="nav-menu" class="floatbox valign-wrapper z-depth-2">
+		<% if (currentUser) { %>
+			<div class="floatbox-content valign"><a href="../auth/logout"><%= currentUser.username %> (click to logout)</a></div>
+		<% } else { %>
+			<div class="floatbox-content valign"><a href="/">log in</a></div>
+		<% } %>
+	</div>
+
 </div>
