@@ -34,3 +34,6 @@ node_modules
 
 # Wstorm .idea folder
 .idea
+
+# Don't save uploads on github
+uploads

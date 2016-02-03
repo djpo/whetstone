@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '/client')));
+app.use(express.static(path.join(__dirname, '/uploads')));
 app.use(session({
   secret: 'this is a secret',
   resave: false,

@@ -1,14 +1,17 @@
 var express   = require('express'),
+    multer    = require('multer'),
+    upload    = multer({ dest: 'uploads/' }),
+    db        = require('../models/index'),
     router    = express.Router();
 
 router.get('/create', function(req, res){
-  //TODO: set active goal on user to the new goal id
-  //user.activeGoal = goal.id
   res.render('create_goal');
 });
 
 // not creating new goal yet
 router.post('/create', function(req, res){
+  //TODO: set active goal on user to the new goal id
+  //user.activeGoal = goal.id
   console.log(req.body);
 
   // var newGoal = new Goal({
@@ -46,6 +49,16 @@ router.get('/dashboard', function(req, res){
 
 router.get('/archive', function(req, res){
   res.render('archive');
+});
+
+router.post('/upload', upload.single('submission'), function(req, res, next){
+  var submission = new db.submission(req.file);
+  submission.user_id = req.user.id;
+  submission.save(function (err) {
+    if (err) console.log(err);
+    // saved!
+  })
+  res.status(204).end()
 });
 
 module.exports = router;

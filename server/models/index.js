@@ -1,9 +1,5 @@
 module.exports = {
-
-  //Add models here
-  //Example
-  user : require('./User'),
-  goal : require('./Goal')
-
-
+  user        : require('./User'),
+  goal        : require('./Goal'),
+  submission  : require('./Submission')
 };
