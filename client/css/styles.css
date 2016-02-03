@@ -6,7 +6,7 @@ body {
 	padding: 0 20px;
 }
 
-.nav-wrapper{
+.nav-wrapper {
 	padding: 0 50px;
 	/*background-color: #fff8e1;*/
 }
@@ -16,9 +16,14 @@ body {
 	color: white;
 }
 
-.user{
+.user {
 	float: right;
 	height: 50px;
 	width: 100px;
 	border: 2px solid white;
+}
+
+/*create_goal*/
+.goal-label {
+	text-align: right;
 }
