@@ -71,4 +71,23 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
   });
 });
 
+router.get('/:goalid/submission/:subid', function(req, res){
+  var goalid = req.params.goalid;
+  var subid = req.params.subid;
+
+  db.goal.findOne({_id: goalid}, function (err, goal) {
+    if (err) console.log(err);
+
+    for (var i = 0; i < goal.submissions.length; i++){
+      if(goal.submissions[i].filename == subid){
+        return res.render('show_submission', {submission: goal.submissions[i]});
+      }
+    }
+
+    console.log('submission not found');
+    //res.status(200).end();
+  })
+
+});
+
 module.exports = router;
