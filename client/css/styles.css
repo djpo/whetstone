@@ -1,15 +1,25 @@
 /* site-wide */
 body {
-  background-color: #eceff1;
+	/*Red/white color scheme*/
+	background-color: #FFFAF0;
+
+	/*Blue/grey color scheme*/
+	/*background-color: #eceff1;*/
 }
 
 /* altered Materialize styles */
 .body-wrapper {
   padding: 0 20px;
 }
-.nav-wrapper {
-  padding: 0 50px;
-  /*background-color: #fff8e1;*/
+
+.nav-wrapper{
+	padding: 0 50px;
+	background-color: #912C00;
+}
+
+.brand {
+	font-weight: bold;
+	color: white;
 }
 
 /* create_goal */
