@@ -1,4 +1,3 @@
-
 <!-- Goal dashboard
   See progress/upcoming goal/checkpoint
   Be able to submit
@@ -9,6 +8,7 @@
   View group submissions, or able to click to get to a specific group member -->
 
 <div class="row">
+
   <div class="col m4 push-m8 s12  z-depth-1" id="upload-box">
     <h5 class="center-align">Upload</h5>
     <form action="/goal/upload" enctype="multipart/form-data" method="post">
@@ -30,11 +30,14 @@
       </button>
     </form>
   </div>
+
   <div class="col m8 pull-m4 s12">
     <h3 class="center-align"><%= goal.name %></h3>
+
+    <!-- row of 3 placeholders -->
     <div class="row">
       <div class="col m4 s12">
-        <div class="card blue-grey darken-1">
+        <div class="card custom-gray">
           <div class="card-content white-text">
             <span class="card-title">January 30th, 2016</span>
             <p>503 Words</p>
@@ -46,7 +49,7 @@
         </div>
       </div>
       <div class="col m4 s12">
-        <div class="card blue-grey darken-1">
+        <div class="card custom-gray">
           <div class="card-content white-text">
             <span class="card-title">January 31th, 2016</span>
             <p>515 Words</p>
@@ -58,7 +61,7 @@
         </div>
       </div>
       <div class="col m4 s12">
-        <div class="card blue-grey darken-1">
+        <div class="card custom-gray">
           <div class="card-content white-text">
             <span class="card-title">February 01, 2016</span>
             <p>639 Words</p>
@@ -70,10 +73,37 @@
         </div>
       </div>
     </div>
+
+    <!-- row of 2 placeholders -->
+    <div class="row">
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">January 30th, 2016</span>
+            <p>503 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">January 31th, 2016</span>
+            <p>515 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
-
-
 
 
 <!--<div class="row" style="border: 2px solid black">-->
