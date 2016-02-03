@@ -8,7 +8,11 @@ router.get('/create', function(req, res){
 });
 
 router.get('/dashboard', function(req, res){
-  res.render('dashboard')
-})
+  res.render('dashboard');
+});
+
+router.get('/archive', function(req, res){
+  res.render('archive');
+});
 
 module.exports = router;
