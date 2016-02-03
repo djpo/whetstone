@@ -2,6 +2,7 @@ var express   = require('express'),
     multer    = require('multer'),
     upload    = multer({ dest: 'uploads/' }),
     db        = require('../models/index'),
+    dateFormat = require('dateformat'),
     router    = express.Router();
 
 router.get('/create', function(req, res){
@@ -71,7 +72,7 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
   });
 });
 
-router.get('/:goalid/submission/:subid', function(req, res){
+router.get('/:goalid/:subid', function(req, res){
   var goalid = req.params.goalid;
   var subid = req.params.subid;
 
@@ -80,7 +81,12 @@ router.get('/:goalid/submission/:subid', function(req, res){
 
     for (var i = 0; i < goal.submissions.length; i++){
       if(goal.submissions[i].filename == subid){
-        return res.render('show_submission', {submission: goal.submissions[i]});
+        return res.render('show_submission',
+          {
+            subDate: dateFormat(goal.submissions[i].created_at, "h:MM TT mmm dd"),
+            subNote: goal.submissions[i].note,
+            subFilename: goal.submissions[i].filename
+          });
       }
     }
 
