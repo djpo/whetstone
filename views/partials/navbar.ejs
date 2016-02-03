@@ -8,7 +8,9 @@
 					<li><a href="#"><%= currentUser.username%></a></li>
 					<li><a href="../auth/logout">Logout</a></li>
 				<%} else {%>
-					<li><a href="#">Login</a></li>
+					<li style="margin: 0 5px"><button data-target="signup-modal" class="btn modal-trigger">Sign
+							Up</button></li>
+					<li style="margin: 0 5px"><button data-target="login-modal" class="btn modal-trigger">Login</button></li>
 				<%}%>
 			</ul>
 		</div>
