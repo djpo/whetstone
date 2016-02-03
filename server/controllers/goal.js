@@ -39,7 +39,7 @@ router.get('/dashboard', function(req, res){
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) console.log(err);
       // Send activeGoal name to view
-      res.render('dashboard', {goal: goal, submissions: user.submissions});
+      res.render('dashboard', {goal: goal});
     });
   });
 });
