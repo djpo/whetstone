@@ -20,12 +20,14 @@ router.post('/register', function(req, res) {
   });
 });
 
-router.get('/login', function(req, res) {
-  render('login');
-});
-
 router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('../goal/create');
+  if (!req.user.activeGoal){
+    //Redirect to create a new goal
+    res.redirect('../goal/create');
+  } else if (req.user.activeGoal) {
+    //Redirect to active goal
+    res.redirect('')
+  }
 });
 
 router.get('/logout', function(req, res) {
