@@ -1,6 +1,7 @@
 var express   = require('express'),
     multer    = require('multer'),
     upload    = multer({ dest: 'uploads/' }),
+    db        = require('../models/index'),
     router    = express.Router();
 
 router.get('/create', function(req, res){
@@ -33,9 +34,12 @@ router.get('/archive', function(req, res){
 });
 
 router.post('/upload', upload.single('submission'), function(req, res, next){
-  var submission = req.file;
-  submission.user_id = req.user.id
-  console.log(submission)
+  var submission = new db.submission(req.file);
+  submission.user_id = req.user.id;
+  submission.save(function (err) {
+    if (err) console.log(err);
+    // saved!
+  })
   res.status(204).end()
 });
 
