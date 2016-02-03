@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 var User = new Schema({
   username: String,
   email: { type: String, required: true, unique: true },
+  submissions : [{ type: Schema.Types.ObjectId, ref: 'Submission' }],
   activeGoal: String,
   created_at: Date,
   updated_at: Date
