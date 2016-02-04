@@ -22,6 +22,19 @@ router.post('/savegoal', function(req, res){
     ////////////////////
     // build out goal here with logic magic
 
+    newGoal.is_active = true;
+    newGoal.start_date = new Date.getDate();
+    newGoal.end_date = newGoal.start_date.getTime() + (newGoal.duration * 7 * 86400000);
+    newGoal.current_week = 0;
+
+    // for each week
+    // newGoal.all_submissions.push a week array
+
+      // for each member
+      // newGoal.all_submissions.this-week.push a user array
+
+        // for each frequency
+        // push a submission object
 
     ////////////////////
 
@@ -55,10 +68,8 @@ router.get('/dashboard', function(req, res){
       
       console.log('sending goal to view');
       console.log(goal);
-      res.send(goal);
 
-      // Send activeGoal name to view
-      // res.render('dashboard', {goal: goal});
+      res.render('dashboard', {goal: goal});
 
       //////////
       ////////////////////
