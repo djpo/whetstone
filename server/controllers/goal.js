@@ -10,6 +10,8 @@ router.get('/create', function(req, res){
   res.render('create_goal');
 });
 
+////////////////////
+//////////
 router.post('/savegoal', function(req, res){
   // Find the current user
   db.user.findOne({_id: req.user.id}, function(err, user){
@@ -30,7 +32,11 @@ router.post('/savegoal', function(req, res){
   });
   res.redirect('/goal/dashboard');
 });
+//////////
+////////////////////
 
+////////////////////
+//////////
 router.get('/dashboard', function(req, res){
   if (!req.user) return res.redirect('/');
   if (!req.user.activeGoal) return res.redirect('../goal/create');
@@ -45,11 +51,15 @@ router.get('/dashboard', function(req, res){
     });
   });
 });
+//////////
+////////////////////
 
 router.get('/archive', function(req, res){
   res.render('archive');
 });
 
+////////////////////
+//////////
 router.post('/upload', upload.single('submission'), function(req, res, next){
   //Find the current user so we can add submission to his/her file
   db.user.findOne({_id: req.user.id}, function(err, user){
@@ -72,6 +82,8 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
 
   });
 });
+//////////
+////////////////////
 
 router.get('/:goalid/:subid', function(req, res){
   var goalid = req.params.goalid;
