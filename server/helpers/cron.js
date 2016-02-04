@@ -1,6 +1,6 @@
 var nodemailer  = require('nodemailer'),
-  Goal        = require('../models/goal'),
-  CronJob     = require('cron').CronJob;
+  db            = require('../models/index'),
+  CronJob       = require('cron').CronJob;
 
 var job = new CronJob('* 01 * * * *', function() {
     /* Runs every minute or so */
