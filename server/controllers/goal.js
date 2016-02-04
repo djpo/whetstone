@@ -10,58 +10,34 @@ router.get('/create', function(req, res){
   res.render('create_goal');
 });
 
-
-////////////////////
-//////////
 router.post('/savegoal', function(req, res){
-  console.log('//////////////////// POST /savegoal');
-
   // Find the current user
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) console.log(err);
+
     // Create new goal
     var newGoal = new db.goal(req.body);
-    // console.log("////////// newGoal pre-initialization");
-    // console.log(newGoal);
-
     // Initialize goal
     newGoal.is_active = true;
     newGoal.start_date = new Date()
     newGoal.end_date = newGoal.start_date.getTime() + (newGoal.duration * 7 * 86400000);
     newGoal.current_week = 0;
+    newGoal.subs = {};
 
     // Push current user to this goal's members array
       // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);
-
-    // For each member, create an empty array
     newGoal.members.forEach(function (member) {
-      // console.log("////////// member");
-      // console.log(member);
-      //   // => 56b3d096c4805df0236331c6
-
       // Make an empty array for each member
       newGoal.subs[member] = [];
-      // console.log("////////// newGoal.subs[member] pre-push");
-      // console.log(newGoal.subs[member]);
-      //   // => []
-
       // For each week (for each member) push an empty array
-      for (i = 0; i < newGoal.duration; i++) {
+      for (var i = 0; i < newGoal.duration; i++) {
         newGoal.subs[member].push([]);
       }
     });
 
-    // console.log("////////// newGoal.subs");
-    // console.log(newGoal.subs);
-    //   // => {}
-    // console.log("////////// newGoal.subs[user._id]");
-    // console.log(newGoal.subs[user._id]);
-    //   // => [ [], [], [], [] ]
-    // console.log("////////// newGoal.subs[user._id][0]");
-    // console.log(newGoal.subs[user._id][0]);
-    //   // => []
-
+    // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
+    newGoal.markModified('subs');
     // Save the goal to the db
     newGoal.save(function (err){
       if (err) return console.error(err);
@@ -69,19 +45,13 @@ router.post('/savegoal', function(req, res){
       user.activeGoal = newGoal._id;
       user.save(function(err){
         if (err) console.log(err);
-        console.log('////////// goal saved!');
         res.redirect('/goal/dashboard');
       });
     });
   });
 });
-//////////
-////////////////////
-
 
 router.get('/dashboard', function(req, res){
-  console.log('//////////////////// GET /dashboard');
-
   if (!req.user) return res.redirect('/');
   if (!req.user.activeGoal) return res.redirect('../goal/create');
   // Find current user
@@ -90,18 +60,6 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-
-      console.log("////////// goal.subs");
-      console.log(goal.subs);
-        // => {}
-      console.log("////////// goal.subs[user._id]");
-      console.log(goal.subs[user._id]);
-        // => undefined
-      console.log("////////// goal.subs[user._id][0]");
-      console.log(goal.subs[user._id[0]]);
-        // => undefined
-
-      console.log('////////// sending goal to view');
       res.render('dashboard', {goal: goal});
     });
   });
@@ -111,9 +69,6 @@ router.get('/archive', function(req, res){
   res.render('archive');
 });
 
-
-////////////////////
-//////////
 router.post('/upload', upload.single('submission'), function(req, res, next){
   console.log('//////////////////// POST /upload');
 
@@ -125,17 +80,11 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
 
-      // console.log("////////// goal.subs");
-      // console.log(goal.subs);
-      //   // => {}
-
+      // Create new submission, add metadata
       var newSubmission = req.file;
       newSubmission.user_id = user._id;
       newSubmission.created_at = new Date();
       newSubmission.note = req.body.note;
-
-      // console.log('////////// newSubmission');
-      // console.log(newSubmission);
 
       // Test if user and week arrays exist already
       if (goal.subs[user._id] === undefined) {
@@ -147,31 +96,19 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
         goal.subs[user._id][goal.current_week] = [];
       }
 
-      console.log('////////// goal.subs[user._id] pre-add');
-      console.log(goal.subs[user._id]);
-
       // Add submission to goal
       goal.subs[user._id][goal.current_week].push(newSubmission);
-      // Change another attribute for testing
-      goal.name = 'new name';
-
-      console.log('////////// goal.subs[user._id] post-add');
-      console.log(goal.subs[user._id]);
-
+      // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
+      goal.markModified('subs');
       // Save goal
       goal.save(function(err){
         if (err) return console.log(err);
-        console.log('Submission created!');
-        // res.status(204).end()
         res.redirect('/goal/dashboard');
       });
 
     });
   });
 });
-//////////
-////////////////////
-
 
 router.get('/:goalid/:subid', function(req, res){
   var goalid = req.params.goalid;
