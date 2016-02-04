@@ -6,11 +6,24 @@
 		<div class="floatbox-content valign">whetstone</div>
 	</div>
 
+	<% if (!currentUser) { %>
+		<div id="nav-menu-signup" class="floatbox valign-wrapper z-depth-2">
+			<div class="floatbox-content valign"><a class="modal-trigger" href="#signup-modal">sign up</a></div>
+		</div>
+	<% }%>
+
 	<div id="nav-menu" class="floatbox valign-wrapper z-depth-2">
 		<% if (currentUser) { %>
 			<div class="floatbox-content valign"><a href="../auth/logout"><%= currentUser.username %> (click to logout)</a></div>
 		<% } else { %>
-			<div class="floatbox-content valign"><a href="/">log in</a></div>
+			<div class="floatbox-content valign"><a class="modal-trigger" href="#login-modal">log in</a></div>
 		<% } %>
 	</div>
 </div>
+
+
+<!--<div class="floatbox-content valign"><a class="modal-trigger" href="#signup-modal">sign up</a></div>-->
+
+<!--<li style="margin: 0 5px"><button data-target="signup-modal" class="btn modal-trigger">Sign-->
+		<!--Up</button></li>-->
+<!--<li style="margin: 0 5px"><button data-target="login-modal" class="btn modal-trigger">Login</button></li>-->
