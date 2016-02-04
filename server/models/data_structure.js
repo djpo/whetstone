@@ -1,4 +1,4 @@
-goal {
+goal: {
   name: String,
   content_type: String,
   frequency: Number,
@@ -26,7 +26,7 @@ goal {
   ]
 }
 
-submission {
+submission: {
   user_id: String,
   content: {
     fieldname: String,
@@ -38,4 +38,11 @@ submission {
     path: String,
     size: Number
   }
+}
+
+user: {
+  username        : String,
+  email           : { type: String, required: true, unique: true },
+  activeGoal      : String,
+  submitted_today : Boolean
 }

@@ -10,8 +10,6 @@ router.get('/create', function(req, res){
   res.render('create_goal');
 });
 
-////////////////////
-//////////
 router.post('/savegoal', function(req, res){
   // Find the current user
   db.user.findOne({_id: req.user.id}, function(err, user){
@@ -20,6 +18,13 @@ router.post('/savegoal', function(req, res){
     var newGoal = new db.goal(req.body);
     // Push current user to this goal's members array
     newGoal.members.push(user._id);
+
+    ////////////////////
+    // build out goal here with logic magic
+
+
+    ////////////////////
+
     // Save the goal to the db
     newGoal.save(function (err){
       if (err) return console.error(err);
@@ -30,13 +35,11 @@ router.post('/savegoal', function(req, res){
       });
     });
   });
+
+  console.log('goal saved');
   res.redirect('/goal/dashboard');
 });
-//////////
-////////////////////
 
-////////////////////
-//////////
 router.get('/dashboard', function(req, res){
   if (!req.user) return res.redirect('/');
   if (!req.user.activeGoal) return res.redirect('../goal/create');
@@ -46,13 +49,23 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) console.log(err);
+
+      ////////////////////
+      //////////
+      
+      console.log('sending goal to view');
+      console.log(goal);
+      res.send(goal);
+
       // Send activeGoal name to view
-      res.render('dashboard', {goal: goal});
+      // res.render('dashboard', {goal: goal});
+
+      //////////
+      ////////////////////
     });
   });
 });
-//////////
-////////////////////
+
 
 router.get('/archive', function(req, res){
   res.render('archive');
@@ -60,6 +73,8 @@ router.get('/archive', function(req, res){
 
 ////////////////////
 //////////
+// edit this to updated goal schema
+
 router.post('/upload', upload.single('submission'), function(req, res, next){
   //Find the current user so we can add submission to his/her file
   db.user.findOne({_id: req.user.id}, function(err, user){

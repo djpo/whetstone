@@ -5,11 +5,11 @@ var express   = require('express'),
     router    = express.Router();
 
 router.post('/register', function(req, res) {
-  console.log(req.body);
   User.register(new User(
     {
       username : req.body.username,
-      email: req.body.email
+      email: req.body.email,
+      submitted_today : false
     }
   ), req.body.password, function(err, user) {
     if (err) return res.render('error', { message: err });

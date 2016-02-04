@@ -1,3 +1,5 @@
+// Not being used. Submissions are stored in Goals.
+
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
