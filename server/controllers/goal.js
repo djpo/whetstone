@@ -25,7 +25,7 @@ router.post('/savegoal', function(req, res){
     newGoal.subs = {};
 
     // Push current user to this goal's members array
-      // Will have to update for multiple users starting a goal together
+    // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);
     newGoal.members.forEach(function (member) {
       // Make an empty array for each member
@@ -105,7 +105,6 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
         if (err) return console.log(err);
         res.redirect('/goal/dashboard');
       });
-
     });
   });
 });
