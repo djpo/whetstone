@@ -58,6 +58,7 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
       if (err) console.log(err);
 
       var submission = req.file;
+      console.log(req)
       submission.user_id = user._id;
       submission.created_at = new Date();
       submission.note = req.body.note;
