@@ -30,7 +30,7 @@ router.post('/savegoal', function(req, res){
     newGoal.current_week = 0;
 
     // Push current user to this goal's members array
-      // Will have to update for multiple users starting a goal together
+    // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);
     newGoal.subs = {};
 
@@ -40,7 +40,7 @@ router.post('/savegoal', function(req, res){
 
       // For each week (for each member) push an empty array
       for (var i = 0; i < newGoal.duration; i++) {
-        newGoal.subs[member].push([i]);
+        newGoal.subs[member].push([]);
       }
     });
 
