@@ -8,7 +8,8 @@ var express       = require('express'),
     passport      = require('passport'),
     db            = require('./server/models/index.js'),
     _             = require('lodash'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    runCron       = require('./server/helpers/cron.js');
 
 var app           = express();
 
@@ -46,6 +47,10 @@ _.each(routes, function(controller, route) {
 // Connect to mongo, run server
 mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
 mongoose.connection.once('open', function(){
+
+  // Start the cron job
+  runCron;
+
   console.log("Running on the smooth sounds of port 3000");
   app.listen(process.env.PORT || 3000);
 });
