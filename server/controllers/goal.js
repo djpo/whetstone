@@ -32,33 +32,26 @@ router.post('/savegoal', function(req, res){
     // Push current user to this goal's members array
       // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);
+    newGoal.subs = {};
 
     // For each member, create an empty array
     newGoal.members.forEach(function (member) {
       newGoal.subs[member] = [];
 
       // For each week (for each member) push an empty array
-      for (i = 0; i < newGoal.duration; i++) {
-        newGoal.subs[member].push([]);
+      for (var i = 0; i < newGoal.duration; i++) {
+        newGoal.subs[member].push([i]);
       }
-
-      console.log('////////// newGoal.subs[member]');
-      console.log(newGoal.subs[member]);
     });
 
-    console.log('////////// newGoal.subs[56b3bcd0fdb668a01af8d717]');
-    console.log(newGoal.subs['56b3bcd0fdb668a01af8d717']);
-
     // Save the goal to the db
+    newGoal.markModified('subs');
     newGoal.save(function (err){
       if (err) return console.error(err);
       // Set user's activeGoal to this goal id, save user
       user.activeGoal = newGoal._id;
       user.save(function(err){
         if (err) console.log(err);
-
-        console.log('////////// goal saved!');
-
         res.redirect('/goal/dashboard');
       });
     });
@@ -79,13 +72,6 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-
-      console.log('////////// goal');
-      console.log(goal);
-      console.log('////////// goal.subs[req.user.id]');
-      console.log(goal.subs[req.user.id]);
-
-      console.log('////////// sending goal to view');
       res.render('dashboard', {goal: goal});
     });
   });
@@ -105,50 +91,29 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) return console.log(err);
 
-    console.log('////////// user._id');
-    console.log(user._id);
-    console.log('////////// user.id');
-    console.log(user.id);
-
-    var thisUser = '56b3bcd0fdb668a01af8d717';
-    console.log('////////// thisUser');
-    console.log(thisUser);
-
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
 
-      console.log('////////// goal');
-      console.log(goal);
-
-      console.log('////////// goal.subs[thisUser][0] pre-add');
-      console.log(goal.subs[thisUser][0]);
 
       var newSubmission = req.file;
       newSubmission.user_id = user._id;
       newSubmission.created_at = new Date();
       newSubmission.note = req.body.note;
 
-      console.log('////////// newSubmission');
-      console.log(newSubmission);
+       // Add submission to goal
+       goal.subs[user.id][goal.current_week].push(newSubmission);
 
-      console.log('////////// goal.subs[thisUser][0] post-add');
-      console.log(goal.subs[thisUser][0]);
+       console.log('//////////');
+       console.log(goal.subs[user.id]);
 
-      res.send(goal);
-
-      // // Add submission to goal
-      // goal.subs[thisUser][goal.current_week].push(newSubmission);
-
-      // console.log('//////////');
-      // console.log(newGoal.subs[thisUser]);
-
-      // // Save goal
-      // // goal.save(function(err){
-      // //   if (err) return console.log(err);
-      // //   console.log('Submission created!');
-      // //   res.status(204).end()
-          // res.redirect('/goal/dashboard');
-      // // });
+        //Save goal
+        goal.markModified('subs');
+        goal.save(function(err){
+          if (err) return console.log(err);
+          console.log('Submission created!');
+          res.status(204).end()
+          res.redirect('/goal/dashboard');
+        });
 
     });
   });
