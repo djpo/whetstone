@@ -18,13 +18,13 @@
             <div class="valign right">content type</div>
           </div>
           <div class="col s8 goal-input">
-            <input type="radio" id="image" name="content" value="image">
+            <input type="radio" id="image" name="content_type" value="image">
             <label for="image">image</label>
             <br>
-            <input type="radio" id="text" name="content" value="text">
+            <input type="radio" id="text" name="content_type" value="text">
             <label for="text">text</label>
             <br>
-            <input type="radio" id="audio" name="content" value="audio">
+            <input type="radio" id="audio" name="content_type" value="audio">
             <label for="audio">audio</label>
           </div>
         </div>
@@ -40,23 +40,10 @@
 
         <div class="row valign-wrapper input-field">
           <div class="col s4 goal-label">
-            <div class="valign right">per</div>
+            <div class="valign right">goal duration (weeks)</div>
           </div>
           <div class="col s8 goal-input">
-            <input type="radio" id="week" name="period" value="week">
-            <label for="week">week</label>
-            <br>
-            <input type="radio" id="month" name="period" value="week">
-            <label for="month">month</label>
-          </div>
-        </div>
-
-        <div class="row valign-wrapper input-field">
-          <div class="col s4 goal-label">
-            <div class="valign right">goal length (months)</div>
-          </div>
-          <div class="col s8 goal-input">
-            <input type="number" id="length" name="length" placeholder="6" min="1" max="12" class="validate">
+            <input type="number" id="duration" name="duration" placeholder="12" min="4" max="52" class="validate">
           </div>
         </div>
 
@@ -68,9 +55,8 @@
             <input type="radio" id="all" name="publish" value="all">
             <label for="all">all</label>
             <br>
-            <input type="radio" id="interval" name="publish" value="interval">
-            <label for="interval">one per week/month</label>
-              <!-- I'd love for the 'week/month' to reflect the period_length selected above -DP -->
+            <input type="radio" id="interval" name="publish" value="weekly">
+            <label for="weekly">one per week</label>
             <br>
             <input type="radio" id="manual" name="publish" value="manual">
             <label for="manual">manual only</label>
