@@ -14,14 +14,15 @@ router.get('/create', function(req, res){
 ////////////////////
 //////////
 router.post('/savegoal', function(req, res){
-  console.log('////////// POST /savegoal');
+  console.log('//////////////////// POST /savegoal');
 
   // Find the current user
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) console.log(err);
-
     // Create new goal
     var newGoal = new db.goal(req.body);
+    // console.log("////////// newGoal pre-initialization");
+    // console.log(newGoal);
 
     // Initialize goal
     newGoal.is_active = true;
@@ -35,19 +36,28 @@ router.post('/savegoal', function(req, res){
 
     // For each member, create an empty array
     newGoal.members.forEach(function (member) {
+      console.log("////////// member");
+      console.log(member);
+
+      // Make an empty array for each member
       newGoal.subs[member] = [];
+      console.log("////////// newGoal.subs[member] pre-push");
+      console.log(newGoal.subs[member]);
 
       // For each week (for each member) push an empty array
       for (i = 0; i < newGoal.duration; i++) {
         newGoal.subs[member].push([]);
       }
-
-      console.log('////////// newGoal.subs[member]');
-      console.log(newGoal.subs[member]);
     });
 
-    console.log('////////// newGoal.subs[56b3bcd0fdb668a01af8d717]');
-    console.log(newGoal.subs[56b3bcd0fdb668a01af8d717]);
+    console.log("////////// newGoal");
+    console.log(newGoal);
+    console.log("////////// newGoal.subs");
+    console.log(newGoal.subs);
+    console.log("////////// newGoal.subs[user._id]");
+    console.log(newGoal.subs[user._id]);
+    console.log("////////// newGoal.subs[user._id][0]");
+    console.log(newGoal.subs[user._id][0]);
 
     // Save the goal to the db
     newGoal.save(function (err){
@@ -56,7 +66,6 @@ router.post('/savegoal', function(req, res){
       user.activeGoal = newGoal._id;
       user.save(function(err){
         if (err) console.log(err);
-
         console.log('////////// goal saved!');
 
         res.redirect('/goal/dashboard');
@@ -69,7 +78,7 @@ router.post('/savegoal', function(req, res){
 
 
 router.get('/dashboard', function(req, res){
-  console.log('////////// GET /dashboard');
+  console.log('//////////////////// GET /dashboard');
 
   if (!req.user) return res.redirect('/');
   if (!req.user.activeGoal) return res.redirect('../goal/create');
@@ -80,10 +89,14 @@ router.get('/dashboard', function(req, res){
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
 
-      console.log('////////// goal');
+      console.log("////////// goal");
       console.log(goal);
-      console.log('////////// goal.subs[req.user.id]');
-      console.log(goal.subs[req.user.id]);
+      console.log("////////// goal.subs");
+      console.log(goal.subs);
+      console.log("////////// goal.subs[user._id]");
+      console.log(goal.subs[user._id]);
+      console.log("////////// goal.subs[user._id][0]");
+      console.log(goal.subs[user._id[0]]);
 
       console.log('////////// sending goal to view');
       res.render('dashboard', {goal: goal});
@@ -99,7 +112,7 @@ router.get('/archive', function(req, res){
 ////////////////////
 //////////
 router.post('/upload', upload.single('submission'), function(req, res, next){
-  console.log('////////// POST /upload');
+  console.log('//////////////////// POST /upload');
 
   // Find the current user
   db.user.findOne({_id: req.user.id}, function(err, user){
@@ -107,10 +120,8 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
 
     console.log('////////// user._id');
     console.log(user._id);
-    console.log('////////// user.id');
-    console.log(user.id);
 
-    var thisUser = '56b3bcd0fdb668a01af8d717';
+    var thisUser = user._id;
     console.log('////////// thisUser');
     console.log(thisUser);
 
