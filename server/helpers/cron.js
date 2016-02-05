@@ -4,7 +4,7 @@ var db            = require('../models/index'),
 
 var job = new CronJob('1 * * * * *', function() {
   /* Runs every minute */
-  console.log('~~~~~NEW DAY~~~~~');
+  console.log('~~~~~NEW DAY');
 
   db.goal.find({is_active: true}).
   exec(function(err, goals){
@@ -34,25 +34,25 @@ var job = new CronJob('1 * * * * *', function() {
         db.user.findOne({_id: member}, function(err, user){
 
           if (newWeek) {
-            console.log('~~~~~New week, reset credits~~~~~');
+            console.log('~~~~~New week, reset credits');
             user.currentGoals[goal.id].credits = 7 - goal.frequency;
           }
           //If user didn't submit today
           if (!user.currentGoals[goal.id].submitted_today) {
-            console.log('~~~~~User did not submit today~~~~~');
+            console.log('~~~~~User did not submit today');
             //If their credit == 0
             if(!user.currentGoals[goal.id].credit) {
-              console.log('~~~~~User gets charged~~~~~');
+              console.log('~~~~~User gets charged');
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
               //mailer(user.email)
             } else {
-              console.log('~~~~~User does not get charged but credits get decremented~~~~~');
+              console.log('~~~~~User does not get charged but credits get decremented');
               user.currentGoals[goal.id].credit--;
             }
           } else {
           //  Else user did submit today, so reset flag
-            console.log('~~~~~User submitted. Good job user!~~~~~');
+            console.log('~~~~~User submitted. Good job user!');
             user.currentGoals[goal.id].submitted_today = false;
           }
 
