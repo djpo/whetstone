@@ -1,5 +1,6 @@
 var express     = require('express'),
     db          = require('../models/index'),
+    dateFormat  = require('dateformat'),
     router      = express.Router();
 
 router.use(function(req, res, next){
@@ -19,9 +20,23 @@ router.post('/save', function(req, res){
     // Create new goal
     var newGoal = new db.goal(req.body);
     // Initialize goal
+      // Will have to change this if goal does not start immediately on goal creation
     newGoal.is_active = true;
-    newGoal.start_date = new Date()
-    newGoal.end_date = newGoal.start_date.getTime() + (newGoal.duration * 7 * 86400000);
+
+
+
+
+    // newGoal.start_date = new Date();
+    newGoal.start_date = dateFormat(new Date(), "yyyymmdd");
+      console.log(newGoal.start_date);
+      console.log(typeof newGoal.start_date);
+    // newGoal.end_date = newGoal.start_date.getTime() + (newGoal.duration * 7 * 86400000);
+    newGoal.end_date = newGoal.start_date + (newGoal.duration * 7);
+      console.log(newGoal.end_date);
+      console.log(typeof newGoal.start_date);
+
+
+
     newGoal.current_week = 0;
     newGoal.subs = {};
 

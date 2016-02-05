@@ -37,23 +37,23 @@ View group submissions, or able to click to get to a specific group member
         <% } else { %>
           <h6>upload content for today!</h6>
           <form action="/submissions/upload" enctype="multipart/form-data" method="post">
-            <div class="row t-bor3">
+            <div class="row">
 
               <!-- File chooser -->
-              <div class="file-field input-field col m5 t-bor1">
+              <div class="file-field input-field col m5">
                 <!-- File chooser button -->
                 <div class="btn upload-button">
                   <span>choose file</span>
                   <input type="file" name="submission">
                 </div>
                 <!-- To be hidden -->
-                <div class="file-path-wrapper" style="border: 3px solid yellow">
+                <div class="file-path-wrapper" style="border: 2px solid #455a64">
                   <input class="file-path validate" type="text">
                 </div>
               </div>
 
               <!-- Submit button -->
-              <div class="col m5 t-bor1">
+              <div class="col m5">
                 <button class="upload-button btn waves-effect waves-light" type="submit" id="submit-button" name="action">
                   <i class="material-icons right">send</i>
                 </button>
@@ -64,9 +64,9 @@ View group submissions, or able to click to get to a specific group member
             <!-- User note field -->
             <p>write a note about your submission</p>
 
-            <div class="row t-bor3">
+            <div class="row" style="border: 2px solid rgba(179,118,87,.5)">
               <div class="input-field">
-                <i class="material-icons prefix t-bor1">label</i>
+                <i class="material-icons prefix">label</i>
                 <input id="icon_prefix" type="text" name="note" class="validate">
               </div>
             </div>
@@ -155,18 +155,20 @@ View group submissions, or able to click to get to a specific group member
 </div>
 
 
+<!-- Box for data testing -->
+
 <div class="row" style="margin-top: 20%; border: 2px solid black">
   <h5>DATAMONSTER</h5>
   <% var weeklySubs = goal.subs[currentUser._id][goal.current_week] %>
-  is weeklySubs an array? <%= Array.isArray(weeklySubs) %>
-  <p class="divider"></p>
   weeklySubs.length: <%= weeklySubs.length %><br>
+  <p class="divider"></p>
   <% for (var i = 0; i < weeklySubs.length; i++) { %>
-    sub #<%= i %> --- <%= weeklySubs[i].filename %><br>
-    <img src="/<%= weeklySubs[i].filename %>">
+  <div>
+    sub #<%= i %><br>
+    filename: <%= weeklySubs[i].filename %><br>
+    <div class="img-container valign-wrapper">
+      <img class="valign" src="/<%= weeklySubs[i].filename %>">
+    </div>
+  </div>
   <% } %>
 </div>
-
-
-<!--Example use of file upload view-->
-<!--<img src="/9732e187c215909d93350ce1b59e124c">
