@@ -15,15 +15,15 @@
       <div class="file-field input-field">
         <div class="btn">
           <span>File</span>
-          <input type="file" name="submission" accept="<%=goal.content_type%>/*">
+          <input type="file" name="submission" accept="<%=goal.content_type%>/*" class="validate" required>
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
+          <input class="file-path validate" type="text" required>
         </div>
       </div>
       <div class="input-field col s12">
         <i class="material-icons prefix">label</i>
-        <input id="icon_prefix" type="text" name="note" class="validate">
+        <input id="icon_prefix" type="text" name="note" class="validate" required>
       </div>
       <button class="btn waves-effect waves-light" type="submit" id="submit-button" name="action">Submit
         <i class="material-icons right">send</i>
