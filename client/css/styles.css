@@ -1,11 +1,58 @@
 /* ////////////////////
 color palette
-  dark red: #912C00
-  cream: #FFFAF0
-  blue-gray: #455a64 (blue-grey darken-2)
-  blue-gray (alt - not used currently): #37474f (blue-grey darken-3)
-  orange: #ffab40 (Materialize default for important - we should change)
-*/
+
+red/brown
+#912C00                       used
+#702B1C R: 112 G: 43 B: 28
+#592A21 R: 89 G: 42 B: 33
+
+tan/brown
+#DA9E7A
+#B37657
+#8E5F40
+#804F39 R: 128 G: 79 B: 57
+
+mute yellow
+#CEA85F
+#C5A059
+#DDD3A0 R: 221 G: 211 B: 160
+
+orange
+#ffab40                       used (we should change)
+  Materialize default for 'important'
+
+light green
+#CEE8CF R: 206 G: 232 B: 207
+#A4BCA4 R: 164 G: 188 B: 164
+
+
+cerulean
+#8DB3A1 R: 141 G: 179 B: 161
+#719382 R: 113 G: 147 B: 130
+#576D61 R: 87 G: 109 B: 97
+
+turquoise
+#99C9C9 R: 153 G: 201 B: 201
+#87BBB9 R: 135 G: 187 B: 185
+#578D8F R: 87 G: 141 B: 143
+
+gray-blue
+#6F8D91 R: 111 G: 141 B: 145
+#455a64                       used
+  Materialize 'blue-grey darken-2'
+
+cream
+#FFFAF0                       used
+
+light gray
+#A5AAA3 R: 165 G: 170 B: 163
+#9B9598 R: 155 G: 149 B: 152
+
+black
+#2E2F2A R: 46 G: 47 B: 42
+#262721 R: 38 G: 39 B: 33
+#23241F R: 35 G: 36 B: 31
+#232520 R: 35 G: 37 B: 32
 
 /* ////////////////////
 style guidelines
@@ -14,6 +61,13 @@ style guidelines
 
 /* ////////////////////
 site-wide */
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .body-wrapper {
   position: relative;
   top: 60px;
