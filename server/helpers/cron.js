@@ -4,16 +4,40 @@ var nodemailer  = require('nodemailer'),
 
 var job = new CronJob('1 * * * * *', function() {
   /* Runs every minute or so */
+  console.log('~~~~~NEW DAY~~~~~');
 
   db.goal.find({is_active: true}).
   exec(function(err, goals){
 
     goals.forEach(function(goal){
+
+      //Increment the goal week variable
+      //Increment goal variable so base 1 instead of 0. Conveniently becomes
+      //variable we need to save
+      var currentWeek = goal.current_week + 1;
+      var newWeek = false;
+
+      //End goal if current date is passed end date
+      if (goal.end_date <= new Date()){
+        goal.is_active = false;
+      }
+      //If today's date is less than or equal to a week ahead of last week,
+      //then increment the week
+      else if(new Date(goal.start_date.getTime() + (currentWeek * 7 * 86400000)) <= new Date()){
+        newWeek = true;
+        goal.current_week = currentWeek;
+        goal.save();
+      }
+
+
       goal.members.forEach(function(member){
 
         db.user.findOne({_id: member}, function(err, user){
-          console.log('///user');
-          console.log(user);
+
+          if (newWeek) {
+            console.log('~~~~~New week, reset credits~~~~~');
+            user.currentGoals[goal.id].credits = 7 - goal.frequency;
+          }
           //If user didn't submit today
           if (!user.currentGoals[goal.id].submitted_today) {
             console.log('~~~~~User did not submit today~~~~~');
@@ -22,11 +46,12 @@ var job = new CronJob('1 * * * * *', function() {
               console.log('~~~~~User gets charged~~~~~');
               //  TODO: Charge/email user
             } else {
-              console.log('~~~~~User credits get decremented~~~~~');
+              console.log('~~~~~User does not get charged but credits get decremented~~~~~');
               user.currentGoals[goal.id].credit--;
             }
           } else {
           //  Else user did submit today, so reset flag
+            console.log('~~~~~User submitted. Good job user!~~~~~');
             user.currentGoals[goal.id].submitted_today = false;
           }
 
@@ -36,26 +61,6 @@ var job = new CronJob('1 * * * * *', function() {
           })
         })
       });
-
-
-
-      //Increment the goal week variable
-      //Increment goal variable so base 1 instead of 0. Conveniently becomes
-      //variable we need to save
-      var currentWeek = goal.current_week + 1;
-
-      //End goal if current date is passed end date
-      if (goal.end_date <= new Date()){
-        goal.is_active = false;
-      }
-      //Above we incremented the week # because it needs to be on a base 1 scale
-      //so * by 1, not 0. If today's date is less than or equal to a week ahead of last week,
-      //then increment the week
-      else if(new Date(goal.start_date.getTime() + (currentWeek * 7 * 86400000)) <= new Date()){
-        //TODO: reset user credits
-        goal.current_week = currentWeek;
-        goal.save();
-      }
     })
 
   });
