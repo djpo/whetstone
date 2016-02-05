@@ -1,6 +1,7 @@
-var express = require('express'),
-    db      = require('../models/index'),
-    router  = express.Router();
+var express     = require('express'),
+    db          = require('../models/index'),
+    dateFormat  = require('dateformat'),
+    router      = express.Router();
 
 router.get('/', function(req, res){
   if (!req.user) {
@@ -29,7 +30,12 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-      res.render('dashboard', {goal: goal});
+      // Render dashboard w/ data
+      res.render('dashboard',
+        { goal: goal,
+          user: user,
+          weeklySubs: goal.subs[user._id][goal.current_week]
+        });
     });
   });
 });

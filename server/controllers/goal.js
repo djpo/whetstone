@@ -1,5 +1,6 @@
 var express     = require('express'),
     db          = require('../models/index'),
+    dateFormat  = require('dateformat'),
     router      = express.Router();
 
 router.use(function(req, res, next){
@@ -19,12 +20,14 @@ router.post('/save', function(req, res){
     // Create new goal
     var newGoal = new db.goal(req.body);
     // Initialize goal
+      // Will have to change this if goal does not start immediately on goal creation
+    var today = new Date();
+    newGoal.start_date = Number(dateFormat(today, "yyyymmdd"));
+    var endDay = today + (86400000 * newGoal.duration * 7);
+    newGoal.end_date = Number(dateFormat(endDay, "yyyymmdd"));
     newGoal.is_active = true;
-    newGoal.start_date = new Date()
-    newGoal.end_date = newGoal.start_date.getTime() + (newGoal.duration * 7 * 86400000);
     newGoal.current_week = 0;
     newGoal.subs = {};
-
     // Push current user to this goal's members array
     // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);

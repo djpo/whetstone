@@ -1,38 +1,84 @@
-<!-- Goal dashboard
-  See progress/upcoming goal/checkpoint
-  Be able to submit
-  Be able to comment on my submission
-  Able to be commented on by group    
-  View my submissions
-  Notifications of group
-  View group submissions, or able to click to get to a specific group member -->
+<!--
+Goal dashboard
+See progress/upcoming goal/checkpoint
+Be able to submit
+Be able to comment on my submission
+Able to be commented on by group    
+View my submissions
+Notifications of group
+View group submissions, or able to click to get to a specific group member
+-->
 
 <div class="row">
 
-  <div class="col m4 push-m8 s12  z-depth-1" id="upload-box">
-    <h5 class="center-align">Upload</h5>
-    <form action="/submissions/upload" enctype="multipart/form-data" method="post">
-      <div class="file-field input-field">
-        <div class="btn">
-          <span>File</span>
-          <input type="file" name="submission" accept="<%=goal.content_type%>/*" class="validate" required>
-        </div>
-        <div class="file-path-wrapper">
-          <input class="file-path validate" type="text" required>
-        </div>
+  <!-- left column -->
+  <div class="col m3">
+
+    <!-- goal info -->
+    <div class="row">
+      <div class="col m12 left-panel-box">
+        <h5><%= goal.name %></h5>
+        <p>week <%= goal.current_week + 1 %> of <%= goal.duration %><br>
+          content type: <%= goal.content_type %><br>
+          <%= weeklySubs.length %> of <%= goal.frequency %> submissions made this week</br>
+          members: <%= goal.members.length %>
+        </p>
       </div>
-      <div class="input-field col s12">
-        <i class="material-icons prefix">label</i>
-        <input id="icon_prefix" type="text" name="note" class="validate" required>
+    </div>
+
+    <!-- upload box -->
+    <div class="row">
+      <div id="upload-box" class="col m12 left-panel-box">
+
+        <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
+          <h6>you uploaded for this goal today.<br>good job!</h6>
+
+        <% } else { %>
+          <h6>upload content for today!</h6>
+          <form action="/submissions/upload" enctype="multipart/form-data" method="post">
+            <div class="row">
+
+              <!-- File chooser -->
+              <div class="file-field input-field col m5">
+                <!-- File chooser button -->
+                <div class="btn upload-button">
+                  <span>choose file</span>
+                  <input required type="file" name="submission" accept="<%=goal.content_type%>/*" class="validate">
+                </div>
+                <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
+                <div class="file-path-wrapper" style="border: 2px solid #455a64">
+                  <input required class="file-path validate" type="text">
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <div class="col m5">
+                <button class="upload-button btn waves-effect waves-light" type="submit" id="submit-button" name="action">
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </div>
+
+            <!-- User note field -->
+            <p>write a note about your submission</p>
+            <div class="row" style="border: 2px solid rgba(179,118,87,.5)">
+              <div class="input-field">
+                <i class="material-icons prefix">label</i>
+                <input id="icon_prefix" type="text" name="note" class="validate">
+              </div>
+            </div>
+
+          </form>
+        <% } %>
+
       </div>
-      <button class="btn waves-effect waves-light" type="submit" id="submit-button" name="action">Submit
-        <i class="material-icons right">send</i>
-      </button>
-    </form>
+    </div>
+    <!-- End of upload box -->
+
   </div>
 
-  <div class="col m8 pull-m4 s12">
-    <h3 class="center-align"><%= goal.name %></h3>
+  <!-- middle column -->
+  <div class="col m6" style="position: relative; top: -8px;">
 
     <!-- row of 3 placeholders -->
     <div class="row">
@@ -103,12 +149,24 @@
     </div>
 
   </div>
+
 </div>
 
-<div class="row" style="border: 2px solid black">
-  <h5>goal profile</h5>
-  <%= goal %>
-</div>
 
-<!--Example use of file upload view-->
-<!--<img src="/9732e187c215909d93350ce1b59e124c">-->
+<!-- Box for data testing -->
+<div hidden class="row" style="margin-top: 20%; border: 2px solid black">
+  <h5>DATAMONSTER</h5>
+
+  <!-- <div class="divider"></div> -->
+
+  <% for (var i = 0; i < weeklySubs.length; i++) { %>
+  <div>
+    sub #<%= i %><br>
+    filename: <%= weeklySubs[i].filename %><br>
+    <div class="img-container valign-wrapper">
+      <img class="valign" src="/<%= weeklySubs[i].filename %>">
+    </div>
+  </div>
+  <% } %>
+
+</div>

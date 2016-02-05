@@ -1,29 +1,108 @@
 /* ////////////////////
+colors in use */
+.custom-red {
+  background-color: #912C00;
+}
+.custom-orange {
+  background-color: #CEA85F;
+}
+.custom-cream {
+  background-color: #FFFAF0;
+}
+.custom-orange {
+  background-color: #CEA85F;
+}
+.custom-light-green {
+  background-color: rgba(164,188,164,.5)
+}
+.custom-gray {
+  background-color: #455a64;
+}
+.custom-black {
+  background-color: #2E2F2A;
+}
+
+
+/* ////////////////////
 color palette
-  dark red: #912C00
-  cream: #FFFAF0
-  blue-gray: #455a64 (blue-grey darken-2)
-  blue-gray (alt - not used currently): #37474f (blue-grey darken-3)
-  orange: #ffab40 (Materialize default for important - we should change)
+
+red/brown
+#912C00                       used
+#702B1C R: 112 G: 43 B: 28
+#592A21 R: 89 G: 42 B: 33
+
+tan/brown
+#DA9E7A
+#B37657 rgb(179,118,87)
+  rgba(179,118,87,.5)         used
+#8E5F40
+#804F39 R: 128 G: 79 B: 57
+
+mute orange
+#CEA85F                       used
+#C5A059
+#DDD3A0 R: 221 G: 211 B: 160
+
+orange
+#ffab40                       used (we should change)
+  Materialize default for 'important'
+
+light green
+#CEE8CF R: 206 G: 232 B: 207
+#A4BCA4 rgb(164,188,164)
+  rgba(164,188,164,.5)        used
+
+
+
+cerulean
+#8DB3A1 R: 141 G: 179 B: 161
+#719382 R: 113 G: 147 B: 130
+#576D61 R: 87 G: 109 B: 97
+
+turquoise
+#99C9C9 R: 153 G: 201 B: 201
+#87BBB9 R: 135 G: 187 B: 185
+#578D8F R: 87 G: 141 B: 143
+
+blue-gray
+#6F8D91 R: 111 G: 141 B: 145
+#455a64                       used
+  Materialize 'blue-grey darken-2'
+
+cream
+#FFFAF0                       used
+
+light gray
+#A5AAA3 R: 165 G: 170 B: 163
+#9B9598 R: 155 G: 149 B: 152
+
+black
+#2E2F2A R: 46 G: 47 B: 42     used
+#262721 R: 38 G: 39 B: 33
+#23241F R: 35 G: 36 B: 31
+#232520 R: 35 G: 37 B: 32
 */
 
 /* ////////////////////
 style guidelines
-  border-radius: 2px (to match Material);
+  border-radius: 2px (to match Material cards);
 */
 
 /* ////////////////////
 site-wide */
 .body-wrapper {
   position: relative;
-  top: 60px;
-  padding: 0 20px;
+  top: 70px;
+  margin: 15px;
 }
 body {
   background-color: #FFFAF0;
 }
-.custom-gray {
-  background-color: #455a64;
+/* padding and border do not increase element size */
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /* ////////////////////
@@ -72,7 +151,20 @@ topbar */
 }
 #cust-nav-dropdown * {
   text-align: right;
-  color: #ffab40;
+  color: #CEA85F;
+}
+#nav-menu-arrow {
+  position: fixed;
+  right: 30px;
+  top: 35px;
+  /*color: #CEA85F;*/
+}
+.apex-dn {
+  width: 8px;
+  height: 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #CEA85F;
 }
 
 /* ////////////////////
@@ -85,6 +177,19 @@ welcome */
 }
 #nav-menu-signup {
   right: 170px;
+}
+#login-modal {
+    width: 300px;
+    padding: 8px;
+}
+#signup-modal {
+    width: 300px;
+    padding: 8px;
+}
+.login-form-text{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
 }
 
 /* ////////////////////
@@ -102,6 +207,38 @@ dashboard */
 #submit-button {
 	width: 100%;
 }
+.left-panel-box {
+  text-align: right;
+  background-color: rgba(164,188,164,.5);
+  color: #2E2F2A;
+}
+#upload-box .upload-button {
+  height: 50px;
+  font-size: 10px;
+  background-color: rgba(179,118,87,.8);
+  /*margin: 0 auto;*/
+}
+#upload-box .input-field {
+  width: 100%;
+  /*height: 20px;*/
+  font-size: 10px;
+  opacity: .5;
+}
+#submit-button {
+  width: 100%;
+  font-size: 10px;
+  opacity: .5;
+}
+
+.img-container {
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+}
+.img-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
 
 /* ////////////////////
 submissions/show */
@@ -110,27 +247,17 @@ submissions/show */
 	margin: 25px 0;
 }
 
-
-#login-modal {
-    width: 300px;
-    padding: 8px;
+/* ////////////////////
+testing */
+.t-bor1 {
+  border: 2px dashed violet;
 }
-#signup-modal {
-    width: 300px;
-    padding: 8px;
+.t-bor2 {
+  border: 2px solid purple;
 }
-
-.login-form-text{
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
+.t-bor3 {
+  border: 2px dotted blue;
 }
-.profile-image-login{
-    width: 100px;
-    height: 100px !important;
-}
-
-.login-text {
-    margin-top: -6px;
-    margin-left: -6px !important;
+.card.custom-gray {
+  /*border: 2px solid yellow;*/
 }

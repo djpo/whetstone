@@ -1,0 +1,129 @@
+<!--
+Goal dashboard
+See progress/upcoming goal/checkpoint
+Be able to submit
+Be able to comment on my submission
+Able to be commented on by group    
+View my submissions
+Notifications of group
+View group submissions, or able to click to get to a specific group member
+-->
+
+<div class="row test-border">
+
+  <!-- left column -->
+  <div class="col m3 test-border">
+
+    <div id="goal-info" class="test-border">
+      <h3 class="center-align test-border"><%= goal.name %></h3>
+    </div>
+
+    <!-- upload box -->
+    <div class="z-depth-1" id="upload-box">
+    <!-- <div class="col m4 push-m8 s12  z-depth-1 testb" id="upload-box"> -->
+      <h5 class="center-align">Upload</h5>
+      <form action="/submissions/upload" enctype="multipart/form-data" method="post">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="submission">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">label</i>
+          <input id="icon_prefix" type="text" name="note" class="validate">
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" id="submit-button" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- content column -->
+  <div class="col m7 test-border" style="position: relative; top: -30px;">
+
+    <!-- row of 3 placeholders -->
+    <div class="row">
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">January 30th, 2016</span>
+            <p>503 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">January 31th, 2016</span>
+            <p>515 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">February 01, 2016</span>
+            <p>639 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- row of 2 placeholders -->
+    <div class="row">
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">January 30th, 2016</span>
+            <p>503 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+      <div class="col m4 s12">
+        <div class="card custom-gray">
+          <div class="card-content white-text">
+            <span class="card-title">January 31th, 2016</span>
+            <p>515 Words</p>
+          </div>
+          <div class="card-action">
+            <a href="#">View</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- <div class="row" style="border: 2px solid black">
+  <h5>goal profile</h5>
+  <%= goal %>
+</div> -->
+
+
+<!--Example use of file upload view-->
+<!--<img src="/9732e187c215909d93350ce1b59e124c">

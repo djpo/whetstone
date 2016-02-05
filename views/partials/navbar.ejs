@@ -17,9 +17,11 @@
 	<% } else { %>
 
 		<div id="nav-menu" class="floatbox z-depth-2">
-			<a id="cust-nav-dropdown-button" class="dropdown-button valign-wrapper" data-activates="cust-nav-dropdown">
+			<a id="cust-nav-dropdown-button" class="dropdown-button valign-wrapper" data-activates="cust-nav-dropdown" href="#">
 				<div class="floatbox-content valign"><%= currentUser.username %></div>
-				<div class="floatbox-content valign"><i class="material-icons" style="font-size: 18px; color: #ffab40">import_export</i></div>
+				<div id="nav-menu-arrow" class="apex-dn floatbox-content valign"></div>
+				<!-- Arrow alternative -->
+				<!-- <div id="nav-menu-arrow" class="floatbox-content valign">&#8675;</div> -->
 			</a>
 		</div>
 
