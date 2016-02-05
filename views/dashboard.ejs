@@ -18,12 +18,11 @@ View group submissions, or able to click to get to a specific group member
     <div class="row">
       <div class="col m12 left-panel-box">
         <h5><%= goal.name %></h5>
-        <p>week <%= goal.current_week + 1 %> of <%= goal.duration %></p>
-        <p>ends on <%= endDate %></p>
-        <p><%= goal.members.length %> member
-          <% if (goal.members.length > 1)  { %>
-            s
-          <% } %>
+        <p>week <%= goal.current_week + 1 %> of <%= goal.duration %><br>
+          content type: <%= goal.content_type %><br>
+          <%= goal.frequency %> submissions per week</br>
+          ends on <%= endDate %><br>
+          members: <%= goal.members.length %>
         </p>
       </div>
     </div>
@@ -158,14 +157,15 @@ View group submissions, or able to click to get to a specific group member
 
 <div class="row" style="margin-top: 20%; border: 2px solid black">
   <h5>DATAMONSTER</h5>
+  <% var weeklySubs = goal.subs[currentUser._id][goal.current_week] %>
+  is weeklySubs an array? <%= Array.isArray(weeklySubs) %>
   <p class="divider"></p>
-  <%= currentUser %>
-  <p class="divider"></p>
-  <%= currentUser.currentGoals[currentUser.activeGoal].submitted_today %>
-
+  weeklySubs.length: <%= weeklySubs.length %><br>
+  <% for (var i = 0; i < weeklySubs.length; i++) { %>
+    sub #<%= i %> --- <%= weeklySubs[i].filename %><br>
+    <img src="/<%= weeklySubs[i].filename %>">
+  <% } %>
 </div>
-
-
 
 
 <!--Example use of file upload view-->

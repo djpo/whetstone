@@ -1,7 +1,7 @@
-var express = require('express'),
-    db      = require('../models/index'),
+var express     = require('express'),
+    db          = require('../models/index'),
     dateFormat  = require('dateformat'),
-    router  = express.Router();
+    router      = express.Router();
 
 router.get('/', function(req, res){
   if (!req.user) {
@@ -34,6 +34,7 @@ router.get('/dashboard', function(req, res){
       // Render dashboard w/ data
       res.render('dashboard',
         { goal: goal,
+          user: user,
           endDate: endDate
         });
     });
