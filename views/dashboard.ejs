@@ -18,7 +18,7 @@ View group submissions, or able to click to get to a specific group member
     <div class="row">
       <div class="col m12 left-panel-box">
         <h5><%= goal.name %></h5>
-        <p>week <%= goal.current_week %> of <%= goal.duration %></p>
+        <p>week <%= goal.current_week + 1 %> of <%= goal.duration %></p>
         <p>ends on <%= endDate %></p>
         <p><%= goal.members.length %> member
           <% if (goal.members.length > 1)  { %>
@@ -33,31 +33,44 @@ View group submissions, or able to click to get to a specific group member
       <div id="upload-box" class="col m12 left-panel-box">
 
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
-          <h6>you uploaded for this goal today. good job!</h6>
+          <h6>you uploaded for this goal today.<br>good job!</h6>
 
         <% } else { %>
           <h6>upload content for today!</h6>
           <form action="/submissions/upload" enctype="multipart/form-data" method="post">
+            <div class="row t-bor3">
 
-            <div class="file-field input-field">
-              <div class="btn upload-button">
-                <span>choose file</span>
-                <input type="file" name="submission">
+              <!-- File chooser -->
+              <div class="file-field input-field col m5 t-bor1">
+                <!-- File chooser button -->
+                <div class="btn upload-button">
+                  <span>choose file</span>
+                  <input type="file" name="submission">
+                </div>
+                <!-- To be hidden -->
+                <div class="file-path-wrapper" style="border: 3px solid yellow">
+                  <input class="file-path validate" type="text">
+                </div>
               </div>
 
-              <div class="file-path-wrapper t-bor2">
-                <input class="file-path validate" type="text">
+              <!-- Submit button -->
+              <div class="col m5 t-bor1">
+                <button class="upload-button btn waves-effect waves-light" type="submit" id="submit-button" name="action">
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- User note field -->
+            <p>write a note about your submission</p>
+
+            <div class="row t-bor3">
+              <div class="input-field">
+                <i class="material-icons prefix t-bor1">label</i>
+                <input id="icon_prefix" type="text" name="note" class="validate">
               </div>
             </div>
-
-            <div class="input-field">
-              <i class="material-icons prefix t-bor3">label</i>
-              <input id="icon_prefix" type="text" name="note" class="validate">
-            </div>
-
-            <button class="upload-button btn waves-effect waves-light" type="submit" id="submit-button" name="action">
-              <i class="material-icons right">send</i>
-            </button>
 
           </form>
         <% } %>
