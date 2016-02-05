@@ -42,7 +42,13 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
       // Save goal
       goal.save(function(err){
         if (err) return console.log(err);
-        res.redirect('/dashboard');
+
+        user.currentGoals[goal.id].submitted_today = true;
+        user.markModified('currentGoals');
+        user.save(function(err){
+          if (err) return console.log(err);
+          res.redirect('/dashboard');
+        })
       });
     });
   });

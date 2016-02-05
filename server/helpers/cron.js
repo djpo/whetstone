@@ -2,25 +2,32 @@ var nodemailer  = require('nodemailer'),
   db            =  require('../models/index'),
   CronJob       = require('cron').CronJob;
 
-var job = new CronJob('* 10 * * * *', function() {
+var job = new CronJob('1 * * * * *', function() {
   /* Runs every minute or so */
 
   db.goal.find({is_active: true}).
   exec(function(err, goals){
 
     goals.forEach(function(goal){
-
       goal.members.forEach(function(member){
 
-        db.user.find({_id: member}).exec(function(user){
+        db.user.findOne({_id: member}, function(err, user){
+          console.log('///user');
+          console.log(user);
           //If user didn't submit today
-          if (!user.currentGoals[goal.id].submittedToday) {
+          if (!user.currentGoals[goal.id].submitted_today) {
+            console.log('~~~~~User did not submit today~~~~~');
             //If their credit == 0
             if(!user.currentGoals[goal.id].credit) {
-            //  TODO: Charge/email user
+              console.log('~~~~~User gets charged~~~~~');
+              //  TODO: Charge/email user
             } else {
+              console.log('~~~~~User credits get decremented~~~~~');
               user.currentGoals[goal.id].credit--;
             }
+          } else {
+          //  Else user did submit today, so reset flag
+            user.currentGoals[goal.id].submitted_today = false;
           }
 
           user.markModified('currentGoals');
