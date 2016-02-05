@@ -1,9 +1,9 @@
-var nodemailer  = require('nodemailer'),
-  db            =  require('../models/index'),
-  CronJob       = require('cron').CronJob;
+var db            = require('../models/index'),
+    mailer        = require('./mailer'),
+    CronJob       = require('cron').CronJob;
 
 var job = new CronJob('1 * * * * *', function() {
-  /* Runs every minute or so */
+  /* Runs every minute */
   console.log('~~~~~NEW DAY~~~~~');
 
   db.goal.find({is_active: true}).
@@ -31,7 +31,6 @@ var job = new CronJob('1 * * * * *', function() {
 
 
       goal.members.forEach(function(member){
-
         db.user.findOne({_id: member}, function(err, user){
 
           if (newWeek) {
@@ -44,7 +43,9 @@ var job = new CronJob('1 * * * * *', function() {
             //If their credit == 0
             if(!user.currentGoals[goal.id].credit) {
               console.log('~~~~~User gets charged~~~~~');
-              //  TODO: Charge/email user
+              //WARNING: only uncomment below when testing longer periods. will send you
+              //emails every minute worst case. Can add up when running server.
+              //mailer(user.email)
             } else {
               console.log('~~~~~User does not get charged but credits get decremented~~~~~');
               user.currentGoals[goal.id].credit--;
@@ -62,37 +63,7 @@ var job = new CronJob('1 * * * * *', function() {
         })
       });
     })
-
   });
-
-    //Goal.find({}, function(err, goals){
-    //  goals.forEach(function(goal){
-    //
-    //    /*Uncomment below to enable emails */
-    //    //// create reusable transporter object using the default SMTP transport
-    //    //var transporter = nodemailer.createTransport('smtps://name%40gmail.com:pw@smtp.gmail.com');
-    //    //
-    //    //// setup e-mail data with unicode symbols
-    //    //var mailOptions = {
-    //    //  from: 'Name <name@gmail.com>', // sender address
-    //    //  to: user.email, // list of receivers
-    //    //  subject: 'Subject', // Subject line
-    //    //  text: 'Body', // plaintext body
-    //    //  html: 'HTML body' // html body
-    //    //};
-    //    //
-    //    //// send mail with defined transport object
-    //    //transporter.sendMail(mailOptions, function(error, info){
-    //    //  if(error){
-    //    //    return console.log(error);
-    //    //  }
-    //    //  console.log('Message sent: ' + info.response);
-    //    //});
-    //
-    //    //  End forEach goal
-    //  });
-    //  //  End goal find
-    //});
 
   }, function () {
     /* This function is executed when the job stops */
