@@ -30,13 +30,13 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
         console.log("goal.subs[user._id] === undefined");
         goal.subs[user._id] = [];
       }
-      if (goal.subs[user._id][goal.current_week] === undefined) {
-        console.log("goal.subs[user._id][goal.current_week] === undefined");
-        goal.subs[user._id][goal.current_week] = [];
+      if (goal.subs[user._id][goal.currentWeek] === undefined) {
+        console.log("goal.subs[user._id][goal.currentWeek] === undefined");
+        goal.subs[user._id][goal.currentWeek] = [];
       }
 
       // Add submission to goal
-      goal.subs[user._id][goal.current_week].push(newSubmission);
+      goal.subs[user._id][goal.currentWeek].push(newSubmission);
       // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
       goal.markModified('subs');
       // Save goal
