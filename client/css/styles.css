@@ -1,23 +1,22 @@
-/* color palette
-  Red/white color scheme
-    dark red: #912C00
-    cream: #FFFAF0
-    blue-gray: #546e7a (blue-grey darken-1)
-    blue-gray alt1: #455a64 (blue-grey darken-2)
-    blue-gray alt2: #37474f (blue-grey darken-3)
-
-  Blue/grey color scheme - still want???
-    background-color: #eceff1;
+/* ////////////////////
+color palette
+  dark red: #912C00
+  cream: #FFFAF0
+  blue-gray: #455a64 (blue-grey darken-2)
+  blue-gray (alt - not used currently): #37474f (blue-grey darken-3)
+  orange: #ffab40 (Materialize default for important - we should change)
 */
 
-/* style guidelines
+/* ////////////////////
+style guidelines
   border-radius: 2px (to match Material);
 */
 
-/* site-wide */
+/* ////////////////////
+site-wide */
 .body-wrapper {
   position: relative;
-  top: 40px;
+  top: 60px;
   padding: 0 20px;
 }
 body {
@@ -27,15 +26,13 @@ body {
   background-color: #455a64;
 }
 
-/* topbar */
+/* ////////////////////
+topbar */
 #topbar {
   position: fixed;
   z-index: 10;
   top: 0px;
   width: 100%;
-}
-#topbar a {
-  color: white;
 }
 #top-strip {
   position: fixed;
@@ -50,10 +47,13 @@ body {
   height: 50px;
   border-radius: 2px;
   background-color: #455a64;
+}
+.floatbox .floatbox-content {
+  margin: auto;
   color: white;
 }
-.floatbox-content {
-  margin: auto;
+.floatbox-content a {
+  color: white;
 }
 #brand-logo {
   left: 15px;
@@ -61,15 +61,40 @@ body {
 #nav-menu {
   right: 15px;
 }
+#cust-nav-dropdown-button {
+  width: 100%;
+  height: 100%;
+}
+#cust-nav-dropdown {
+  margin-top: 10px;
+  border-radius: 2px;
+  background-color: #455a64;
+}
+#cust-nav-dropdown * {
+  text-align: right;
+  color: #ffab40;
+}
+
+/* ////////////////////
+welcome */
+#splash {
+  height: 90vh;
+  width: 95vw;
+  margin: 15px;
+  padding: 40px;
+}
 #nav-menu-signup {
   right: 170px;
 }
 
-/* goal/new */
+/* ////////////////////
+goal/new_goal */
 .goal-label {
   text-align: right;
 }
 
+/* ////////////////////
+dashboard */
 #upload-box {
 	margin-top: 20px;
 	padding: 15px;
@@ -77,13 +102,10 @@ body {
 #submit-button {
 	width: 100%;
 }
+
+/* ////////////////////
+submissions/show */
 #sub-view-img {
 	width: 100%;
 	margin: 25px 0;
-}
-#splash {
-	height: 90vh;
-	width: 95vw;
-	margin: 15px;
-	padding: 40px;
 }
