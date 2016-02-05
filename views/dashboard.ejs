@@ -43,11 +43,11 @@ View group submissions, or able to click to get to a specific group member
                 <!-- File chooser button -->
                 <div class="btn upload-button">
                   <span>choose file</span>
-                  <input type="file" name="submission">
+                  <input required type="file" name="submission" accept="<%=goal.content_type%>/*" class="validate">
                 </div>
-                <!-- To be hidden -->
+                <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
                 <div class="file-path-wrapper" style="border: 2px solid #455a64">
-                  <input class="file-path validate" type="text">
+                  <input required class="file-path validate" type="text">
                 </div>
               </div>
 
@@ -57,12 +57,10 @@ View group submissions, or able to click to get to a specific group member
                   <i class="material-icons right">send</i>
                 </button>
               </div>
-
             </div>
 
             <!-- User note field -->
             <p>write a note about your submission</p>
-
             <div class="row" style="border: 2px solid rgba(179,118,87,.5)">
               <div class="input-field">
                 <i class="material-icons prefix">label</i>
@@ -75,6 +73,7 @@ View group submissions, or able to click to get to a specific group member
 
       </div>
     </div>
+    <!-- End of upload box -->
 
   </div>
 

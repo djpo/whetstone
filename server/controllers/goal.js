@@ -21,20 +21,13 @@ router.post('/save', function(req, res){
     var newGoal = new db.goal(req.body);
     // Initialize goal
       // Will have to change this if goal does not start immediately on goal creation
-
-
     var today = new Date();
     newGoal.start_date = Number(dateFormat(today, "yyyymmdd"));
-
     var endDay = today + (86400000 * newGoal.duration * 7);
     newGoal.end_date = Number(dateFormat(endDay, "yyyymmdd"));
-
-
-
     newGoal.is_active = true;
     newGoal.current_week = 0;
     newGoal.subs = {};
-
     // Push current user to this goal's members array
     // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);
@@ -58,7 +51,7 @@ router.post('/save', function(req, res){
       //Initialize mixed type currentGoals, then initialize values
       user.currentGoals = {};
       user.currentGoals[newGoal._id] = {};
-      user.currentGoals[newGoal._id].credit = 7 - newGoal.frequency;
+      user.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
       user.currentGoals[newGoal._id].submitted_today = false;
 
       user.markModified('currentGoals');
