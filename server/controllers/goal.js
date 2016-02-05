@@ -48,7 +48,7 @@ router.post('/save', function(req, res){
       //Initialize mixed type currentGoals, then initialize values
       user.currentGoals = {};
       user.currentGoals[newGoal._id] = {};
-      user.currentGoals[newGoal._id].credit = 7 - newGoal.frequency;
+      user.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
       user.currentGoals[newGoal._id].submitted_today = false;
 
       user.markModified('currentGoals');
