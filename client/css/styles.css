@@ -96,7 +96,8 @@ site-wide */
   margin: 15px;
 }
 body {
-  background-color: #FFFAF0;
+  /*background-color: #FFFAF0;*/
+  background-color: #f8f8f8;
 }
 /* padding and border do not increase element size */
 * {
@@ -117,7 +118,7 @@ topbar */
   position: fixed;
   width: 100%;
   height: 40px;
-  background-color: #912C00;
+  /*background-color: #912C00;*/
 }
 .floatbox {
   position: fixed;
@@ -260,4 +261,9 @@ testing */
 }
 .card.custom-gray {
   /*border: 2px solid yellow;*/
+}
+
+#login-signup {
+  position: absolute;
+  right: 15px;
 }

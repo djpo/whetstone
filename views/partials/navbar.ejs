@@ -1,22 +1,32 @@
 <div id="topbar">
-	<div id="top-strip" class="z-depth-2">
+	<div id="top-strip" class="z-depth-1">
 	</div>
 
-	<div id="brand-logo" class="floatbox valign-wrapper z-depth-2">
+	<div id="brand-logo" class="floatbox valign-wrapper z-depth-1">
 		<div class="floatbox-content valign">whetstone</div>
 	</div>
 
 	<% if (!currentUser) { %>
-		<div id="nav-menu-signup" class="floatbox valign-wrapper z-depth-2">
-			<div class="floatbox-content valign"><a class="modal-trigger" href="#signup-modal">sign up</a></div>
+
+	<div id="login-signup">
+
+	</div>
+		<div id="nav-menu-signup" class="">
+			<div class=""><a class="modal-trigger" href="#signup-modal">sign up</a></div>
 		</div>
-		<div id="nav-menu" class="floatbox valign-wrapper z-depth-2">
-			<div class="floatbox-content valign"><a class="modal-trigger" href="#login-modal">log in</a></div>
+		<div id="nav-menu" class="floatbox valign-wrapper z-depth-1">
+			<div class="floatbox-content valign custom-gray"><a class="modal-trigger" href="#login-modal">log in</a></div>
 		</div>
+	<!--<div id="nav-menu-signup" class="floatbox valign-wrapper z-depth-1">-->
+		<!--<div class="floatbox-content valign"><a class="modal-trigger" href="#signup-modal">sign up</a></div>-->
+	<!--</div>-->
+	<!--<div id="nav-menu" class="floatbox valign-wrapper z-depth-1">-->
+		<!--<div class="floatbox-content valign custom-gray"><a class="modal-trigger" href="#login-modal">log in</a></div>-->
+	<!--</div>-->
 
 	<% } else { %>
 
-		<div id="nav-menu" class="floatbox z-depth-2">
+		<div id="nav-menu" class="floatbox z-depth-1">
 			<a id="cust-nav-dropdown-button" class="dropdown-button valign-wrapper" data-activates="cust-nav-dropdown" href="#">
 				<div class="floatbox-content valign"><%= currentUser.username %></div>
 				<div id="nav-menu-arrow" class="apex-dn floatbox-content valign"></div>
@@ -25,7 +35,7 @@
 			</a>
 		</div>
 
-		<ul id="cust-nav-dropdown" class="dropdown-content z-depth-2">
+		<ul id="cust-nav-dropdown" class="dropdown-content z-depth-1">
 	    <li><a href="/dashboard">dashboard</a></li>
 	    <li><a href="/archive">all goals</a></li>
 	    <li class="divider"></li>
