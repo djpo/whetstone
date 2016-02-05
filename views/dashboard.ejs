@@ -7,9 +7,11 @@
   Notifications of group
   View group submissions, or able to click to get to a specific group member -->
 
-<div class="row">
+<div class="row test-border">
 
-  <div class="col m4 push-m8 s12  z-depth-1" id="upload-box">
+
+  <!-- upload box column -->
+  <div class="col m4 push-m8 s12  z-depth-1 test-border" id="upload-box">
     <h5 class="center-align">Upload</h5>
     <form action="/submissions/upload" enctype="multipart/form-data" method="post">
       <div class="file-field input-field">
@@ -31,8 +33,10 @@
     </form>
   </div>
 
-  <div class="col m8 pull-m4 s12">
-    <h3 class="center-align"><%= goal.name %></h3>
+
+  <!-- content column -->
+  <div class="col m8 pull-m4 s12 test-border">
+    <h3 class="center-align test-border"><%= goal.name %></h3>
 
     <!-- row of 3 placeholders -->
     <div class="row">

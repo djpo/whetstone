@@ -1,4 +1,22 @@
 /* ////////////////////
+colors in use */
+.custom-red {
+  background-color: #912C00;
+}
+.custom-cream {
+  background-color: #FFFAF0;
+}
+.custom-orange {
+  background-color: #CEA85F;
+}
+.custom-blue-gray {
+  background-color: #455a64;
+}
+.custom-gray {
+  background-color: #455a64;
+}
+
+/* ////////////////////
 color palette
 
 red/brown
@@ -13,7 +31,7 @@ tan/brown
 #804F39 R: 128 G: 79 B: 57
 
 mute yellow
-#CEA85F
+#CEA85F                       used
 #C5A059
 #DDD3A0 R: 221 G: 211 B: 160
 
@@ -36,7 +54,7 @@ turquoise
 #87BBB9 R: 135 G: 187 B: 185
 #578D8F R: 87 G: 141 B: 143
 
-gray-blue
+blue-gray
 #6F8D91 R: 111 G: 141 B: 145
 #455a64                       used
   Materialize 'blue-grey darken-2'
@@ -53,21 +71,15 @@ black
 #262721 R: 38 G: 39 B: 33
 #23241F R: 35 G: 36 B: 31
 #232520 R: 35 G: 37 B: 32
+*/
 
 /* ////////////////////
 style guidelines
-  border-radius: 2px (to match Material);
+  border-radius: 2px (to match Material cards);
 */
 
 /* ////////////////////
 site-wide */
-
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
 .body-wrapper {
   position: relative;
   top: 60px;
@@ -76,8 +88,11 @@ site-wide */
 body {
   background-color: #FFFAF0;
 }
-.custom-gray {
-  background-color: #455a64;
+/* padding and border do not increase element size */
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /* ////////////////////
@@ -153,6 +168,28 @@ welcome */
 #nav-menu-signup {
   right: 170px;
 }
+#login-modal {
+    width: 300px;
+    padding: 8px;
+}
+#signup-modal {
+    width: 300px;
+    padding: 8px;
+}
+.login-form-text{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+}
+/* these seem to be unused? -DP (2/5) */
+/* .profile-image-login{
+    width: 100px;
+    height: 100px !important;
+}
+.login-text {
+    margin-top: -6px;
+    margin-left: -6px !important;
+}*/
 
 /* ////////////////////
 goal/new_goal */
@@ -177,28 +214,8 @@ submissions/show */
 	margin: 25px 0;
 }
 
-
-
-#login-modal {
-    width: 300px;
-    padding: 8px;
-}
-#signup-modal {
-    width: 300px;
-    padding: 8px;
-}
-
-.login-form-text{
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-}
-.profile-image-login{
-    width: 100px;
-    height: 100px !important;
-}
-
-.login-text {
-    margin-top: -6px;
-    margin-left: -6px !important;
+/* ////////////////////
+testing */
+.test-border {
+  border: 1px dashed violet;
 }
