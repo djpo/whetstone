@@ -126,7 +126,20 @@ topbar */
 }
 #cust-nav-dropdown * {
   text-align: right;
-  color: #ffab40;
+  color: #CEA85F;
+}
+#nav-menu-arrow {
+  position: fixed;
+  right: 30px;
+  top: 35px;
+  /*color: #CEA85F;*/
+}
+.apex-dn {
+  width: 8px;
+  height: 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #CEA85F;
 }
 
 /* ////////////////////
@@ -163,6 +176,7 @@ submissions/show */
 	width: 100%;
 	margin: 25px 0;
 }
+
 
 
 #login-modal {
