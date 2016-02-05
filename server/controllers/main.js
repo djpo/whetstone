@@ -1,5 +1,6 @@
 var express = require('express'),
     db      = require('../models/index'),
+    dateFormat  = require('dateformat'),
     router  = express.Router();
 
 router.get('/', function(req, res){
@@ -29,7 +30,12 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-      res.render('dashboard', {goal: goal});
+      var endDate = dateFormat(goal.end_date, "yyyy/mm/dd");
+      // Render dashboard w/ data
+      res.render('dashboard',
+        { goal: goal,
+          endDate: endDate
+        });
     });
   });
 });

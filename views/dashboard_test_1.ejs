@@ -9,66 +9,43 @@ Notifications of group
 View group submissions, or able to click to get to a specific group member
 -->
 
-<div class="row">
+<div class="row test-border">
 
   <!-- left column -->
-  <div class="col m3">
+  <div class="col m3 test-border">
 
-    <!-- goal info -->
-    <div class="row">
-      <div class="col m12 left-panel-box">
-        <h5><%= goal.name %></h5>
-        <p>week <%= goal.current_week %> of <%= goal.duration %></p>
-        <p>ends on <%= endDate %></p>
-        <p><%= goal.members.length %> member
-          <% if (goal.members.length > 1)  { %>
-            s
-          <% } %>
-        </p>
-      </div>
+    <div id="goal-info" class="test-border">
+      <h3 class="center-align test-border"><%= goal.name %></h3>
     </div>
 
     <!-- upload box -->
-    <div class="row">
-      <div id="upload-box" class="col m12 left-panel-box">
-
-        <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
-          <h6>you uploaded for this goal today. good job!</h6>
-
-        <% } else { %>
-          <h6>upload content for today!</h6>
-          <form action="/submissions/upload" enctype="multipart/form-data" method="post">
-
-            <div class="file-field input-field">
-              <div class="btn upload-button">
-                <span>choose file</span>
-                <input type="file" name="submission">
-              </div>
-
-              <div class="file-path-wrapper t-bor2">
-                <input class="file-path validate" type="text">
-              </div>
-            </div>
-
-            <div class="input-field">
-              <i class="material-icons prefix t-bor3">label</i>
-              <input id="icon_prefix" type="text" name="note" class="validate">
-            </div>
-
-            <button class="upload-button btn waves-effect waves-light" type="submit" id="submit-button" name="action">
-              <i class="material-icons right">send</i>
-            </button>
-
-          </form>
-        <% } %>
-
-      </div>
+    <div class="z-depth-1" id="upload-box">
+    <!-- <div class="col m4 push-m8 s12  z-depth-1 testb" id="upload-box"> -->
+      <h5 class="center-align">Upload</h5>
+      <form action="/submissions/upload" enctype="multipart/form-data" method="post">
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="submission">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">label</i>
+          <input id="icon_prefix" type="text" name="note" class="validate">
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" id="submit-button" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
     </div>
 
   </div>
 
-  <!-- middle column -->
-  <div class="col m6" style="position: relative; top: -8px;">
+  <!-- content column -->
+  <div class="col m7 test-border" style="position: relative; top: -30px;">
 
     <!-- row of 3 placeholders -->
     <div class="row">
@@ -142,17 +119,10 @@ View group submissions, or able to click to get to a specific group member
 
 </div>
 
-
-<div class="row" style="margin-top: 20%; border: 2px solid black">
-  <h5>DATAMONSTER</h5>
-  <p class="divider"></p>
-  <%= currentUser %>
-  <p class="divider"></p>
-  <%= currentUser.currentGoals[currentUser.activeGoal].submitted_today %>
-
-</div>
-
-
+<!-- <div class="row" style="border: 2px solid black">
+  <h5>goal profile</h5>
+  <%= goal %>
+</div> -->
 
 
 <!--Example use of file upload view-->
