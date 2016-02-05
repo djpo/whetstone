@@ -1,14 +1,14 @@
 goal: {
-  name: String,
-  content_type: String,
-  frequency: Number,
-  duration: Number,
-  publish: String,
-  members: Array,
-  is_active: Boolean,
-  start_date: Date,
-  end_date: Date,
-  current_week: Number,
+  name          : String,
+  contentType   : String,
+  frequency     : Number,
+  duration      : Number,
+  publish       : String,
+  members       : Array,
+  isActive      : Boolean,
+  startDate     : Number,
+  endDate       : Number,
+  currentWeek   : Number,
   subs: {
     user_id: [
       // week 0 submissions

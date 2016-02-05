@@ -28,15 +28,15 @@ var mongoose = require('mongoose'),
 
 var Goal_Schema = new Schema({
   name          : String,
-  content_type  : String,
+  contentType   : String,
   frequency     : Number,
   duration      : Number,
   publish       : String,
   members       : Array,
-  is_active     : Boolean,
-  start_date    : Number,
-  end_date      : Number,
-  current_week  : Number,
+  isActive      : Boolean,
+  startDate     : Number,
+  endDate       : Number,
+  currentWeek   : Number,
   subs          : Schema.Types.Mixed
 });
 

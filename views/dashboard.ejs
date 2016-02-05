@@ -18,8 +18,8 @@ View group submissions, or able to click to get to a specific group member
     <div class="row">
       <div class="col m12 left-panel-box">
         <h5><%= goal.name %></h5>
-        <p>week <%= goal.current_week + 1 %> of <%= goal.duration %><br>
-          content type: <%= goal.content_type %><br>
+        <p>week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br>
+          content type: <%= goal.contentType %><br>
           <%= weeklySubs.length %> of <%= goal.frequency %> submissions made this week</br>
           members: <%= goal.members.length %>
         </p>
@@ -43,7 +43,7 @@ View group submissions, or able to click to get to a specific group member
                 <!-- File chooser button -->
                 <div class="btn upload-button">
                   <span>choose file</span>
-                  <input required type="file" name="submission" accept="<%=goal.content_type%>/*" class="validate">
+                  <input required type="file" name="submission" accept="<%=goal.contentType%>/*" class="validate">
                 </div>
                 <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
                 <div class="file-path-wrapper" style="border: 2px solid #455a64">

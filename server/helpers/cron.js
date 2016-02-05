@@ -9,25 +9,29 @@ var job = new CronJob('1 * * * * *', function() {
   var today = dateFormat(new Date(), "yyyymmdd");
 
 
-    db.goal.find({is_active: true}).
+    db.goal.find({isActive: true}).
   exec(function(err, goals){
 
     goals.forEach(function(goal){
 
       //Increment goal variable so base 1 instead of 0
-      var currentWeekOneIndexed = goal.current_week + 1;
+      var currentWeekOneIndexed = goal.currentWeek + 1;
       var newWeek = false;
-      var oneWeekAhead = dateFormat(new Date(goal.start_date.getTime() + (currentWeekOneIndexed * 7 * 86400000)), "yyyymmdd");
+//////////
+// TODO: date to number
+      var oneWeekAhead = dateFormat(new Date(goal.startDate.getTime() + (currentWeekOneIndexed * 7 * 86400000)), "yyyymmdd");
 
       //End goal if current date is passed end date
-      if (goal.end_date <= new Date()){
-        goal.is_active = false;
+//////////
+// TODO: date to number
+      if (goal.endDate <= new Date()){
+        goal.isActive = false;
       }
       //If today's date is less than or equal to a week ahead of last week,
       //then increment the week
       else if(oneWeekAhead < today){
         newWeek = true;
-        goal.current_week += 1;
+        goal.currentWeek += 1;
         goal.save();
       }
 

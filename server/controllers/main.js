@@ -34,7 +34,7 @@ router.get('/dashboard', function(req, res){
       res.render('dashboard',
         { goal: goal,
           user: user,
-          weeklySubs: goal.subs[user._id][goal.current_week]
+          weeklySubs: goal.subs[user._id][goal.currentWeek]
         });
     });
   });
