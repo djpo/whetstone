@@ -14,8 +14,7 @@ router.post('/register', function(req, res) {
   ), req.body.password, function(err, user) {
     if (err) return res.render('error', { message: err });
     passport.authenticate('local')(req, res, function () {
-      //Redirect immediately to new goal creation
-      res.redirect('../goal/create');
+      res.redirect('/');
     });
   });
 });
