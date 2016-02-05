@@ -49,7 +49,7 @@ mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_U
 mongoose.connection.once('open', function(){
 
   // Start the cron job (comment to disable cron)
-  // runCron;
+   runCron;
 
   console.log("Running on the smooth sounds of port 3000");
   app.listen(process.env.PORT || 3000);

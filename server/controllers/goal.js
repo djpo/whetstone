@@ -43,6 +43,14 @@ router.post('/savegoal', function(req, res){
       if (err) return console.error(err);
       // Set user's activeGoal to this goal id, save user
       user.activeGoal = newGoal._id;
+
+      //Initialize mixed type currentGoals, then initialize values
+      user.currentGoals = {};
+      user.currentGoals[newGoal._id] = {};
+      user.currentGoals[newGoal._id].credit = 7 - newGoal.frequency;
+      user.currentGoals[newGoal._id].submitted_today = false;
+
+      user.markModified('currentGoals');
       user.save(function(err){
         if (err) console.log(err);
         res.redirect('/goal/dashboard');

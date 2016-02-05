@@ -6,7 +6,7 @@ var User = new Schema({
   username        : String,
   email           : { type: String, required: true, unique: true },
   activeGoal      : String,
-  submitted_today : Boolean
+  currentGoals    : Schema.Types.Mixed
 });
 
 User.plugin(passportLocalMongoose);

@@ -10,12 +10,24 @@ goal: {
   end_date: Date,
   current_week: Number,
   subs: {
-    user_id [
+    user_id: [
       // week 0 submissions
       [sub_0, sub_1],
       // week 0 submissions
       [sub_0, sub_1]
     ]
+  }
+}
+
+user: {
+  username        : String,
+  email           : { type: String, required: true, unique: true },
+  activeGoal      : String,
+  currentGoals    : {
+        goal_id : {
+            credit  : Number,
+            submitted_today: Boolean
+        }
   }
 }
 
@@ -32,11 +44,4 @@ submission: {
     path        : String,
     size        : Number
   }
-}
-
-user: {
-  username        : String,
-  email           : { type: String, required: true, unique: true },
-  activeGoal      : String,
-  submitted_today : Boolean
 }
