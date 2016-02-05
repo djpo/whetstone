@@ -1,27 +1,35 @@
-<div class="row">
-  <form class="col s12" method="post" action="/auth/login">
-    <div class="row">
-      <div class="input-field col s12">
-        <input placeholder="" id="username" type="text" name="username" class="validate">
-        <label for="username">Username</label>
+<div id="login-modal" class="row modal">
+    <form class="login-form" method="post" action="/auth/login">
+      <div class="row">
+        <div class="input-field col s12 center">
+          <p class="center login-form-text">Login</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input placeholder="" id="email" type="email" name="email" class="validate">
-        <label for="email">Email</label>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-social-person-outline prefix"></i>
+          <input placeholder="" id="username" type="text" name="username" class="validate">
+          <label for="username">Username</label>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input placeholder="" id="password" type="password" name="password" class="validate">
-        <label for="password">Password</label>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-communication-email prefix"></i>
+          <input placeholder="" id="email" type="email" name="email" class="validate">
+          <label for="email">Email</label>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s4">
-        <input type="submit" class="waves-effect waves-light btn">
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-action-lock-outline prefix"></i>
+          <input placeholder="" id="password" type="password" name="password" class="validate">
+          <label for="password">Password</label>
+        </div>
       </div>
-    </div>
-  </form>
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="submit" class="waves-effect waves-light btn">
+        </div>
+      </div>
+    </form>
 </div>
