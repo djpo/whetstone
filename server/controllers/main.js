@@ -30,12 +30,11 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-      var endDate = dateFormat(goal.end_date, "yyyy/mm/dd");
       // Render dashboard w/ data
       res.render('dashboard',
         { goal: goal,
           user: user,
-          endDate: endDate
+          weeklySubs: goal.subs[user._id][goal.current_week]
         });
     });
   });

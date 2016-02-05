@@ -20,8 +20,7 @@ View group submissions, or able to click to get to a specific group member
         <h5><%= goal.name %></h5>
         <p>week <%= goal.current_week + 1 %> of <%= goal.duration %><br>
           content type: <%= goal.content_type %><br>
-          <%= goal.frequency %> submissions per week</br>
-          ends on <%= endDate %><br>
+          <%= weeklySubs.length %> of <%= goal.frequency %> submissions made this week</br>
           members: <%= goal.members.length %>
         </p>
       </div>
@@ -156,12 +155,11 @@ View group submissions, or able to click to get to a specific group member
 
 
 <!-- Box for data testing -->
-
-<div class="row" style="margin-top: 20%; border: 2px solid black">
+<div hidden class="row" style="margin-top: 20%; border: 2px solid black">
   <h5>DATAMONSTER</h5>
-  <% var weeklySubs = goal.subs[currentUser._id][goal.current_week] %>
-  weeklySubs.length: <%= weeklySubs.length %><br>
-  <p class="divider"></p>
+
+  <!-- <div class="divider"></div> -->
+
   <% for (var i = 0; i < weeklySubs.length; i++) { %>
   <div>
     sub #<%= i %><br>
@@ -171,4 +169,5 @@ View group submissions, or able to click to get to a specific group member
     </div>
   </div>
   <% } %>
+
 </div>

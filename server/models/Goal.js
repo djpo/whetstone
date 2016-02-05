@@ -34,8 +34,8 @@ var Goal_Schema = new Schema({
   publish       : String,
   members       : Array,
   is_active     : Boolean,
-  start_date    : Date,
-  end_date      : Date,
+  start_date    : Number,
+  end_date      : Number,
   current_week  : Number,
   subs          : Schema.Types.Mixed
 });
