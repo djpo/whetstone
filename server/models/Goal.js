@@ -5,6 +5,7 @@ var Goal_Schema = new Schema({
   name          : String,
   contentType   : String,
   frequency     : Number,
+  incentive     : Number,
   duration      : Number,
   publish       : String,
   members       : Array,

@@ -54,6 +54,7 @@ router.post('/save', function(req, res){
       user.currentGoals[newGoal._id] = {};
       user.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
       user.currentGoals[newGoal._id].submitted_today = false;
+      user.currentGoals[newGoal._id].bankroll = 0;
 
       user.markModified('currentGoals');
       user.save(function(err){

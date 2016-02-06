@@ -60,6 +60,7 @@ var job = new CronJob('1 * * * * *', function() {
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
               //mailer(user.email)
+              user.currentGoals[goal.id].bankroll -= goal.incentive;
             } else {
               console.log('~~~~~' + user + ' does not get charged but credits get decremented.');
               user.currentGoals[goal.id].missableDays--;

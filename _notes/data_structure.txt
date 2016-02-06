@@ -26,8 +26,9 @@ user: {
   activeGoal      : String,
   currentGoals    : {
         goal_id : {
-            credit  : Number,
-            submitted_today: Boolean
+            missableDays    : Number,
+            submitted_today : Boolean,
+            bankroll        : Number
         }
   }
 }
