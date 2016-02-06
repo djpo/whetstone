@@ -95,9 +95,6 @@ site-wide */
   top: 70px;
   margin: 15px;
 }
-body {
-  background-color: #FFFAF0;
-}
 /* padding and border do not increase element size */
 * {
   -webkit-box-sizing: border-box;
@@ -117,7 +114,7 @@ topbar */
   position: fixed;
   width: 100%;
   height: 40px;
-  background-color: #912C00;
+  /*background-color: #912C00;*/
 }
 .floatbox {
   position: fixed;
@@ -125,14 +122,9 @@ topbar */
   width: 140px;
   height: 50px;
   border-radius: 2px;
-  background-color: #455a64;
 }
 .floatbox .floatbox-content {
   margin: auto;
-  color: white;
-}
-.floatbox-content a {
-  color: white;
 }
 #brand-logo {
   left: 15px;
@@ -147,11 +139,9 @@ topbar */
 #cust-nav-dropdown {
   margin-top: 10px;
   border-radius: 2px;
-  background-color: #455a64;
 }
 #cust-nav-dropdown * {
   text-align: right;
-  color: #CEA85F;
 }
 #nav-menu-arrow {
   position: fixed;
@@ -164,7 +154,6 @@ topbar */
   height: 8px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid #CEA85F;
 }
 
 /* ////////////////////
@@ -209,13 +198,10 @@ dashboard */
 }
 .left-panel-box {
   text-align: right;
-  background-color: rgba(164,188,164,.5);
-  color: #2E2F2A;
 }
 #upload-box .upload-button {
   height: 50px;
   font-size: 10px;
-  background-color: rgba(179,118,87,.8);
   /*margin: 0 auto;*/
 }
 #upload-box .input-field {
@@ -233,7 +219,7 @@ dashboard */
 .img-container {
   width: 200px;
   height: 200px;
-  border: 2px solid black;
+  /*border: 2px solid black;*/
 }
 .img-container img {
   max-width: 100%;
