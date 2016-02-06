@@ -25,6 +25,7 @@ var job = new CronJob('1 * * * * *', function() {
   exec(function(err, goals) {
 
     goals.forEach(function(goal) {
+      console.log("Goal start date is: " + goal.startDate)
       // Set newWeek default to false
       var newWeek = false;
       // End goal if end date is today
@@ -33,8 +34,8 @@ var job = new CronJob('1 * * * * *', function() {
         goal.isActive = false;
         goal.save();
       }
-      // Start new week if it's the right day of the week
-      else if (goal.weekStartsOn === today.getDay()) {
+      // Start new week if it's the right day of the week, but only if the start day wasn't today
+      else if (goal.weekStartsOn === today.getDay() && goal.startDate.getTime() != today.getTime()) {
         console.log("It's that day of the week again! New week starts now for '" + goal.name + "'.");
         newWeek = true;
         goal.currentWeek += 1;
