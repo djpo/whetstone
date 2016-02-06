@@ -1,6 +1,5 @@
 var express     = require('express'),
     db          = require('../models/index'),
-    dateFormat  = require('dateformat'),
     router      = express.Router();
 
 router.get('/', function(req, res){

@@ -6,8 +6,9 @@ goal: {
   publish       : String,
   members       : Array,
   isActive      : Boolean,
-  startDate     : Number,
-  endDate       : Number,
+  startDate     : Date,
+  endDate       : Date,
+  weekStartsOn  : Number,
   currentWeek   : Number,
   subs: {
     user_id: [
