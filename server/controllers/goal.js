@@ -21,12 +21,13 @@ router.post('/save', function(req, res){
     var newGoal = new db.goal(req.body);
     // Initialize goal
       // Will have to change this if goal does not start immediately on goal creation
-    var today = new Date();
-    newGoal.startDate = Number(dateFormat(today, "yyyymmdd"));
-    var endDay = today + (86400000 * newGoal.duration * 7);
-    newGoal.endDate = Number(dateFormat(endDay, "yyyymmdd"));
-    newGoal.isActive = true;
+    var now = new Date();
+    newGoal.startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var endTime = new Date(newGoal.startDate.getTime() + (7 * newGoal.duration * 86400000));
+    newGoal.endDate = new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate());
+    newGoal.weekStartsOn = newGoal.startDate.getDay();
     newGoal.currentWeek = 0;
+    newGoal.isActive = true;
     newGoal.subs = {};
     // Push current user to this goal's members array
     // Will have to update for multiple users starting a goal together
