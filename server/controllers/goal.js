@@ -1,6 +1,7 @@
 var express     = require('express'),
     db          = require('../models/index'),
-    dateFormat  = require('dateformat'),
+    invitemailer= require('../helpers/invitemailer'),
+    async       = require('async'),
     router      = express.Router();
 
 router.use(function(req, res, next){
@@ -32,36 +33,69 @@ router.post('/save', function(req, res){
     // Push current user to this goal's members array
     // Will have to update for multiple users starting a goal together
     newGoal.members.push(user._id);
-    newGoal.members.forEach(function (member) {
-      // Make an empty array for each member
-      newGoal.subs[member] = [];
-      // For each week (for each member) push an empty array
-      for (var i = 0; i < newGoal.duration; i++) {
-        newGoal.subs[member].push([]);
+
+    function registerNewMembers(callback){
+      if (!newGoal.friendsEmails) return;
+      var emailArray = newGoal.friendsEmails.split(",");
+      emailArray.forEach(function(email, i, array){
+        db.user.register(new db.user(
+          {
+            username : email,
+            email: email
+          }
+        ), 'temporary', function(err, newUser) {
+          if (err) return res.render('error', { message: err });
+          newGoal.members.push(newUser._id)
+
+          //WARNING: only uncomment below when testing longer periods. will send you
+          //emails every minute worst case. Can add up when running server.
+          //invitemailer(user.email)
+
+          initializeUser(newUser)
+          if(i + 1 === array.length){
+            callback()
+          }
+        });
+      })
       }
-    });
 
-    // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
-    newGoal.markModified('subs');
-    // Save the goal to the db
-    newGoal.save(function (err){
-      if (err) return console.error(err);
+    function initializeUser(thisUser) {
+      newGoal.subs[thisUser._id] = [];
+
+      // For each week (for each member) push an empty array
+      for (var j = 0; j < newGoal.duration; j++) {
+        newGoal.subs[thisUser._id].push([]);
+      }
       // Set user's activeGoal to this goal id, save user
-      user.activeGoal = newGoal._id;
-
+      thisUser.activeGoal = newGoal._id;
       //Initialize mixed type currentGoals, then initialize values
-      user.currentGoals = {};
-      user.currentGoals[newGoal._id] = {};
-      user.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
-      user.currentGoals[newGoal._id].submitted_today = false;
-      user.currentGoals[newGoal._id].bankroll = 0;
+      thisUser.currentGoals = {};
+      thisUser.currentGoals[newGoal._id] = {};
+      thisUser.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
+      thisUser.currentGoals[newGoal._id].submitted_today = false;
+      thisUser.currentGoals[newGoal._id].bankroll = 0;
 
-      user.markModified('currentGoals');
-      user.save(function(err){
-        if (err) console.log(err);
+      thisUser.markModified('currentGoals');
+      thisUser.save(function(err){
+          if (err) console.log(err);
+        });
+    }
+
+    async.series([
+      registerNewMembers
+    ], function(err){
+      if (err) console.log(err);
+      initializeUser(user)
+      // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
+      newGoal.markModified('subs');
+      // Save the goal to the db
+      newGoal.save(function (err){
+        if (err) return console.error(err);
         res.redirect('/');
       });
-    });
+
+    })
+
   });
 });
 

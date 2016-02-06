@@ -9,6 +9,7 @@ var Goal_Schema = new Schema({
   duration      : Number,
   publish       : String,
   members       : Array,
+  friendsEmails : String,
   isActive      : Boolean,
   startDate     : Date,
   endDate       : Date,

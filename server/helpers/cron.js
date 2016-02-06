@@ -1,6 +1,5 @@
 var db            = require('../models/index'),
-    mailer        = require('./mailer'),
-    dateFormat    = require('dateformat'),
+    warningmailer = require('./warningmailer'),
     CronJob       = require('cron').CronJob;
 
 var job = new CronJob('1 * * * * *', function() {
@@ -47,29 +46,33 @@ var job = new CronJob('1 * * * * *', function() {
       goal.members.forEach(function(member) {
         db.user.findOne({_id: member}, function(err, user) {
 
+          console.log("Snapshot for " + user.username + " before user logic: \n" + user + "\n")
+
           if (newWeek) {
             console.log('~~~~~New week, resetting missableDays.');
             user.currentGoals[goal.id].missableDays = 7 - goal.frequency;
           }
           //If user didn't submit today
           if (!user.currentGoals[goal.id].submitted_today) {
-            console.log('~~~~~' + user + ' did not submit today.');
+            console.log('~~~~~' + user.username + ' did not submit today.');
             //If their credit == 0
             if(!user.currentGoals[goal.id].missableDays) {
-              console.log('~~~~~' + user + ' gets charged.');
+              user.currentGoals[goal.id].bankroll -= goal.incentive;
+              console.log('~~~~~' + user.username + ' gets charged.');
+            } else {
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
-              //mailer(user.email)
-              user.currentGoals[goal.id].bankroll -= goal.incentive;
-            } else {
-              console.log('~~~~~' + user + ' does not get charged but credits get decremented.');
+              //warningmailer(user.email)
               user.currentGoals[goal.id].missableDays--;
+              console.log('~~~~~' + user.username + ' does not get charged but credits get decremented.');
             }
           } else {
           //  Else ' + user + ' did submit today, so reset flag
-            console.log('~~~~~' + user + ' submitted. Good job ' + user + '!');
             user.currentGoals[goal.id].submitted_today = false;
+            console.log('~~~~~' + user.username + ' submitted. Good job ' + user.username + '!');
           }
+
+          console.log("\nSnapshot for " + user.username + " after user logic: \n" + user + "\n\n")
 
           user.markModified('currentGoals');
           user.save(function(err){
