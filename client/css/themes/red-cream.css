@@ -52,3 +52,6 @@ input:-ms-input-placeholder {
 .whet-btn-1 {
     background-color: rgba(179,118,87,.8);
 }
+.whet-card-background {
+    background-color: #455a64;
+}

@@ -7,19 +7,19 @@
     background-color: #F2F2F2
 }
 input::-webkit-input-placeholder {
-    color: darkolivegreen !important;
+    color: darkgray !important;
 }
 
 input:-moz-placeholder { /* Firefox 18- */
-    color: darkolivegreen !important;
+    color: darkgray !important;
 }
 
 input::-moz-placeholder {  /* Firefox 19+ */
-    color: darkolivegreen !important;
+    color: darkgray !important;
 }
 
 input:-ms-input-placeholder {
-    color: darkolivegreen !important;
+    color: darkgray !important;
 }
 
 /*2. Nav
@@ -52,7 +52,9 @@ input:-ms-input-placeholder {
 .whet-btn-1 {
     background-color: #71595C;
 }
-
+.whet-card-background {
+    background-color: white;
+}
 
 /* ////////////////////
 style guidelines

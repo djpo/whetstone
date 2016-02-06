@@ -40,24 +40,25 @@ View group submissions, or able to click to get to a specific group member
 
               <!-- File chooser -->
               <div class="file-field input-field col m5">
+                <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
+                <div class="file-path-wrapper">
+                  <input required class="file-path validate" placeholder="Submission" type="text">
+                </div>
                 <!-- File chooser button -->
-                <div class="btn upload-button whet-btn-1">
+                <div class="btn upload-button whet-btn-1" style="width: 100%">
                   <span>choose file</span>
                   <input required type="file" name="submission" accept="<%=goal.contentType%>/*" class="validate">
                 </div>
-                <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
-                <div class="file-path-wrapper">
-                  <input required class="file-path validate" type="text">
-                </div>
+
               </div>
             </div>
             <!-- User note field -->
-            <div class="row">
-              <div class="input-field">
+            <!--<div class="row">-->
+              <div class="input-field s12">
                 <!--<i class="material-icons prefix">label</i>-->
                 <input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">
               </div>
-            </div>
+            <!--</div>-->
             <!-- Submit button -->
             <div class="col s12">
               <button class="whet-btn-1 upload-button btn waves-effect waves-light" type="submit"
@@ -82,8 +83,8 @@ View group submissions, or able to click to get to a specific group member
     <!-- row of 3 placeholders -->
     <div class="row">
       <div class="col m4 s12">
-        <div class="card custom-gray">
-          <div class="card-content white-text">
+        <div class="card whet-card-background">
+          <div class="card-content">
             <span class="card-title">January 30th, 2016</span>
             <p>503 Words</p>
           </div>
@@ -94,8 +95,8 @@ View group submissions, or able to click to get to a specific group member
         </div>
       </div>
       <div class="col m4 s12">
-        <div class="card custom-gray">
-          <div class="card-content white-text">
+        <div class="card whet-card-background ">
+          <div class="card-content">
             <span class="card-title">January 31th, 2016</span>
             <p>515 Words</p>
           </div>
@@ -106,8 +107,8 @@ View group submissions, or able to click to get to a specific group member
         </div>
       </div>
       <div class="col m4 s12">
-        <div class="card custom-gray">
-          <div class="card-content white-text">
+        <div class="card whet-card-background ">
+          <div class="card-content">
             <span class="card-title">February 01, 2016</span>
             <p>639 Words</p>
           </div>
@@ -122,8 +123,8 @@ View group submissions, or able to click to get to a specific group member
     <!-- row of 2 placeholders -->
     <div class="row">
       <div class="col m4 s12">
-        <div class="card custom-gray">
-          <div class="card-content white-text">
+        <div class="card cwhet-card-background ">
+          <div class="card-content">
             <span class="card-title">January 30th, 2016</span>
             <p>503 Words</p>
           </div>
@@ -134,8 +135,8 @@ View group submissions, or able to click to get to a specific group member
         </div>
       </div>
       <div class="col m4 s12">
-        <div class="card custom-gray">
-          <div class="card-content white-text">
+        <div class="card whet-card-background ">
+          <div class="card-content">
             <span class="card-title">January 31th, 2016</span>
             <p>515 Words</p>
           </div>
