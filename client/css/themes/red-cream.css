@@ -1,0 +1,54 @@
+/*
+[Original Color Scheme]
+*/
+/*1. Body and built in elements
+----------------------------------------------*/
+.whet-body-background {
+    background-color: #FFFAF0;
+}
+input::-webkit-input-placeholder {
+    color: darkolivegreen !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: darkolivegreen !important;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+    color: darkolivegreen !important;
+}
+
+input:-ms-input-placeholder {
+    color: darkolivegreen !important;
+}
+
+/*2. Nav
+----------------------------------------------*/
+.whet-nav-stone {
+    background-color: #455a64;
+}
+.whet-nav-text {
+    color: white;
+}
+.whet-nav-dropdown {
+    background-color: #455a64;
+}
+.whet-nav-dropdown li a {
+    color: #CEA85F;
+}
+.whet-down-arrow {
+    border-top: 8px solid #CEA85F;
+}
+.whet-topbar-background {
+    background-color: #912C00;
+}
+
+/*3. Dashboard elements
+----------------------------------------------*/
+.whet-leftpanel-background {
+    background-color: rgba(164,188,164,.5);
+    color: #2E2F2A;
+}
+.whet-btn-1 {
+    background-color: rgba(179,118,87,.8);
+}

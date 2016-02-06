@@ -16,9 +16,9 @@ View group submissions, or able to click to get to a specific group member
 
     <!-- goal info -->
     <div class="row">
-      <div class="col m12 left-panel-box">
-        <h5><%= goal.name %></h5>
-        <p>week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br>
+      <div class="col m12 left-panel-box whet-leftpanel-background">
+        <h5 class="light"><%= goal.name %></h5>
+        <p class="light">week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br>
           content type: <%= goal.contentType %><br>
           <%= weeklySubs.length %> of <%= goal.frequency %> submissions made this week</br>
           members: <%= goal.members.length %>
@@ -28,45 +28,44 @@ View group submissions, or able to click to get to a specific group member
 
     <!-- upload box -->
     <div class="row">
-      <div id="upload-box" class="col m12 left-panel-box">
+      <div id="upload-box" class="col m12 left-panel-box whet-leftpanel-background">
 
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
           <h6>you uploaded for this goal today.<br>good job!</h6>
 
         <% } else { %>
-          <h6>upload content for today!</h6>
           <form action="/submissions/upload" enctype="multipart/form-data" method="post">
+            <h5 class="light">upload</h5>
             <div class="row">
 
               <!-- File chooser -->
               <div class="file-field input-field col m5">
                 <!-- File chooser button -->
-                <div class="btn upload-button">
+                <div class="btn upload-button whet-btn-1">
                   <span>choose file</span>
                   <input required type="file" name="submission" accept="<%=goal.contentType%>/*" class="validate">
                 </div>
                 <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
-                <div class="file-path-wrapper" style="border: 2px solid #455a64">
+                <div class="file-path-wrapper">
                   <input required class="file-path validate" type="text">
                 </div>
               </div>
-
-              <!-- Submit button -->
-              <div class="col m5">
-                <button class="upload-button btn waves-effect waves-light" type="submit" id="submit-button" name="action">
-                  <i class="material-icons right">send</i>
-                </button>
-              </div>
             </div>
-
             <!-- User note field -->
-            <p>write a note about your submission</p>
-            <div class="row" style="border: 2px solid rgba(179,118,87,.5)">
+            <div class="row">
               <div class="input-field">
-                <i class="material-icons prefix">label</i>
-                <input id="icon_prefix" type="text" name="note" class="validate">
+                <!--<i class="material-icons prefix">label</i>-->
+                <input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">
               </div>
             </div>
+            <!-- Submit button -->
+            <div class="col s12">
+              <button class="whet-btn-1 upload-button btn waves-effect waves-light" type="submit"
+                      id="submit-button" name="action">
+                <i class="material-icons">send</i>
+              </button>
+            </div>
+
 
           </form>
         <% } %>

@@ -1,0 +1,60 @@
+/*
+[Grey-Thin Color Scheme]
+*/
+/*1. Body and built in elements
+----------------------------------------------*/
+.whet-body-background {
+    background-color: #F2F2F2
+}
+input::-webkit-input-placeholder {
+    color: darkolivegreen !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: darkolivegreen !important;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+    color: darkolivegreen !important;
+}
+
+input:-ms-input-placeholder {
+    color: darkolivegreen !important;
+}
+
+/*2. Nav
+----------------------------------------------*/
+.whet-nav-stone {
+    background-color: #455a64;
+}
+.whet-nav-text {
+    color: white;
+}
+.whet-nav-dropdown {
+    background-color: #455a64;
+}
+.whet-nav-dropdown li a {
+    color: #CEA85F;
+}
+.whet-down-arrow {
+    border-top: 8px solid #CEA85F;
+}
+.whet-topbar-background {
+    background-color: #f8f8f8;
+}
+
+/*3. Dashboard elements
+----------------------------------------------*/
+.whet-leftpanel-background {
+    background-color: white;
+    color: black;
+}
+.whet-btn-1 {
+    background-color: #71595C;
+}
+
+
+/* ////////////////////
+style guidelines
+
+*/
