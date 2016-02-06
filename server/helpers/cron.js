@@ -61,7 +61,7 @@ var job = new CronJob('1 * * * * *', function() {
               //mailer(user.email)
             } else {
               console.log('~~~~~' + user + ' does not get charged but credits get decremented.');
-              ' + user + '.currentGoals[goal.id].missableDays--;
+              user.currentGoals[goal.id].missableDays--;
             }
           } else {
           //  Else ' + user + ' did submit today, so reset flag
