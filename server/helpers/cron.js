@@ -2,7 +2,7 @@ var db            = require('../models/index'),
     warningmailer = require('./warningmailer'),
     CronJob       = require('cron').CronJob;
 
-var job = new CronJob('1 * * * * *', function() {
+var job = new CronJob('* * * * * *', function() {
                       // Runs every minute (currently)
 
                   // Timing argument, for reference
@@ -55,10 +55,30 @@ var job = new CronJob('1 * * * * *', function() {
           //If user didn't submit today
           if (!user.currentGoals[goal.id].submitted_today) {
             console.log('~~~~~' + user.username + ' did not submit today.');
-            //If their credit == 0
+            //If they're out of missable days
             if(!user.currentGoals[goal.id].missableDays) {
               user.currentGoals[goal.id].bankroll -= goal.incentive;
-              console.log('~~~~~' + user.username + ' gets charged.');
+              user.markModified('currentGoals');
+              user.save(function(err){
+                if (err) console.log(err);
+              });
+
+              //Pay other members
+              goal.members.forEach(function(member){
+                if (member.toString() !== user._id.toString()) {
+                  db.user.findOne({_id: member}, function(err, thisUser){
+                    if(err) console.log(err);
+                      thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / (goal.members.length - 1));
+                      console.log(thisUser.username + "'s bankrol: " + thisUser.currentGoals[goal.id].bankroll)
+                      thisUser.markModified('currentGoals')
+                      thisUser.save(function(err){
+                        if(err) console.log(err)
+                      })
+                  })
+                }
+              });
+              console.log('~~~~~' + user.username + ' gets charged ' + goal.incentive + ' and gives '
+                + Math.floor(goal.incentive / (goal.members.length - 1)) + ' to everybody else');
             } else {
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
@@ -70,14 +90,13 @@ var job = new CronJob('1 * * * * *', function() {
           //  Else ' + user + ' did submit today, so reset flag
             user.currentGoals[goal.id].submitted_today = false;
             console.log('~~~~~' + user.username + ' submitted. Good job ' + user.username + '!');
+            user.markModified('currentGoals');
+            user.save(function(err){
+              if (err) console.log(err);
+            });
           }
 
           console.log("\nSnapshot for " + user.username + " after user logic: \n" + user + "\n\n")
-
-          user.markModified('currentGoals');
-          user.save(function(err){
-            if (err) console.log(err);
-          });
         });
       });
     });

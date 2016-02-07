@@ -45,7 +45,7 @@ router.post('/save', function(req, res){
           }
         ), 'temporary', function(err, newUser) {
           if (err) return res.render('error', { message: err });
-          newGoal.members.push(newUser._id)
+          newGoal.members.push(newUser._id);
 
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
