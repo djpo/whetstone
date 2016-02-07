@@ -4,59 +4,57 @@
 /*1. Body and built in elements
 ----------------------------------------------*/
 .whet-body-background {
-    background-color: #F2F2F2
+  background-color: #F2F2F2
 }
 input::-webkit-input-placeholder {
-    color: darkgray !important;
+  color: darkgray !important;
 }
 
 input:-moz-placeholder { /* Firefox 18- */
-    color: darkgray !important;
+  color: darkgray !important;
 }
 
 input::-moz-placeholder {  /* Firefox 19+ */
-    color: darkgray !important;
+  color: darkgray !important;
 }
 
 input:-ms-input-placeholder {
-    color: darkgray !important;
+  color: darkgray !important;
 }
 
 /*2. Nav
 ----------------------------------------------*/
 .whet-nav-stone {
-    background-color: #455a64;
+  background-color: #455a64;
 }
 .whet-nav-text {
-    color: white;
+  color: white;
 }
 .whet-nav-dropdown {
-    background-color: #455a64;
+  background-color: #455a64;
 }
 .whet-nav-dropdown li a {
-    color: #CEA85F;
+  color: #CEA85F;
 }
 .whet-down-arrow {
-    border-top: 8px solid #CEA85F;
+  border-top: 8px solid #CEA85F;
 }
 .whet-topbar-background {
-    background-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 /*3. Dashboard elements
 ----------------------------------------------*/
 .whet-leftpanel-background {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 .whet-btn-1 {
-    background-color: #71595C;
+  background-color: #71595C;
 }
 .whet-card-background {
-    background-color: white;
+  background-color: white;
 }
-
-/* ////////////////////
-style guidelines
-
-*/
+.submission-box { 
+  border-color: #455a64;
+}

@@ -1,5 +1,6 @@
 /* ////////////////////
 colors in use */
+/*
 .custom-red {
   background-color: #912C00;
 }
@@ -21,7 +22,7 @@ colors in use */
 .custom-black {
   background-color: #2E2F2A;
 }
-
+*/
 
 /* ////////////////////
 color palette
@@ -190,8 +191,6 @@ style guidelines
 /* Dashboard
 ----------------------------------------------*/
 #upload-box {
-	margin-top: 20px;
-	padding: 15px;
 }
 #submit-button {
 	width: 100%;
@@ -202,18 +201,14 @@ style guidelines
 #upload-box .upload-button {
   height: 50px;
   font-size: 10px;
-  /*margin: 0 auto;*/
 }
 #upload-box .input-field {
   width: 100%;
-  /*height: 20px;*/
   font-size: 10px;
-  opacity: .5;
 }
 #submit-button {
   width: 100%;
   font-size: 10px;
-  opacity: .5;
 }
 .middle-column {
   position: relative;
@@ -223,41 +218,32 @@ style guidelines
   display: inline-block;
   width: 150px;
   height: 150px;
-  border: 3px solid black;
   background-color: gray;
   overflow: hidden;
+  border-width: 5px;
+  border-style: solid;
 }
 .submission-box img {
-  max-width: 100%;
-  max-height: 100%;
-/*  margin-left: auto;
-  margin-right: auto;*/
-  /*margin: auto;*/
+  width: 150px;
+  height: 150px;
+/*  width: 90%;
+  height: 90%;*/
+  object-fit: cover;
 }
 
 /* dashboard testing */
-.middle-column {
+/*.middle-column {
   border: 1px solid green;
 }
 .middle-column > * {
   border: 1px solid orange;
-}
+}*/
 /*.col {
   border: 1px solid pink;
 }
 .row {
   border: 1px solid indigo;
 }*/
-.img-container {
-  width: 200px;
-  height: 200px;
-  border: 2px solid orange;
-}
-.img-container img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
 
 
 /* submissions/show

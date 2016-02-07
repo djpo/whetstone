@@ -1,12 +1,9 @@
-<!--
-Goal dashboard
-See progress/upcoming goal/checkpoint
-Be able to submit
-Be able to comment on my submission
-Able to be commented on by group    
-View my submissions
-Notifications of group
-View group submissions, or able to click to get to a specific group member
+<!-- Group features
+  Be able to comment on my submission
+  Able to be commented on by group    
+  View my submissions
+  Notifications of group
+  View group submissions, or able to click to get to a specific group member
 -->
 
 <div class="row">
@@ -15,7 +12,7 @@ View group submissions, or able to click to get to a specific group member
   <div class="col m3">
 
     <!-- goal info -->
-    <div class="row">
+    <div class="row z-depth-1">
       <div class="col m12 left-panel-box whet-leftpanel-background">
         <h5 class="light"><%= goal.name %></h5>
         <p class="light">week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br>
@@ -28,7 +25,7 @@ View group submissions, or able to click to get to a specific group member
     </div>
 
     <!-- upload box -->
-    <div class="row">
+    <div class="row z-depth-1">
       <div id="upload-box" class="col m12 left-panel-box whet-leftpanel-background">
 
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
@@ -79,7 +76,7 @@ View group submissions, or able to click to get to a specific group member
 
   <!-- middle column -->
   <div class="middle-column col m6">
-    <h4>this week's submissions</h4>
+    <h5 class="light">this week's submissions</h5>
 
     <!-- placeholder card -->
     <!-- <div class="row">
@@ -99,12 +96,13 @@ View group submissions, or able to click to get to a specific group member
     <div class="row">
     <% for (var i = 0; i < goal.frequency; i++) { %>
 
-      <div class="submission-box">
+      <div class="submission-box whet-stone z-depth-1">
       <% if (weeklySubs[i]) { %>
         <img class="valign" src="/<%= weeklySubs[i].filename %>">
-        <!-- set image as background -->
       <% } else { %>
-        #<%= i %>
+        <div class="empty-submission">
+          #<%= i + 1 %>
+        </div>
       <% } %>
       </div>
     <% } %>
@@ -115,24 +113,5 @@ View group submissions, or able to click to get to a specific group member
   <!-- right column -->
   <div class="col m3">
   </div>
-
-</div>
-
-
-<!-- Box for data testing -->
-<div class="row" style="margin-top: 20%; border: 2px solid black">
-  <h5>DATAMONSTER</h5>
-
-  <!-- <div class="divider"></div> -->
-
-  <% for (var i = 0; i < weeklySubs.length; i++) { %>
-  <div>
-    sub #<%= i %><br>
-    filename: <%= weeklySubs[i].filename %><br>
-    <div class="img-container valign-wrapper">
-      <img class="valign" src="/<%= weeklySubs[i].filename %>">
-    </div>
-  </div>
-  <% } %>
 
 </div>
