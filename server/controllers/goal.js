@@ -35,7 +35,7 @@ router.post('/save', function(req, res){
     //newGoal.members.push(user._id);
 
     function registerNewMembers(callback){
-      if (!newGoal.friendsEmails) return;
+      if (newGoal.friendsEmails.length == 0) return callback();
       var emailArray = newGoal.friendsEmails.split(",");
       var counter = 0; // Need an external counter because i is asynchronous
       emailArray.forEach(function(email, i, array){
@@ -45,7 +45,8 @@ router.post('/save', function(req, res){
             email: email
           }
         ), 'temporary', function(err, newUser) {
-          if (err) return res.render('error', { message: err });
+          //if (err) return res.render('error', { message: err });
+          if (err) return console.log(err);
 
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
