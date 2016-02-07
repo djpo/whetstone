@@ -63,9 +63,11 @@ var job = new CronJob('1 * * * * *', function() {
                 if (err) console.log(err);
 
                 //Pay other members
-                goal.members.forEach(function(member){
-                  if (member.toString() !== user._id.toString()) {
-                    db.user.findOne({_id: member}, function(err, thisUser){
+                goal.members.forEach(function(otherMember){
+                  //If member in members array doesn't equal to the current user...
+                  if (otherMember.toString() !== user._id.toString()) {
+
+                    db.user.findOne({_id: otherMember}, function(err, thisUser){
                       if(err) console.log(err);
                       thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / (goal.members.length - 1));
                       console.log(thisUser.username + "'s bankrol: " + thisUser.currentGoals[goal.id].bankroll)
@@ -74,10 +76,11 @@ var job = new CronJob('1 * * * * *', function() {
                         if(err) console.log(err)
                       })
                     })
+
                   }
                 });
-              });
 
+              });
               console.log('~~~~~' + user.username + ' gets charged ' + goal.incentive + ' and gives '
                 + Math.floor(goal.incentive / (goal.members.length - 1)) + ' to everybody else');
             } else {
