@@ -3,7 +3,7 @@ var db            = require('../models/index'),
     async         = require('async'),
     CronJob       = require('cron').CronJob;
 
-var job = new CronJob('* * * * * *', function() {
+var job = new CronJob('1 * * * * *', function() {
                       // Runs every minute (currently)
 
                   // Timing argument, for reference
@@ -44,10 +44,10 @@ var job = new CronJob('* * * * * *', function() {
         console.log("Goal '" + goal.name + "' still active, same week.");
       }
 
-      goal.members.forEach(function(member) {
+      async.each(goal.members, function(member, callback){
         db.user.findOne({_id: member}, function(err, user) {
 
-          //console.log("Snapshot for " + user.username + " before user logic: \n" + user + "\n")
+          console.log("Snapshot for " + user.username + " before user logic: \n" + user + "\n")
 
           if (newWeek) {
             console.log('~~~~~New week, resetting missableDays.');
@@ -58,31 +58,28 @@ var job = new CronJob('* * * * * *', function() {
             console.log('~~~~~' + user.username + ' did not submit today.');
             //If they're out of missable days
             if(!user.currentGoals[goal.id].missableDays) {
-              user.currentGoals[goal.id].bankroll -= goal.incentive;
-              user.markModified('currentGoals');
-              user.save(function(err){
-                if (err) console.log(err);
-              });
+
 
               //Pay other members
               //If member in members array doesn't equal to the current user...
-              async.each(goal.members, function(otherMember, callback){
-                console.log("Current user: " + user.username);
-                if (otherMember.toString() !== user._id.toString()) {
+              async.each(goal.members, function(otherMember, thiscallback){
+               if (otherMember.toString() === user._id.toString()) {
+                 user.currentGoals[goal.id].bankroll -= goal.incentive;
+               } else {
                   db.user.findOne({_id: otherMember}, function(err, thisUser){
-                    console.log("This user: " + thisUser.username);
                     if(err) console.log(err);
-                    console.log(thisUser.username + 's bankroll before ' + thisUser.currentGoals[goal.id].bankroll)
+                    console.log('\n' + thisUser.username)
+                    console.log("BEFORE INCREMENT: " + thisUser.currentGoals[goal.id].bankroll)
                     thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / (goal.members.length - 1));
-                    console.log(thisUser.username + 's bankroll after ' + thisUser.currentGoals[goal.id].bankroll)
+
                     thisUser.markModified('currentGoals');
                     thisUser.save(function(err){
                       if(err) console.log(err);
-                      callback();
+                      console.log('\n' + thisUser.username)
+                      console.log("AFTER SAVE: " + thisUser.currentGoals[goal.id].bankroll)
+                      thiscallback();
                     })
                   })
-                } else {
-                  callback();
                 }
               });
 
@@ -103,11 +100,12 @@ var job = new CronJob('* * * * * *', function() {
             console.log('~~~~~' + user.username + ' submitted. Good job ' + user.username + '!');
           }
 
-          //console.log("\nSnapshot for " + user.username + " after user logic: \n" + user + "\n\n")
+          console.log("\nSnapshot for " + user.username + " after user logic: \n" + user + "\n\n")
           user.markModified('currentGoals');
           user.save(function(err){
             if (err) console.log(err);
           });
+          callback();
         });
       });
     });
