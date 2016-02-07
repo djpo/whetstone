@@ -81,6 +81,7 @@ router.post('/save', function(req, res){
         });
     }
 
+    //Register the new members, then finish
     async.series([
       registerNewMembers
     ], function(err){
