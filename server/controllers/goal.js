@@ -32,11 +32,12 @@ router.post('/save', function(req, res){
     newGoal.subs = {};
     // Push current user to this goal's members array
     // Will have to update for multiple users starting a goal together
-    newGoal.members.push(user._id);
+    //newGoal.members.push(user._id);
 
     function registerNewMembers(callback){
       if (!newGoal.friendsEmails) return;
       var emailArray = newGoal.friendsEmails.split(",");
+      var counter = 0; // Need an external counter because i is asynchronous
       emailArray.forEach(function(email, i, array){
         db.user.register(new db.user(
           {
@@ -45,14 +46,14 @@ router.post('/save', function(req, res){
           }
         ), 'temporary', function(err, newUser) {
           if (err) return res.render('error', { message: err });
-          newGoal.members.push(newUser._id);
 
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
           //invitemailer(user.email)
 
           initializeUser(newUser)
-          if(i + 1 === array.length){
+          counter++;
+          if(counter === array.length){
             callback()
           }
         });
@@ -60,6 +61,7 @@ router.post('/save', function(req, res){
       }
 
     function initializeUser(thisUser) {
+      newGoal.members.push(thisUser._id);
       newGoal.subs[thisUser._id] = [];
 
       // For each week (for each member) push an empty array
