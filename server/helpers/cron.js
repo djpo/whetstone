@@ -1,4 +1,5 @@
 var db            = require('../models/index'),
+    Whet          = require('./helper'),
     warningmailer = require('./warningmailer'),
     async         = require('async'),
     CronJob       = require('cron').CronJob;
@@ -14,7 +15,7 @@ var job = new CronJob('1 * * * * *', function() {
                     // Months: 0-11
                     // Day of Week: 0-6
 
-  console.log('~~~~~NEW DAY');
+  console.log('\n\n\n~~~~~NEW DAY');
   var now = new Date();
   console.log("The current time is:", now, ".");
 
@@ -26,6 +27,7 @@ var job = new CronJob('1 * * * * *', function() {
 
     goals.forEach(function(goal) {
       console.log("Goal start date is: " + goal.startDate)
+      // WEEKLY CHANGES
       // Set newWeek default to false
       var newWeek = false;
       // End goal if end date is today
@@ -44,7 +46,8 @@ var job = new CronJob('1 * * * * *', function() {
         console.log("Goal '" + goal.name + "' still active, same week.");
       }
 
-      async.each(goal.members, function(member, callback){
+      //DAILY CHANGES
+      goal.members.forEach(function(member){
         db.user.findOne({_id: member}, function(err, user) {
 
           console.log("Snapshot for " + user.username + " before user logic: \n" + user + "\n")
@@ -58,34 +61,53 @@ var job = new CronJob('1 * * * * *', function() {
             console.log('~~~~~' + user.username + ' did not submit today.');
             //If they're out of missable days
             if(!user.currentGoals[goal.id].missableDays) {
+              //Decrement user account
+              user.currentGoals[goal.id].bankroll -= goal.incentive;
+              console.log(user.username + 's bankroll DECREASED BY ' + goal.incentive)
+              user.markModified('currentGoals');
+              user.save(function(err){});
 
 
               //Pay other members
-              //If member in members array doesn't equal to the current user...
-              async.each(goal.members, function(otherMember, thiscallback){
-               if (otherMember.toString() === user._id.toString()) {
-                 user.currentGoals[goal.id].bankroll -= goal.incentive;
-               } else {
-                  db.user.findOne({_id: otherMember}, function(err, thisUser){
-                    if(err) console.log(err);
-                    console.log('\n' + thisUser.username)
-                    console.log("BEFORE INCREMENT: " + thisUser.currentGoals[goal.id].bankroll)
-                    thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / (goal.members.length - 1));
-
+              //Get an array that has only the other members
+              var friendsOnly = goal.members;
+              friendsOnly.splice(friendsOnly.indexOf(user._id), 1);
+              //For each friend, increase their bankroll by the incentive price divided amongst all friends
+              friendsOnly.forEach(function(friendId){
+                  db.user.findOne({_id: friendId}, function (err, thisUser) {
+                    if (err) console.log(err);
+                    thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / friendsOnly.length);
                     thisUser.markModified('currentGoals');
-                    thisUser.save(function(err){
-                      if(err) console.log(err);
-                      console.log('\n' + thisUser.username)
-                      console.log("AFTER SAVE: " + thisUser.currentGoals[goal.id].bankroll)
-                      thiscallback();
+                    thisUser.save(function (err) {
+                      console.log(thisUser.username + " is saved here")
                     })
                   })
-                }
               });
+              //Need to push current user back on so other users can see it
+              friendsOnly.push(user.id);
 
-              //console.log('~~~~~' + user.username + ' gets charged ' + goal.incentive + ' and gives '
-              //  + Math.floor(goal.incentive / (goal.members.length - 1)) + ' to everybody else');
-              console.log("~~~~" + user.username + 's bankroll after all ' + user.currentGoals[goal.id].bankroll)
+              //ATTEMPT AT ASYNCH SOLUTION
+              //var friendsOnly = goal.members;
+              //friendsOnly.splice(friendsOnly.indexOf(user._id), 1);
+              //var amount = Math.floor(goal.incentive / (friendsOnly.length));
+              //var stack = [];
+              //friendsOnly.forEach(function(friend){
+              //  stack.push(Whet.payFriend(friend, amount, goal.id))
+              //})
+              //
+              //async.waterfall([stack],
+              //  function(err, result){
+              //
+              //  })
+              //
+              //friendsOnly.push(user.id)
+              //
+              //user.markModified('currentGoals');
+              //user.save(function(err){
+              //  if (err) console.log(err);
+              //  console.log('SAVED USER DECREMENT')
+              //});
+
             } else {
               //User didn't submit but still has missable days
               //WARNING: only uncomment below when testing longer periods. will send you
@@ -105,7 +127,6 @@ var job = new CronJob('1 * * * * *', function() {
           user.save(function(err){
             if (err) console.log(err);
           });
-          callback();
         });
       });
     });
