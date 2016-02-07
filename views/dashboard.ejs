@@ -68,7 +68,6 @@ View group submissions, or able to click to get to a specific group member
               </button>
             </div>
 
-
           </form>
         <% } %>
 
@@ -79,10 +78,11 @@ View group submissions, or able to click to get to a specific group member
   </div>
 
   <!-- middle column -->
-  <div class="col m6" style="position: relative; top: -8px;">
+  <div class="middle-column col m6">
+    <h4>this week's submissions</h4>
 
-    <!-- row of 3 placeholders -->
-    <div class="row">
+    <!-- placeholder card -->
+    <!-- <div class="row">
       <div class="col m4 s12">
         <div class="card whet-card-background">
           <div class="card-content">
@@ -94,68 +94,33 @@ View group submissions, or able to click to get to a specific group member
             <a href="#">Share</a>
           </div>
         </div>
-      </div>
-      <div class="col m4 s12">
-        <div class="card whet-card-background ">
-          <div class="card-content">
-            <span class="card-title">January 31th, 2016</span>
-            <p>515 Words</p>
-          </div>
-          <div class="card-action">
-            <a href="#">View</a>
-            <a href="#">Share</a>
-          </div>
-        </div>
-      </div>
-      <div class="col m4 s12">
-        <div class="card whet-card-background ">
-          <div class="card-content">
-            <span class="card-title">February 01, 2016</span>
-            <p>639 Words</p>
-          </div>
-          <div class="card-action">
-            <a href="#">View</a>
-            <a href="#">Share</a>
-          </div>
-        </div>
-      </div>
-    </div>
+      </div> -->
 
-    <!-- row of 2 placeholders -->
     <div class="row">
-      <div class="col m4 s12">
-        <div class="card whet-card-background ">
-          <div class="card-content">
-            <span class="card-title">January 30th, 2016</span>
-            <p>503 Words</p>
-          </div>
-          <div class="card-action">
-            <a href="#">View</a>
-            <a href="#">Share</a>
-          </div>
-        </div>
+    <% for (var i = 0; i < goal.frequency; i++) { %>
+
+      <div class="submission-box">
+      <% if (weeklySubs[i]) { %>
+        <img class="valign" src="/<%= weeklySubs[i].filename %>">
+        <!-- set image as background -->
+      <% } else { %>
+        #<%= i %>
+      <% } %>
       </div>
-      <div class="col m4 s12">
-        <div class="card whet-card-background ">
-          <div class="card-content">
-            <span class="card-title">January 31th, 2016</span>
-            <p>515 Words</p>
-          </div>
-          <div class="card-action">
-            <a href="#">View</a>
-            <a href="#">Share</a>
-          </div>
-        </div>
-      </div>
+    <% } %>
     </div>
 
+  </div>
+
+  <!-- right column -->
+  <div class="col m3">
   </div>
 
 </div>
 
 
 <!-- Box for data testing -->
-<div hidden class="row" style="margin-top: 20%; border: 2px solid black">
+<div class="row" style="margin-top: 20%; border: 2px solid black">
   <h5>DATAMONSTER</h5>
 
   <!-- <div class="divider"></div> -->
