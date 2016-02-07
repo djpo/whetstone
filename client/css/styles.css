@@ -1,5 +1,6 @@
 /* ////////////////////
 colors in use */
+/*
 .custom-red {
   background-color: #912C00;
 }
@@ -21,7 +22,7 @@ colors in use */
 .custom-black {
   background-color: #2E2F2A;
 }
-
+*/
 
 /* ////////////////////
 color palette
@@ -88,8 +89,8 @@ style guidelines
   border-radius: 2px (to match Material cards);
 */
 
-/* ////////////////////
-site-wide */
+/* Site-wide
+----------------------------------------------*/
 .body-wrapper {
   position: relative;
   top: 70px;
@@ -102,8 +103,8 @@ site-wide */
           box-sizing: border-box;
 }
 
-/* ////////////////////
-topbar */
+/* Topbar
+----------------------------------------------*/
 #topbar {
   position: fixed;
   z-index: 10;
@@ -156,8 +157,8 @@ topbar */
   border-right: 8px solid transparent;
 }
 
-/* ////////////////////
-welcome */
+/* Welcome
+----------------------------------------------*/
 #splash {
   height: 90vh;
   width: 95vw;
@@ -181,17 +182,15 @@ welcome */
     font-size: 1.2rem;
 }
 
-/* ////////////////////
-goal/new_goal */
+/* goal/new_goal
+----------------------------------------------*/
 .goal-label {
   text-align: right;
 }
 
-/* ////////////////////
-dashboard */
+/* Dashboard
+----------------------------------------------*/
 #upload-box {
-	margin-top: 20px;
-	padding: 15px;
 }
 #submit-button {
 	width: 100%;
@@ -202,48 +201,54 @@ dashboard */
 #upload-box .upload-button {
   height: 50px;
   font-size: 10px;
-  /*margin: 0 auto;*/
 }
 #upload-box .input-field {
   width: 100%;
-  /*height: 20px;*/
   font-size: 10px;
-  opacity: .5;
 }
 #submit-button {
   width: 100%;
   font-size: 10px;
-  opacity: .5;
+}
+.middle-column {
+  position: relative;
+  top: -8px;
+}
+.submission-box {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  background-color: gray;
+  overflow: hidden;
+  border-width: 5px;
+  border-style: solid;
+}
+.submission-box img {
+  width: 150px;
+  height: 150px;
+/*  width: 90%;
+  height: 90%;*/
+  object-fit: cover;
 }
 
-.img-container {
-  width: 200px;
-  height: 200px;
-  /*border: 2px solid black;*/
+/* dashboard testing */
+/*.middle-column {
+  border: 1px solid green;
 }
-.img-container img {
-  max-width: 100%;
-  max-height: 100%;
+.middle-column > * {
+  border: 1px solid orange;
+}*/
+/*.col {
+  border: 1px solid pink;
 }
+.row {
+  border: 1px solid indigo;
+}*/
 
-/* ////////////////////
-submissions/show */
+
+/* submissions/show
+----------------------------------------------*/
 #sub-view-img {
 	width: 100%;
 	margin: 25px 0;
-}
-
-/* ////////////////////
-testing */
-.t-bor1 {
-  border: 2px dashed violet;
-}
-.t-bor2 {
-  border: 2px solid purple;
-}
-.t-bor3 {
-  border: 2px dotted blue;
-}
-.card.custom-gray {
-  /*border: 2px solid yellow;*/
 }

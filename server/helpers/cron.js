@@ -17,17 +17,14 @@ var job = new CronJob('1 * * * * *', function() {
 
   console.log('\n\n\n~~~~~NEW DAY');
   var now = new Date();
-  console.log("The current time is:", now, ".");
+  console.log("~~~~~The current time is:", now, ".");
 
   var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  console.log("Today is:", today, ".");
 
     db.goal.find({isActive: true}).
   exec(function(err, goals) {
 
     goals.forEach(function(goal) {
-      console.log("Goal start date is: " + goal.startDate)
-      // WEEKLY CHANGES
       // Set newWeek default to false
       var newWeek = false;
       // End goal if end date is today
@@ -38,12 +35,12 @@ var job = new CronJob('1 * * * * *', function() {
       }
       // Start new week if it's the right day of the week, but only if the start day wasn't today
       else if (goal.weekStartsOn === today.getDay() && goal.startDate.getTime() != today.getTime()) {
-        console.log("It's that day of the week again! New week starts now for '" + goal.name + "'.");
+        console.log("~~~~~A new week starts now for goal '" + goal.name + "'.");
         newWeek = true;
         goal.currentWeek += 1;
         goal.save();
       } else {
-        console.log("Goal '" + goal.name + "' still active, same week.");
+        console.log("~~~~~Goal '" + goal.name + "' still active, same week.");
       }
 
       //DAILY CHANGES
@@ -53,7 +50,7 @@ var job = new CronJob('1 * * * * *', function() {
           console.log("Snapshot for " + user.username + " before user logic: \n" + user + "\n")
 
           if (newWeek) {
-            console.log('~~~~~New week, resetting missableDays.');
+            console.log('~~~~~New week for ' + user.username + ', resetting missableDays.');
             user.currentGoals[goal.id].missableDays = 7 - goal.frequency;
           }
           //If user didn't submit today
