@@ -31,14 +31,11 @@ router.post('/save', function(req, res){
     newGoal.isActive = true;
     newGoal.pot = 0;
     newGoal.subs = {};
-    // Push current user to this goal's members array
-    // Will have to update for multiple users starting a goal together
-    //newGoal.members.push(user._id);
 
     function registerNewMembers(callback){
       if (newGoal.friendsEmails.length == 0) return callback();
       var emailArray = newGoal.friendsEmails.split(",");
-      var counter = 0; // Need an external counter because i is asynchronous
+      var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1 3 instead of 0, 1, 2, 3
       emailArray.forEach(function(email, i, array){
         db.user.register(new db.user(
           {
@@ -46,7 +43,6 @@ router.post('/save', function(req, res){
             email: email
           }
         ), 'temporary', function(err, newUser) {
-          //if (err) return res.render('error', { message: err });
           if (err) return console.log(err);
 
           //WARNING: only uncomment below when testing longer periods. will send you
