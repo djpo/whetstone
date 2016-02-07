@@ -29,11 +29,43 @@ router.get('/dashboard', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-      // Render dashboard w/ data
+
+      // Should this go in a separate script file? -DP
+      var getDayName = function(dayNumber){
+        switch(dayNumber) {
+          case 0:
+              return 'Sunday';
+              break;
+          case 1:
+              return 'Monday';
+              break;
+          case 1:
+              return 'Tuesday';
+              break;
+          case 1:
+              return 'Wednesday';
+              break;
+          case 1:
+              return 'Thursday';
+              break;
+          case 1:
+              return 'Friday';
+              break;
+          case 6:
+              return 'Saturday';
+              break;
+        }
+      };
+
+      // Prepare data to send to view
+      var dayName = getDayName(goal.weekStartsOn);
+
+      // Render dashboard with specified data
       res.render('dashboard',
         { goal: goal,
           user: user,
-          weeklySubs: goal.subs[user._id][goal.currentWeek]
+          weeklySubs: goal.subs[user._id][goal.currentWeek],
+          dayName: dayName
         });
     });
   });

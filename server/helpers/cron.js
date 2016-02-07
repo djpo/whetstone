@@ -16,16 +16,14 @@ var job = new CronJob('1 * * * * *', function() {
 
   console.log('~~~~~NEW DAY');
   var now = new Date();
-  console.log("The current time is:", now, ".");
+  console.log("~~~~~The current time is:", now, ".");
 
   var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  console.log("Today is:", today, ".");
 
     db.goal.find({isActive: true}).
   exec(function(err, goals) {
 
     goals.forEach(function(goal) {
-      console.log("Goal start date is: " + goal.startDate)
       // Set newWeek default to false
       var newWeek = false;
       // End goal if end date is today
@@ -36,37 +34,37 @@ var job = new CronJob('1 * * * * *', function() {
       }
       // Start new week if it's the right day of the week, but only if the start day wasn't today
       else if (goal.weekStartsOn === today.getDay() && goal.startDate.getTime() != today.getTime()) {
-        console.log("It's that day of the week again! New week starts now for '" + goal.name + "'.");
+        console.log("~~~~~A new week starts now for goal '" + goal.name + "'.");
         newWeek = true;
         goal.currentWeek += 1;
         goal.save();
       } else {
-        console.log("Goal '" + goal.name + "' still active, same week.");
+        console.log("~~~~~Goal '" + goal.name + "' still active, same week.");
       }
 
       goal.members.forEach(function(member) {
         db.user.findOne({_id: member}, function(err, user) {
 
           if (newWeek) {
-            console.log('~~~~~New week, resetting missableDays.');
+            console.log('~~~~~New week for ' + user.username + ', resetting missableDays.');
             user.currentGoals[goal.id].missableDays = 7 - goal.frequency;
           }
           //If user didn't submit today
           if (!user.currentGoals[goal.id].submitted_today) {
-            console.log('~~~~~' + user + ' did not submit today.');
+            console.log('~~~~~' + user.username + ' did not submit today.');
             //If their credit == 0
             if(!user.currentGoals[goal.id].missableDays) {
-              console.log('~~~~~' + user + ' gets charged.');
+              console.log('~~~~~' + user.username + ' gets charged.');
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
               //mailer(user.email)
             } else {
-              console.log('~~~~~' + user + ' does not get charged but credits get decremented.');
+              console.log('~~~~~' + user.username + ' does not get charged but credits get decremented.');
               user.currentGoals[goal.id].missableDays--;
             }
           } else {
           //  Else ' + user + ' did submit today, so reset flag
-            console.log('~~~~~' + user + ' submitted. Good job ' + user + '!');
+            console.log('~~~~~' + user.username + ' submitted. Good job, ' + user.username + '!');
             user.currentGoals[goal.id].submitted_today = false;
           }
 
