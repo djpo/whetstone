@@ -25,6 +25,7 @@ var job = new CronJob('1 * * * * *', function() {
   exec(function(err, goals) {
 
     goals.forEach(function(goal) {
+      console.log("Snapshot for " + goal.name + " before user logic: \n" + goal + "\n")
       // Set newWeek default to false
       var newWeek = false;
       // End goal if end date is today
@@ -62,26 +63,29 @@ var job = new CronJob('1 * * * * *', function() {
               user.currentGoals[goal.id].bankroll -= goal.incentive;
               console.log(user.username + 's bankroll DECREASED BY ' + goal.incentive)
               user.markModified('currentGoals');
-              user.save(function(err){});
-
-
-              //Pay other members
-              //Get an array that has only the other members
-              var friendsOnly = goal.members;
-              friendsOnly.splice(friendsOnly.indexOf(user._id), 1);
-              //For each friend, increase their bankroll by the incentive price divided amongst all friends
-              friendsOnly.forEach(function(friendId){
-                  db.user.findOne({_id: friendId}, function (err, thisUser) {
-                    if (err) console.log(err);
-                    thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / friendsOnly.length);
-                    thisUser.markModified('currentGoals');
-                    thisUser.save(function (err) {
-                      console.log(thisUser.username + " is saved here")
-                    })
-                  })
+              user.save(function(err){
+                goal.pot += goal.incentive;
+                goal.save()
               });
-              //Need to push current user back on so other users can see it
-              friendsOnly.push(user.id);
+
+
+              ////Pay other members
+              ////Get an array that has only the other members
+              //var friendsOnly = goal.members;
+              //friendsOnly.splice(friendsOnly.indexOf(user._id), 1);
+              ////For each friend, increase their bankroll by the incentive price divided amongst all friends
+              //friendsOnly.forEach(function(friendId){
+              //    db.user.findOne({_id: friendId}, function (err, thisUser) {
+              //      if (err) console.log(err);
+              //      thisUser.currentGoals[goal.id].bankroll += Math.floor(goal.incentive / friendsOnly.length);
+              //      thisUser.markModified('currentGoals');
+              //      thisUser.save(function (err) {
+              //        console.log(thisUser.username + " is saved here")
+              //      })
+              //    })
+              //});
+              ////Need to push current user back on so other users can see it
+              //friendsOnly.push(user.id);
 
               //ATTEMPT AT ASYNCH SOLUTION
               //var friendsOnly = goal.members;

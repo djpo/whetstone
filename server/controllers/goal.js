@@ -29,6 +29,7 @@ router.post('/save', function(req, res){
     newGoal.weekStartsOn = newGoal.startDate.getDay();
     newGoal.currentWeek = 0;
     newGoal.isActive = true;
+    newGoal.pot = 0;
     newGoal.subs = {};
     // Push current user to this goal's members array
     // Will have to update for multiple users starting a goal together

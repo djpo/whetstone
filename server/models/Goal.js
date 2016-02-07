@@ -15,6 +15,7 @@ var Goal_Schema = new Schema({
   endDate       : Date,
   weekStartsOn  : Number,
   currentWeek   : Number,
+  pot           : Number,
   subs          : Schema.Types.Mixed
 });
 
