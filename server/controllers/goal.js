@@ -47,15 +47,15 @@ router.post('/save', function(req, res){
 
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
-          //invitemailer(user.email)
+          //invitemailer(user.email);
 
-          initializeUser(newUser)
+          initializeUser(newUser);
           counter++;
           if(counter === array.length){
-            callback()
+            return callback();
           }
         });
-      })
+      });
       }
 
     function initializeUser(thisUser) {
@@ -86,11 +86,12 @@ router.post('/save', function(req, res){
       registerNewMembers
     ], function(err){
       if (err) console.log(err);
-      initializeUser(user)
+      initializeUser(user);
+      
       // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
       newGoal.markModified('subs');
       // Save the goal to the db
-      console.log("Goal '" + goal.name + "' created.");
+      console.log("Goal '" + newGoal.name + "' created.");
       newGoal.save(function (err){
         if (err) return console.error(err);
         res.redirect('/');

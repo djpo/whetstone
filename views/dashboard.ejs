@@ -79,19 +79,38 @@
   <div class="middle-column col m6">
     <h5 class="light">week <%= goal.currentWeek + 1 %></h5>
 
-    <div class="row">
-    <% for (var i = 0; i < goal.frequency; i++) { %>
+    <!-- possible waterfall animation for page load -->
+<!--     <a href="#!" class="btn" onclick="Materialize.showStaggeredList('#staggered-test')">Click Me</a> -->
+<!--     <div class="row">
+      <ul id="staggered-test">
+        <% for (var i = 0; i < goal.frequency; i++) { %>
+          <li>
+            <div class="submission-box whet-stone z-depth-1">
+              <% if (weeklySubs[i]) { %>
+                <img class="valign" src="/<%= weeklySubs[i].filename %>">
+              <% } else { %>
+                <div class="empty-submission">
+                  #<%= i + 1 %>
+                </div>
+              <% } %>
+            </div>
+          </li>
+        <% } %>
+      </ul>
+    </div> -->
 
-      <div class="submission-box whet-stone z-depth-1">
-      <% if (weeklySubs[i]) { %>
-        <img class="valign" src="/<%= weeklySubs[i].filename %>">
-      <% } else { %>
-        <div class="empty-submission">
-          #<%= i + 1 %>
+    <div class="row">
+      <% for (var i = 0; i < goal.frequency; i++) { %>
+        <div class="submission-box whet-stone z-depth-1">
+          <% if (weeklySubs[i]) { %>
+            <img class="valign" src="/<%= weeklySubs[i].filename %>">
+          <% } else { %>
+            <div class="empty-submission">
+              #<%= i + 1 %>
+            </div>
+          <% } %>
         </div>
       <% } %>
-      </div>
-    <% } %>
     </div>
 
   </div>
