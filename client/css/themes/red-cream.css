@@ -6,6 +6,11 @@
 .whet-body-background {
   background-color: #FFFAF0;
 }
+.whet-panel-background {
+  background-color: white;
+  color: black;
+}
+
 input::-webkit-input-placeholder {
   color: darkolivegreen !important;
 }
