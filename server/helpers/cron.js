@@ -61,7 +61,7 @@ var job = new CronJob('00 00 00 * * *', function() {
             if(!user.currentGoals[goal.id].missableDays) {
               //User loses his/her incentive...
               user.currentGoals[goal.id].bankroll -= goal.incentive;
-              console.log(user.username + 's bankroll DECREASED BY ' + goal.incentive)
+              console.log(user.username + "'s bankroll DECREASED BY " + goal.incentive);
               user.markModified('currentGoals');
               user.save(function(err){
                 //...and pays the pot

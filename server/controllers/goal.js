@@ -56,8 +56,8 @@ router.post('/save', function(req, res){
             callback()
           }
         });
-      })
-      }
+      });
+    }
 
     function initializeUser(thisUser) {
       newGoal.members.push(thisUser._id);
@@ -70,8 +70,9 @@ router.post('/save', function(req, res){
       // Set user's activeGoal to this goal id, save user
       thisUser.activeGoal = newGoal._id;
       //Initialize mixed type currentGoals, then initialize values
-      thisUser.currentGoals = {};
+      thisUser.currentGoals = thisUser.currentGoals || {};
       thisUser.currentGoals[newGoal._id] = {};
+      thisUser.currentGoals[newGoal._id].name = newGoal.name;
       thisUser.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
       thisUser.currentGoals[newGoal._id].submitted_today = false;
       thisUser.currentGoals[newGoal._id].bankroll = 0;
@@ -87,8 +88,9 @@ router.post('/save', function(req, res){
       registerNewMembers
     ], function(err){
       if (err) console.log(err);
-      initializeUser(user)
-      // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
+      initializeUser(user);
+      
+      // Alert db that subs has changed (because subs is Schema.Types.Mixed)
       newGoal.markModified('subs');
       // Save the goal to the db
       //console.log("Goal '" + goal.name + "' created.");
