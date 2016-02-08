@@ -11,34 +11,38 @@
 style ideas:
   Materialize sidenav
 -->
-<h3 hidden>archive view</h3>
 <div class="row">
-  <div id="archive-goals-menu" class="col s2 ">
-    <h6>all <%= user.username.split('@')[0] %>'s goals</h6>
-
-    <ul class="collection">
-      <% for (var key in  user.currentGoals) { %>
-        <!-- if this goal key === user.activeGoal, display li as 'selected' (different color) -->
-        <li class="collection-item"><%= user.currentGoals[key].name %></li>
-      <% } %>
-    </ul>
+  <div class="col s3">
+    <div class="row left-panel-box whet-leftpanel-background z-depth-1">
+      <h5 class="light" style="margin-right: 10px;"><%= user.username.split('@')[0] %>'s goals</h5>
+      <ul id="archive-goals-list" class="collection light" style="text-align: left">
+        <% for (var key in  user.currentGoals) { %>
+          <% if (key === user.activeGoal) { %>
+            <li class="collection-item selected-collection-item"><%= user.currentGoals[key].name %></li>
+          <% } else { %>
+            <li class="collection-item"><%= user.currentGoals[key].name %></li>
+          <% } %>
+        <% } %>
+      </ul>
+    </div>
   </div>
 
   <!-- activeGoal all submissions -->
-  <div class="col s7">
+  <div class="col l8 s9">
     <!-- weekly stuffs -->
-    <% for (var i = 0; i < 2; i++) { %>
-      <div class="archive-week row">
+    <% for (var i = 0; i < goal.subs[user._id].length; i++) { %>
+      <% var weeklySubs = goal.subs[user._id][i] %>
 
-        <div class="left-column col s2">
-          week <%= i %>
+      <div class="archive-week row">
+        <div class="left-column col l2 s2">
+          <span class="thin" style="font-size: 1em; float: right">week <%= i + 1 %></span>
         </div>
 
         <div class="middle-column col s10">
-          <div class="row">
+          <div class="row" style="margin: 0;">
             <% for (var j = 0; j < goal.frequency; j++) { %>
               <div class="archive-box whet-stone z-depth-1">
-                <% var weeklySubs = goal.subs[user._id] %>
+
                 <% if (weeklySubs[j]) { %>
                   <img class="valign" src="/<%= weeklySubs[j].filename %>">
                 <% } else { %>
@@ -46,17 +50,14 @@ style ideas:
                     <%= j + 1 %>
                   </div>
                 <% } %>
+
               </div>
             <% } %>
           </div>
-          <div class="divider"></div>
         </div>
-
       </div>
+
     <% } %>
   </div>
 
-  <!-- activeGoal all submissions -->
-  <div class="col s3" style="height: 300px; border: 1px solid blue">
-  </div>
 </div>

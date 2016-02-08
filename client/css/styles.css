@@ -99,6 +99,9 @@ style guidelines
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+.left-panel-box {
+  text-align: right;
+}
 
 /* Topbar
 ----------------------------------------------*/
@@ -145,7 +148,6 @@ style guidelines
   position: fixed;
   right: 30px;
   top: 35px;
-  /*color: #CEA85F;*/
 }
 .apex-dn {
   width: 8px;
@@ -191,9 +193,6 @@ style guidelines
 }
 #submit-button {
 	width: 100%;
-}
-.left-panel-box {
-  text-align: right;
 }
 #upload-box .upload-button {
   height: 50px;
@@ -249,18 +248,12 @@ style guidelines
 
 /* archive
 ----------------------------------------------*/
-#archive-goals-menu {
-  border: 1px solid purple;
+#archive-goals-list {
   padding: 0;
 }
-.archive-week {
-  border: 1px solid black;
+#archive-goals-list .selected-collection-item {
+  background-color: rgba(141,179,161,1);
 }
-
-.archive-week .col {
-  border: 1px solid orange;
-}
-
 .archive-box {
   display: inline-block;
   position: relative;
