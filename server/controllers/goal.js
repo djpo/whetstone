@@ -90,12 +90,12 @@ router.post('/save', function(req, res){
       // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
       newGoal.markModified('subs');
       // Save the goal to the db
+      //console.log("Goal '" + goal.name + "' created.");
       newGoal.save(function (err){
         if (err) return console.error(err);
         res.redirect('/');
       });
-
-    })
+    });
 
   });
 });

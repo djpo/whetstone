@@ -4,7 +4,7 @@ var db            = require('../models/index'),
     CronJob       = require('cron').CronJob;
 
 var job = new CronJob('00 00 00 * * *', function() {
-                      // Runs every minute (currently)
+// Runs every night at 12AM
 
                   // Timing argument, for reference
                     // Seconds: 0-59

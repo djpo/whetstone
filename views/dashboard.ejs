@@ -9,11 +9,11 @@
 <div class="row">
 
   <!-- left column -->
-  <div class="col m3">
+  <div class="col m3 s12">
 
     <!-- goal info -->
     <div class="row z-depth-1">
-      <div class="col m12 left-panel-box whet-leftpanel-background">
+      <div class="col m12 s12 left-panel-box whet-leftpanel-background">
         <h5 class="light"><%= goal.name %></h5>
         <p class="light">week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br>
           content type: <%= goal.contentType %><br>
@@ -27,7 +27,7 @@
 
     <!-- upload box -->
     <div class="row z-depth-1">
-      <div id="upload-box" class="col m12 left-panel-box whet-leftpanel-background">
+      <div id="upload-box" class="col m12 s12 left-panel-box whet-leftpanel-background">
 
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
           <h6>you uploaded for this goal today.<br>good job!</h6>
@@ -38,13 +38,13 @@
             <div class="row">
 
               <!-- File chooser -->
-              <div class="file-field input-field col m5">
+              <div class="file-field input-field col m5 s12">
                 <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
                 <div class="file-path-wrapper">
                   <input required class="file-path validate" placeholder="Submission" type="text">
                 </div>
                 <!-- File chooser button -->
-                <div class="btn upload-button whet-btn-1" style="width: 100%">
+                <div class="btn upload-button whet-btn-1 " style="width: 100%">
                   <span>choose file</span>
                   <input required type="file" name="submission" accept="<%=goal.contentType%>/*" class="validate">
                 </div>
@@ -76,33 +76,18 @@
   </div>
 
   <!-- middle column -->
-  <div class="middle-column col m6">
-    <h5 class="light">this week's submissions</h5>
-
-    <!-- placeholder card -->
-    <!-- <div class="row">
-      <div class="col m4 s12">
-        <div class="card whet-card-background">
-          <div class="card-content">
-            <span class="card-title">January 30th, 2016</span>
-            <p>503 Words</p>
-          </div>
-          <div class="card-action">
-            <a href="#">View</a>
-            <a href="#">Share</a>
-          </div>
-        </div>
-      </div> -->
+  <div class="middle-column col m6 s12 center-align">
+    <h5 class="light center-align" style="margin-top: 0">week <%= goal.currentWeek + 1 %></h5>
 
     <div class="row">
     <% for (var i = 0; i < goal.frequency; i++) { %>
 
-      <div class="submission-box whet-stone z-depth-1">
+      <div class="submission-box whet-stone whet-submission-box z-depth-1">
       <% if (weeklySubs[i]) { %>
         <img class="valign" src="/<%= weeklySubs[i].filename %>">
       <% } else { %>
-        <div class="empty-submission">
-          #<%= i + 1 %>
+        <div class="empty-submission center-align">
+          <p>#<%= i + 1 %></p>
         </div>
       <% } %>
       </div>
@@ -112,7 +97,16 @@
   </div>
 
   <!-- right column -->
-  <div class="col m3">
+  <div class="col m3 s12 ">
+    <ul class="collection">
+      <% for (var i = 0; i < friendStatus.length; i++) {%>
+      <li class="collection-item"><%= friendStatus[i][0]%>
+        <% if (friendStatus[i][1]){%>
+        <span class="badge new">1</span>
+        <%}%>
+      </li>
+      <%}%>
+    </ul>
   </div>
 
 </div>
