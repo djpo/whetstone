@@ -69,16 +69,17 @@
 
   <!-- middle column -->
   <div class="middle-column col m6 s12 center-align">
-    <h5 class="light center-align" style="margin-top: 0">week <%= goal.currentWeek + 1 %></h5>
+    <h5 class="light left-align" style="margin-top: 0; margin-left: 20px">week <%= goal.currentWeek + 1 %></h5>
 
     <div class="row">
       <% for (var i = 0; i < goal.frequency; i++) { %>
         <div class="submission-box whet-stone whet-submission-box z-depth-1">
           <% if (weeklySubs[i]) { %>
-            <img class="valign" src="/<%= weeklySubs[i].filename %>">
+            <a href="/submissions/<%= goal._id %>/<%= user._id %>/<%= goal.currentWeek %>/<%= i %>">
+              <img class="valign" src="/<%= weeklySubs[i].filename %>">
+            </a>
           <% } else { %>
-            <!-- <div class="empty-submission"> -->
-            <div class="empty-submission center-align">
+            <div class="empty-submission">
               <p>#<%= i + 1 %></p>
             </div>
           <% } %>

@@ -54,24 +54,24 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
   });
 });
 
-router.get('/:goalid/:subid', function(req, res){
-  var goalid = req.params.goalid;
-  var subid = req.params.subid;
+router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
+  var goalId  = req.params.goalId,
+      userId   = req.params.userId,
+      weekNum = req.params.weekNum,
+      subNum  = req.params.subNum;
 
-  db.goal.findOne({_id: goalid}, function (err, goal) {
-    if (err) console.log(err);
-
-    for (var i = 0; i < goal.submissions.length; i++){
-      if(goal.submissions[i].filename == subid){
-        return res.render('submissions/show',
-          {
-            subDate: dateFormat(goal.submissions[i].created_at, "h:MM TT mmm dd"),
-            subNote: goal.submissions[i].note,
-            subFilename: goal.submissions[i].filename
-          });
-      }
+  db.goal.findOne({_id: goalId}, function (err, goal) {
+    if (err) return console.log(err);
+    if (goal.subs[userId][weekNum][subNum]) {
+      var subToShow = goal.subs[userId][weekNum][subNum];
+      return res.render('submissions/show',
+        {
+          subDate: dateFormat(subToShow.created_at, "h:MM TT mmm dd"),
+          subNote: subToShow.note,
+          subFilename: subToShow.filename
+        }
+      );
     }
-
     console.log('submission not found');
     //res.status(200).end();
   });
