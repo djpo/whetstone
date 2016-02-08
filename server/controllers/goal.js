@@ -39,8 +39,7 @@ router.post('/save', function(req, res){
       emailArray.forEach(function(email, i, array){
         db.user.register(new db.user(
           {
-            username : email,
-            email: email
+            username : email.trim()
           }
         ), 'temporary', function(err, newUser) {
           if (err) return console.log(err);
