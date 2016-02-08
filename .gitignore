@@ -38,6 +38,8 @@ node_modules
 # Don't save uploads on github
 uploads
 
+.env
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

@@ -44,8 +44,10 @@ _.each(routes, function(controller, route) {
   app.use(route, controller);
 });
 
+console.log( process.env.MONGO_USERNAME)
+
 // Connect to mongo, run server
-mongoose.connect('mongodb://0.0.0.0:27017/whetstone');
+mongoose.connect('mongodb://' + process.env.MONGO_USERNAME + ':' + process.env.MONGO_PASSWORD + '@ds059135.mongolab.com:59135/whetstone-dev');
 mongoose.connection.once('open', function(){
 
   // Start the cron job (comment to disable cron)
