@@ -37,15 +37,22 @@ router.post('/save', function(req, res){
       var emailArray = newGoal.friendsEmails.split(",");
       var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1 3 instead of 0, 1, 2, 3
       emailArray.forEach(function(email, i, array){
-        db.user.findOne({username: email}, function(err, foundUser){
+        db.user.findOne({username: email.trim()}, function(err, foundUser){
 
-          if(!foundUser) {
+          if(foundUser) {
+            initializeUser(foundUser)
+            //Callback to the async function when all members have been registered/added
+            counter++;
+            if(counter === array.length){
+              callback()
+            }
+          } else {
             db.user.register(new db.user(
               {
                 name    : email.split('@')[0],
                 username: email.trim()
               }
-            ), 'temporary', function(err, newUser) {
+            ), 'temporary', function(err, newUser, callback) {
               if (err) return console.log(err);
 
               //WARNING: only uncomment below when testing longer periods. will send you
@@ -53,14 +60,12 @@ router.post('/save', function(req, res){
               //invitemailer(user.username)
 
               initializeUser(newUser)
+              //Callback to the async function when all members have been registered/added
+              counter++;
+              if(counter === array.length){
+                callback()
+              }
             });
-          } else {
-            initializeUser(foundUser)
-          }
-          //Callback to the async function when all members have been registered/added
-          counter++;
-          if(counter === array.length){
-            callback()
           }
         })
       })
