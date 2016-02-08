@@ -64,7 +64,6 @@ router.get('/dashboard', function(req, res){
       console.log("goal.subs[user._id][goal.currentWeek]: " + goal.subs[user._id][goal.currentWeek]);
       var weeklySubs = goal.subs[user._id][goal.currentWeek] || [];
 
-      // Render dashboard with specified data
       res.render('dashboard',
         { goal: goal,
           user: user,
@@ -76,7 +75,20 @@ router.get('/dashboard', function(req, res){
 });
 
 router.get('/archive', function(req, res){
-  res.render('archive');
+  if (!req.user) return res.redirect('/');
+  if (!req.user.activeGoal) return res.redirect('/goal/new');
+  // Find current user
+  db.user.findOne({_id: req.user.id}, function(err, user){
+    if (err) return console.log(err);
+    // Find current user's current goal
+    db.goal.findOne({_id: user.activeGoal}, function(err, goal){
+      if (err) return console.log(err);
+      res.render('archive',
+        { goal: goal,
+          user: user
+        });
+    });
+  });
 });
 
 module.exports = router;

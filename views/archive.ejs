@@ -14,5 +14,42 @@
   
 <!--
 style ideas:
-  sidenav
+  Materialize sidenav
 -->
+
+<div class="row">
+
+  <!-- left column -->
+  <div class="col m3">
+  </div>
+
+  <!-- middle column -->
+  <div class="middle-column col m6">
+    <h5 class="light">week <%= goal.currentWeek + 1 %></h5>
+
+    <!-- for each week -->
+    <% for (var i = 0; i < goal.subs[user._id].length; i++) { %>
+      <div class="row">
+        <span>week <%= i %></span>
+
+        <!-- for each day -->
+        <% for (var j = 0; j < goal.frequency; j++) { %>
+          <div class="submission-box whet-stone z-depth-1">
+            <% var weeklySubs = goal.subs[user._id] %>
+            <% if (weeklySubs[j]) { %>
+              <img class="valign" src="/<%= weeklySubs[j].filename %>">
+            <% } else { %>
+              <div class="empty-submission">
+                <%= j + 1 %>
+              </div>
+            <% } %>
+          </div>
+        <% } %>
+
+      </div>
+      <div class="divider"></div>
+    <% } %>
+
+  </div>
+
+</div>
