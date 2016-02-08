@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rk23/whetstone#readme",
   "dependencies": {
+    "async": "^1.5.2",
     "aws-sdk": "^2.2.33",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",
