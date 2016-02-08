@@ -1,6 +1,5 @@
-/* ////////////////////
-colors in use */
-/*
+/* colors in use
+----------------------------------------------
 .custom-red {
   background-color: #912C00;
 }
@@ -24,9 +23,8 @@ colors in use */
 }
 */
 
-/* ////////////////////
-color palette
-
+/* color palette
+----------------------------------------------
 red/brown
 #912C00                       used
 #702B1C R: 112 G: 43 B: 28
@@ -52,8 +50,6 @@ light green
 #CEE8CF R: 206 G: 232 B: 207
 #A4BCA4 rgb(164,188,164)
   rgba(164,188,164,.5)        used
-
-
 
 cerulean
 #8DB3A1 R: 141 G: 179 B: 161
@@ -217,9 +213,10 @@ style guidelines
 }
 .submission-box {
   display: inline-block;
+  position: relative;
   width: 150px;
   height: 150px;
-  background-color: gray;
+  background-color: rgba(69,90,100,.3);
   overflow: hidden;
   border-width: 5px;
   border-style: solid;
@@ -230,6 +227,13 @@ style guidelines
   width: 150px;
   height: 150px;
   object-fit: cover;
+}
+.empty-submission {
+  position: absolute;
+  left: 10%;
+  font-family: "Roboto", sans-serif;
+  font-size: 3em;
+  color: white;
 }
 
 /* submissions/show
