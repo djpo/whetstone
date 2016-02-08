@@ -13,29 +13,14 @@ style ideas:
 -->
 <h3 hidden>archive view</h3>
 <div class="row">
+  <div id="archive-goals-menu" class="col s2 ">
+    <h6>all <%= user.username.split('@')[0] %>'s goals</h6>
 
-  <!-- menu of different goals -->
-  <div id="archive-goals-menu" class="col s2">
-    <h6>all <%= user.username %>'s goals</h6>
-    <ul>
-      <li>
-        <div class="divider"></div>
-        <div>
-          <span>placeholder goal name</span>
-        </div>
-      </li>
-      <li>
-        <div class="divider"></div>
-        <div>
-          <span>placeholder goal name</span>
-        </div>
-      </li>
-      <li>
-        <div class="divider"></div>
-        <div>
-          <span>placeholder goal name</span>
-        </div>
-      </li>
+    <ul class="collection">
+      <% for (var key in  user.currentGoals) { %>
+        <!-- if this goal key === user.activeGoal, display li as 'selected' (different color) -->
+        <li class="collection-item"><%= user.currentGoals[key].name %></li>
+      <% } %>
     </ul>
   </div>
 

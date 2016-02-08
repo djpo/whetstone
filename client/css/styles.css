@@ -251,6 +251,7 @@ style guidelines
 ----------------------------------------------*/
 #archive-goals-menu {
   border: 1px solid purple;
+  padding: 0;
 }
 .archive-week {
   border: 1px solid black;
@@ -259,6 +260,7 @@ style guidelines
 .archive-week .col {
   border: 1px solid orange;
 }
+
 .archive-box {
   display: inline-block;
   position: relative;

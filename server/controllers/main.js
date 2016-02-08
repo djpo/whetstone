@@ -98,13 +98,28 @@ router.get('/archive', function(req, res){
   // Find current user
   db.user.findOne({_id: req.user.id}, function(err, user){
     if (err) return console.log(err);
+
+    console.log(user.activeGoal);
+    console.log(user.currentGoals);
+    console.log("-----");
+
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
+
+      // Prepare data to send to view
+      // var userGoalNames = [];
+      var counter = 0;
+
+      // var userGoalNames = Object.getOwnPropertyNames(user.currentGoals);
+      // console.log(userGoalNames);
+
+
       
       res.render('archive',
         { goal: goal,
           user: user
+          // , userGoalNames: userGoalNames
         });
     });
   });
