@@ -1,6 +1,5 @@
-/* ////////////////////
-colors in use */
-/*
+/* colors in use
+----------------------------------------------
 .custom-red {
   background-color: #912C00;
 }
@@ -24,9 +23,8 @@ colors in use */
 }
 */
 
-/* ////////////////////
-color palette
-
+/* color palette
+----------------------------------------------
 red/brown
 #912C00                       used
 #702B1C R: 112 G: 43 B: 28
@@ -52,8 +50,6 @@ light green
 #CEE8CF R: 206 G: 232 B: 207
 #A4BCA4 rgb(164,188,164)
   rgba(164,188,164,.5)        used
-
-
 
 cerulean
 #8DB3A1 R: 141 G: 179 B: 161
@@ -103,6 +99,9 @@ style guidelines
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+.left-panel-box {
+  text-align: right;
+}
 
 /* Topbar
 ----------------------------------------------*/
@@ -149,7 +148,6 @@ style guidelines
   position: fixed;
   right: 30px;
   top: 35px;
-  /*color: #CEA85F;*/
 }
 .apex-dn {
   width: 8px;
@@ -196,9 +194,6 @@ style guidelines
 #submit-button {
 	width: 100%;
 }
-.left-panel-box {
-  text-align: right;
-}
 #upload-box .upload-button {
   height: 50px;
   font-size: 10px;
@@ -220,6 +215,7 @@ style guidelines
 }
 .submission-box {
   display: inline-block;
+  position: relative;
   width: 150px;
   height: 150px;
   overflow: hidden;
@@ -230,6 +226,10 @@ style guidelines
   object-fit: cover;
 }
 .empty-submission {
+  /*position: absolute;*/
+  /*left: 10%;*/
+  /*font-family: "Roboto", sans-serif;*/
+  /*font-size: 3em;*/
   color: white;
   padding: 25%;
   text-align: center;
@@ -239,13 +239,44 @@ style guidelines
 /* submissions/show
 ----------------------------------------------*/
 #sub-view-img {
-	width: 100%;
-	margin: 25px 0;
+  width: 100%;
+  margin: 25px 0;
 }
+
+/* archive
+----------------------------------------------*/
+#archive-goals-list {
+  padding: 0;
+}
+#archive-goals-list .selected-collection-item {
+  background-color: rgba(141,179,161,1);
+}
+
+
+.archive-box {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(69,90,100,.3);
+  overflow: hidden;
+}
+.archive-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empty-submission {
+  font-size: 1em;
+  color: white;
+  padding: 25%;
+  text-align: center;
+}
+
 
 /*Home page
 --------------------------------------------*/
-
 .front-page-full {
   position: relative;
   width: 100vw;
@@ -291,5 +322,3 @@ style guidelines
 #whet-footer-right i {
   font-size: 14px;
 }
-
-
