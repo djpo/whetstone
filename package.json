@@ -2,7 +2,7 @@
   "name": "whetstone",
   "version": "1.0.0",
   "description": "Hone your craft",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rk23/whetstone#readme",
   "dependencies": {
+    "aws-sdk": "^2.2.33",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",
     "cron": "^1.1.0",
