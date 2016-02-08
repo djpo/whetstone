@@ -39,15 +39,14 @@ router.post('/save', function(req, res){
       emailArray.forEach(function(email, i, array){
         db.user.register(new db.user(
           {
-            username : email,
-            email: email
+            username : email.trim()
           }
         ), 'temporary', function(err, newUser) {
           if (err) return console.log(err);
 
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
-          //invitemailer(user.email);
+          //invitemailer(user.username);
 
           initializeUser(newUser);
           counter++;
@@ -88,10 +87,10 @@ router.post('/save', function(req, res){
       if (err) console.log(err);
       initializeUser(user);
       
-      // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
+      // Alert db that subs has changed (because subs is Schema.Types.Mixed)
       newGoal.markModified('subs');
       // Save the goal to the db
-      console.log("Goal '" + newGoal.name + "' created.");
+      //console.log("Goal '" + goal.name + "' created.");
       newGoal.save(function (err){
         if (err) return console.error(err);
         res.redirect('/');

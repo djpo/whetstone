@@ -1,5 +1,6 @@
 var express     = require('express'),
     db          = require('../models/index'),
+    async       = require('async'),
     router      = express.Router();
 
 router.get('/', function(req, res){
@@ -31,7 +32,7 @@ router.get('/dashboard', function(req, res){
       if (err) return console.log(err);
 
       // Should this go in a separate script file? -DP
-      var getDayName = function(dayNumber){
+      function getDayName(dayNumber){
         switch(dayNumber) {
           case 0:
               return 'Sunday';
@@ -59,17 +60,34 @@ router.get('/dashboard', function(req, res){
 
       // Prepare data to send to view
       var dayName = getDayName(goal.weekStartsOn);
-
-      // Leaving console.log in to find source of error: 'weeklySubs is undefined' in dashboard.ejs
-      console.log("goal.subs[user._id][goal.currentWeek]: " + goal.subs[user._id][goal.currentWeek]);
       var weeklySubs = goal.subs[user._id][goal.currentWeek] || [];
+      var friendStatus = [];
+      function getFriendStatus(callback){
+        var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1, 3 instead of 0, 1, 2, 3
+        goal.members.forEach(function(member, i, array){
+          db.user.findOne({_id: member}, function(err, user){
+            var name = user.username.split('@')[0];
+            friendStatus.push([name, user.currentGoals[goal.id].submitted_today]);
+            counter++;
+            if(counter === array.length){
+              callback();
+            }
+          });
+        })
+      }
 
-      res.render('dashboard',
-        { goal: goal,
-          user: user,
-          weeklySubs: weeklySubs,
-          dayName: dayName
-        });
+      async.series([
+        getFriendStatus
+      ], function(err){
+        res.render('dashboard',
+          { goal: goal,
+            user: user,
+            weeklySubs: weeklySubs,
+            dayName: dayName,
+            friendStatus: friendStatus
+          });
+      });
+
     });
   });
 });
@@ -83,9 +101,6 @@ router.get('/archive', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-
-      console.log("----- archive user -----");
-      console.log(user);
       
       res.render('archive',
         { goal: goal,

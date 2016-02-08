@@ -12,19 +12,30 @@ style ideas:
   Materialize sidenav
 -->
 <h3 hidden>archive view</h3>
-
 <div class="row">
 
   <!-- menu of different goals -->
   <div id="archive-goals-menu" class="col s2">
-    <h6>all goals</h6>
+    <h6>all <%= user.username %>'s goals</h6>
     <ul>
       <li>
-        <div style="border: 1px solid orange;">
-          <span><%= user.currentGoals["56b8170e181208161099302f"].bankroll %></span>
+        <div class="divider"></div>
+        <div>
+          <span>placeholder goal name</span>
         </div>
       </li>
-
+      <li>
+        <div class="divider"></div>
+        <div>
+          <span>placeholder goal name</span>
+        </div>
+      </li>
+      <li>
+        <div class="divider"></div>
+        <div>
+          <span>placeholder goal name</span>
+        </div>
+      </li>
     </ul>
   </div>
 

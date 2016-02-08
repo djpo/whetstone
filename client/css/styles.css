@@ -91,6 +91,7 @@ style guidelines
   position: relative;
   top: 70px;
   margin: 15px;
+  margin-bottom: 0;
 }
 /* padding and border do not increase element size */
 * {
@@ -205,23 +206,23 @@ style guidelines
 #submit-button {
   width: 100%;
   font-size: 10px;
+  margin-bottom: 15px;
 }
 .middle-column {
   position: relative;
-  top: -45px;
+  /*top: -45px;*/
   /*TODO fix these columns so they actually line up*/
+  /*I added a margin-top: 0 to the h5 style so it went up and didn't need top -45 anymore -RK*/
 }
 .submission-box {
   display: inline-block;
   position: relative;
   width: 150px;
   height: 150px;
-  background-color: rgba(69,90,100,.3);
+  /*background-color: rgba(69,90,100,.3);*/
+  /*border-width: 5px;*/
+  /*border-style: solid;*/
   overflow: hidden;
-  border-width: 5px;
-  border-style: solid;
-  /*margin-left: auto;
-  margin-right: auto;*/
 }
 .submission-box img {
   width: 150px;
@@ -229,11 +230,14 @@ style guidelines
   object-fit: cover;
 }
 .empty-submission {
-  position: absolute;
-  left: 10%;
-  font-family: "Roboto", sans-serif;
-  font-size: 3em;
+  /*position: absolute;*/
+  /*left: 10%;*/
+  /*font-family: "Roboto", sans-serif;*/
+  /*font-size: 3em;*/
   color: white;
+  padding: 25%;
+  text-align: center;
+  text-size: 100px;
 }
 
 /* submissions/show
@@ -247,7 +251,6 @@ style guidelines
 ----------------------------------------------*/
 #archive-goals-menu {
   border: 1px solid purple;
-  background-color: red;
 }
 .archive-week {
   border: 1px solid black;
@@ -256,8 +259,6 @@ style guidelines
 .archive-week .col {
   border: 1px solid orange;
 }
-
-
 .archive-box {
   display: inline-block;
   position: relative;
@@ -274,3 +275,50 @@ style guidelines
   object-fit: cover;
 }
 
+/*Home page
+--------------------------------------------*/
+.front-page-full {
+  position: relative;
+  width: 100vw;
+  left: calc(-50vw + 50%);
+  height: 600px;
+  margin-bottom: 0;
+  padding: 100px 200px;
+}
+#whet-block-1 {
+  margin-top: 250px;
+}
+#footer {
+  position: absolute;
+  left: calc(-50vw + 50%);
+  width: 100vw;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.footer-left {
+  height: 40px;
+  display: inline-block;
+  margin-bottom: 0;
+}
+#whet-footer-left {
+  font-weight: 100;
+  padding: 10px;
+  text-align: center;
+  font-variant: small-caps;
+}
+.footer-right {
+  height: 40px;
+  display: inline-block;
+  margin-bottom: 0;
+}
+#whet-footer-right {
+  font-weight: 100;
+  padding: 10px;
+  text-align: center;
+}
+#whet-footer-right span {
+  font-variant: small-caps;
+}
+#whet-footer-right i {
+  font-size: 14px;
+}

@@ -58,3 +58,21 @@ input:-ms-input-placeholder {
 .submission-box { 
   border-color: #455a64;
 }
+.whet-submission-box {
+  background-color: darkgray;
+}
+
+/*4. Home page
+----------------------------------------------*/
+.whet-footer-left {
+  background-color: #191718;
+  color: whitesmoke;
+}
+.whet-footer-right {
+  color: whitesmoke;
+  background-color: #303030;
+}
+.whet-block-1 {
+  background-color: #4a148c;
+  color: white;
+}
