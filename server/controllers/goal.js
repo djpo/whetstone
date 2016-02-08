@@ -42,7 +42,7 @@ router.post('/save', function(req, res){
             name    : email.split('@')[0],
             username: email.trim()
           }
-        ), 'temporary', function(err, newUser, callback) {
+        ), 'temporary', function(err, newUser) {
           if (err) return console.log(err);
 
           //WARNING: only uncomment below when testing longer periods. will send you
