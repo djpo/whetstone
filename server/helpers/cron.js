@@ -3,7 +3,7 @@ var db            = require('../models/index'),
     async         = require('async'),
     CronJob       = require('cron').CronJob;
 
-var job = new CronJob('1 * * * * *', function() {
+var job = new CronJob('1 2 * * * *', function() {
                       // Runs every minute (currently)
 
                   // Timing argument, for reference
