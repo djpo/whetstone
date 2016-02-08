@@ -225,16 +225,6 @@ style guidelines
   height: 150px;
   object-fit: cover;
 }
-.empty-submission {
-  /*position: absolute;*/
-  /*left: 10%;*/
-  /*font-family: "Roboto", sans-serif;*/
-  /*font-size: 3em;*/
-  color: white;
-  padding: 25%;
-  text-align: center;
-  text-size: 100px;
-}
 
 /* submissions/show
 ----------------------------------------------*/
@@ -251,8 +241,6 @@ style guidelines
 #archive-goals-list .selected-collection-item {
   background-color: rgba(141,179,161,1);
 }
-
-
 .archive-box {
   display: inline-block;
   position: relative;
@@ -266,12 +254,14 @@ style guidelines
   height: 100%;
   object-fit: cover;
 }
-
 .empty-submission {
   font-size: 1em;
   color: white;
   padding: 25%;
   text-align: center;
+}
+.collection-item {
+/*  padding: 0;*/
 }
 
 
