@@ -1,11 +1,3 @@
-<!-- Group features
-  Be able to comment on my submission
-  Able to be commented on by group    
-  View my submissions
-  Notifications of group
-  View group submissions, or able to click to get to a specific group member
--->
-
 <div class="row">
 
   <!-- left column -->
@@ -15,12 +7,12 @@
     <div class="row z-depth-1">
       <div class="col m12 s12 left-panel-box whet-leftpanel-background">
         <h5 class="light"><%= goal.name %></h5>
-        <p class="light">week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br>
-          content type: <%= goal.contentType %><br>
+        <p class="light">
+          <!-- week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br> -->
+          <!-- content type: <%= goal.contentType %><br> -->
           <%= weeklySubs.length %> of <%= goal.frequency %> submissions made this week<br>
           week starts on <%= dayName %><br>
-          members: <%= goal.members.length %><br>
-          pot size: <%= goal.pot%>
+          pot size: $<%= goal.pot %>
         </p>
       </div>
     </div>
@@ -80,18 +72,18 @@
     <h5 class="light center-align" style="margin-top: 0">week <%= goal.currentWeek + 1 %></h5>
 
     <div class="row">
-    <% for (var i = 0; i < goal.frequency; i++) { %>
-
-      <div class="submission-box whet-stone whet-submission-box z-depth-1">
-      <% if (weeklySubs[i]) { %>
-        <img class="valign" src="/<%= weeklySubs[i].filename %>">
-      <% } else { %>
-        <div class="empty-submission center-align">
-          <p>#<%= i + 1 %></p>
+      <% for (var i = 0; i < goal.frequency; i++) { %>
+        <div class="submission-box whet-stone whet-submission-box z-depth-1">
+          <% if (weeklySubs[i]) { %>
+            <img class="valign" src="/<%= weeklySubs[i].filename %>">
+          <% } else { %>
+            <!-- <div class="empty-submission"> -->
+            <div class="empty-submission center-align">
+              <p>#<%= i + 1 %></p>
+            </div>
+          <% } %>
         </div>
       <% } %>
-      </div>
-    <% } %>
     </div>
 
   </div>
