@@ -70,7 +70,7 @@ router.post('/save', function(req, res){
       // Set user's activeGoal to this goal id, save user
       thisUser.activeGoal = newGoal._id;
       //Initialize mixed type currentGoals, then initialize values
-      thisUser.currentGoals = {};
+      thisUser.currentGoals = thisUser.currentGoals || {};
       thisUser.currentGoals[newGoal._id] = {};
       thisUser.currentGoals[newGoal._id].name = newGoal.name;
       thisUser.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
