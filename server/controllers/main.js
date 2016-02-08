@@ -60,11 +60,15 @@ router.get('/dashboard', function(req, res){
       // Prepare data to send to view
       var dayName = getDayName(goal.weekStartsOn);
 
+      // Leaving console.log in to find source of error: 'weeklySubs is undefined' in dashboard.ejs
+      console.log("goal.subs[user._id][goal.currentWeek]: " + goal.subs[user._id][goal.currentWeek]);
+      var weeklySubs = goal.subs[user._id][goal.currentWeek] || [];
+
       // Render dashboard with specified data
       res.render('dashboard',
         { goal: goal,
           user: user,
-          weeklySubs: goal.subs[user._id][goal.currentWeek],
+          weeklySubs: weeklySubs,
           dayName: dayName
         });
     });

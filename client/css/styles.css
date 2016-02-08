@@ -160,8 +160,8 @@ style guidelines
 /* Welcome
 ----------------------------------------------*/
 #splash {
-  height: 90vh;
-  width: 95vw;
+  /*height: 90vh;*/
+  /*width: 95vw;*/
   margin: 15px;
   padding: 40px;
 }
@@ -212,7 +212,8 @@ style guidelines
 }
 .middle-column {
   position: relative;
-  top: -8px;
+  top: -45px;
+  /*TODO fix these columns so they actually line up*/
 }
 .submission-box {
   display: inline-block;
@@ -226,25 +227,8 @@ style guidelines
 .submission-box img {
   width: 150px;
   height: 150px;
-/*  width: 90%;
-  height: 90%;*/
   object-fit: cover;
 }
-
-/* dashboard testing */
-/*.middle-column {
-  border: 1px solid green;
-}
-.middle-column > * {
-  border: 1px solid orange;
-}*/
-/*.col {
-  border: 1px solid pink;
-}
-.row {
-  border: 1px solid indigo;
-}*/
-
 
 /* submissions/show
 ----------------------------------------------*/
