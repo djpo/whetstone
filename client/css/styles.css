@@ -160,8 +160,8 @@ style guidelines
 /* Welcome
 ----------------------------------------------*/
 #splash {
-  height: 90vh;
-  width: 95vw;
+  /*height: 90vh;*/
+  /*width: 95vw;*/
   margin: 15px;
   padding: 40px;
 }
@@ -210,10 +210,10 @@ style guidelines
   width: 100%;
   font-size: 10px;
 }
-.middle-column {
+/*.middle-column {
   position: relative;
   top: -8px;
-}
+}*/
 .submission-box {
   display: inline-block;
   width: 150px;
@@ -243,6 +243,9 @@ style guidelines
 }
 .row {
   border: 1px solid indigo;
+}
+* {
+  border: 1px solid black;
 }*/
 
 
