@@ -3,7 +3,7 @@ var db            = require('../models/index'),
     async         = require('async'),
     CronJob       = require('cron').CronJob;
 
-var job = new CronJob('1 2 * * * *', function() {
+var job = new CronJob('1 * * * * *', function() {
                       // Runs every minute (currently)
 
                   // Timing argument, for reference
@@ -72,7 +72,7 @@ var job = new CronJob('1 2 * * * *', function() {
               //User didn't submit but still has missable days
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
-              //warningmailer(user.email)
+              //warningmailer(user.username)
               user.currentGoals[goal.id].missableDays--;
               console.log('~~~~~' + user.username + ' does not get charged but missableDays get decremented.');
             }

@@ -47,7 +47,7 @@ router.post('/save', function(req, res){
 
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
-          //invitemailer(user.email)
+          //invitemailer(user.username)
 
           initializeUser(newUser)
           counter++;

@@ -3,8 +3,6 @@ var mongoose = require('mongoose'),
   passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({
-  username        : String,
-  email           : { type: String, required: true, unique: true },
   activeGoal      : String,
   currentGoals    : Schema.Types.Mixed
 });
