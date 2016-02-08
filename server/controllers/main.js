@@ -1,5 +1,6 @@
 var express     = require('express'),
     db          = require('../models/index'),
+    async       = require('async'),
     router      = express.Router();
 
 router.get('/', function(req, res){
@@ -64,13 +65,34 @@ router.get('/dashboard', function(req, res){
       console.log("goal.subs[user._id][goal.currentWeek]: " + goal.subs[user._id][goal.currentWeek]);
       var weeklySubs = goal.subs[user._id][goal.currentWeek] || [];
 
-      // Render dashboard with specified data
-      res.render('dashboard',
-        { goal: goal,
-          user: user,
-          weeklySubs: weeklySubs,
-          dayName: dayName
-        });
+      var friendStatus = [];
+      function getFriendStatus(callback){
+        var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1 3 instead of 0, 1, 2, 3
+        goal.members.forEach(function(member, i, array){
+          db.user.findOne({_id: member}, function(err, user){
+            friendStatus.push([user.username, user.currentGoals[goal.id].submitted_today])
+            counter++;
+            if(counter === array.length){
+              callback()
+            }
+          })
+        })
+      }
+
+      async.series([
+        getFriendStatus
+      ], function(err){
+        // Render dashboard with specified data
+        res.render('dashboard',
+          { goal: goal,
+            user: user,
+            weeklySubs: weeklySubs,
+            dayName: dayName,
+            friendStatus: friendStatus
+          });
+      })
+
+
     });
   });
 });
