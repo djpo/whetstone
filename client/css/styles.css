@@ -222,13 +222,18 @@ style guidelines
   display: inline-block;
   width: 150px;
   height: 150px;
-  background-color: gray;
   overflow: hidden;
 }
 .submission-box img {
   width: 150px;
   height: 150px;
   object-fit: cover;
+}
+.empty-submission {
+  color: white;
+  padding: 25%;
+  text-align: center;
+  text-size: 100px;
 }
 
 /* submissions/show

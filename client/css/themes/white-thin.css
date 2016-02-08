@@ -58,6 +58,9 @@ input:-ms-input-placeholder {
 .submission-box { 
   border-color: #455a64;
 }
+.whet-submission-box {
+  background-color: darkgray;
+}
 
 /*4. Home page
 ----------------------------------------------*/

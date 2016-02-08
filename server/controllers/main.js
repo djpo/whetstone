@@ -70,7 +70,8 @@ router.get('/dashboard', function(req, res){
         var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1 3 instead of 0, 1, 2, 3
         goal.members.forEach(function(member, i, array){
           db.user.findOne({_id: member}, function(err, user){
-            friendStatus.push([user.username, user.currentGoals[goal.id].submitted_today])
+            var name = user.username.split('@')[0]
+            friendStatus.push([name, user.currentGoals[goal.id].submitted_today])
             counter++;
             if(counter === array.length){
               callback()
