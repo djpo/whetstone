@@ -72,7 +72,7 @@ var job = new CronJob('00 00 00 * * *', function() {
               //User didn't submit but still has missable days
               //WARNING: only uncomment below when testing longer periods. will send you
               //emails every minute worst case. Can add up when running server.
-              //warningmailer(user.email)
+              //warningmailer(user.username)
               user.currentGoals[goal.id].missableDays--;
               console.log('~~~~~' + user.username + ' does not get charged but missableDays get decremented.');
             }
