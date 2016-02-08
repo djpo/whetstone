@@ -1,55 +1,66 @@
-<h3>archive view</h3>
-
 <!-- archive
-	Link to create a new goal
-	View old goals
-	Renew old goals -->
-  
+  Link to create a new goal
+  View old goals
+  Renew old goals -->
 <!-- Page when goal is over / reviewing past goals (show)
   See all submissions
   See all people in group
   Not necessarily their submissions, but maybe some stats
-  If betting any money, see money lost and paid to group -->
-
-  
+  If betting any money, see money lost and paid to group --> 
 <!--
 style ideas:
   Materialize sidenav
 -->
+<h3 hidden>archive view</h3>
 
 <div class="row">
 
-  <!-- left column -->
-  <div class="col m3">
+  <!-- menu of different goals -->
+  <div id="archive-goals-menu" class="col s2">
+    <h6>all goals</h6>
+    <ul>
+      <li>
+        <div style="border: 1px solid orange;">
+          <span><%= user.currentGoals["56b8170e181208161099302f"].bankroll %></span>
+        </div>
+      </li>
+
+    </ul>
   </div>
 
-  <!-- middle column -->
-  <div class="middle-column col m6">
-    <h5 class="light">week <%= goal.currentWeek + 1 %></h5>
+  <!-- activeGoal all submissions -->
+  <div class="col s7">
+    <!-- weekly stuffs -->
+    <% for (var i = 0; i < 2; i++) { %>
+      <div class="archive-week row">
 
-    <!-- for each week -->
-    <% for (var i = 0; i < goal.subs[user._id].length; i++) { %>
-      <div class="row">
-        <span>week <%= i %></span>
+        <div class="left-column col s2">
+          week <%= i %>
+        </div>
 
-        <!-- for each day -->
-        <% for (var j = 0; j < goal.frequency; j++) { %>
-          <div class="submission-box whet-stone z-depth-1">
-            <% var weeklySubs = goal.subs[user._id] %>
-            <% if (weeklySubs[j]) { %>
-              <img class="valign" src="/<%= weeklySubs[j].filename %>">
-            <% } else { %>
-              <div class="empty-submission">
-                <%= j + 1 %>
+        <div class="middle-column col s10">
+          <div class="row">
+            <% for (var j = 0; j < goal.frequency; j++) { %>
+              <div class="archive-box whet-stone z-depth-1">
+                <% var weeklySubs = goal.subs[user._id] %>
+                <% if (weeklySubs[j]) { %>
+                  <img class="valign" src="/<%= weeklySubs[j].filename %>">
+                <% } else { %>
+                  <div class="empty-submission">
+                    <%= j + 1 %>
+                  </div>
+                <% } %>
               </div>
             <% } %>
           </div>
-        <% } %>
+          <div class="divider"></div>
+        </div>
 
       </div>
-      <div class="divider"></div>
     <% } %>
-
   </div>
 
+  <!-- activeGoal all submissions -->
+  <div class="col s3" style="height: 300px; border: 1px solid blue">
+  </div>
 </div>

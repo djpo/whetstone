@@ -83,6 +83,10 @@ router.get('/archive', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: user.activeGoal}, function(err, goal){
       if (err) return console.log(err);
+
+      console.log("----- archive user -----");
+      console.log(user);
+      
       res.render('archive',
         { goal: goal,
           user: user
