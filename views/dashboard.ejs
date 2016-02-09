@@ -5,7 +5,7 @@
 
     <!-- goal info -->
     <div class="row z-depth-1">
-      <div class="col m12 s12 left-panel-box whet-leftpanel-background">
+      <div class="col m12 s12 right-align whet-leftpanel-background">
         <h5 class="light"><%= goal.name %></h5>
         <p class="light">
           <!-- week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br> -->
@@ -19,7 +19,7 @@
 
     <!-- upload box -->
     <div class="row z-depth-1">
-      <div id="upload-box" class="col m12 s12 left-panel-box whet-leftpanel-background">
+      <div id="upload-box" class="col m12 s12 right-align whet-leftpanel-background">
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
           <h6>you uploaded for this goal today.<br>good job!</h6>
         <% } else { %>
@@ -89,16 +89,47 @@
 
   <!-- right column -->
   <div class="col m3 s12 ">
-    <!-- idea: collapsible list, to show more info and buttons relating to group members -->
-    <!-- <ul class="collection collapsible" data-collapsible="accordion"> -->
-    <ul class="collection z-depth-1">
+    <ul class="collapsible" data-collapsible="accordion">
+
       <% for (var i = 0; i < friendStatus.length; i++) { %>
-        <li class="collection-item"><%= friendStatus[i][0] %>
-          <% if (friendStatus[i][1]) { %>
-          <span class="badge new">1</span>
+        <li>
+
+          <!-- if user is current user, expand and add buttons -->
+
+          <!-- TODO: figure out why below logic isn't working -->
+          <% console.log(friendStatus[i][3]); %>
+          <% console.log(currentUser.id); %>
+          <% console.log(currentUser.id === friendStatus[i][3]); %>
+            <!-- returning false... -->
+
+          <% if (friendStatus[i][3] === currentUser.id) { %>
+            <div class="collapsible-header active"><%= friendStatus[i][0] %>
+              <% if (friendStatus[i][1]) { %>
+                <span class="badge new">1</span>
+              <% } %>
+            </div>
+            <div class="collapsible-body">
+              <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
+              <a href="/dashboard" class="btn">dashboard</a>
+              <a href="/archive" class="btn">archive</a>
+            </div>
+
+          <!-- else, make a standard li with no buttons -->
+          <!-- TODO: add buttons to direct to other group members' dashboard and archive -->
+          <% } else { %>
+            <div class="collapsible-header"><%= friendStatus[i][0] %>
+              <% if (friendStatus[i][1]) { %>
+                <span class="badge new">1</span>
+              <% } %>
+            </div>
+            <div class="collapsible-body">
+              <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
+            </div>
           <% } %>
+          
         </li>
       <% } %>
+
     </ul>
   </div>
 

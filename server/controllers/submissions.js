@@ -22,13 +22,11 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
       newSubmission.user_id = user._id;
       newSubmission.created_at = new Date();
       newSubmission.note = req.body.note;
-      // Test if user and week arrays exist already
+      // Test if user and week arrays exist already; create blank if not
       if (goal.subs[user._id] === undefined) {
-        console.log("goal.subs[user._id] === undefined");
         goal.subs[user._id] = [];
       }
       if (goal.subs[user._id][goal.currentWeek] === undefined) {
-        console.log("goal.subs[user._id][goal.currentWeek] === undefined");
         goal.subs[user._id][goal.currentWeek] = [];
       }
       // Add submission to goal
@@ -51,22 +49,29 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
 
 router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
   var goalId  = req.params.goalId,
-      userId   = req.params.userId,
+      userId  = req.params.userId,
       weekNum = req.params.weekNum,
       subNum  = req.params.subNum;
   db.goal.findOne({_id: goalId}, function (err, goal) {
     if (err) return console.log(err);
-    if (goal.subs[userId][weekNum][subNum]) {
+    db.user.findOne({_id: userId}, function (err, user) {
+      if (err) return console.log(err);
+      var subUserName = user.name;
       var subToShow = goal.subs[userId][weekNum][subNum];
       return res.render('submissions/show',
         {
-          subDate: dateFormat(subToShow.created_at, "h:MM TT mmm dd"),
-          subNote: subToShow.note,
-          subFilename: subToShow.filename
+          subDate     : dateFormat(subToShow.created_at, "mmm dd h:MMtt"),
+          subNote     : subToShow.note,
+          subFilename : subToShow.filename,
+          subWeekNum  : weekNum,
+          subNum      : subNum,
+          subUserName : subUserName
         }
       );
-    }
-    console.log('submission not found');
+    });
+
+    // This is being printed... is that a problem? -DP (2/8)
+    // console.log('submission not found');
   });
 });
 
