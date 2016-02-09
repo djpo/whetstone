@@ -7,12 +7,12 @@
 <!-- style ideas:
   Materialize sidenav -->
 
-<div class="row">
-  <div class="col s3">
+<div id="archive-page" class="row">
+  <div class="col m3 s10">
 
-    <div class="row right-align whet-leftpanel-background z-depth-1">
-      <h5 class="light" style="margin-right: 10px;"><%= user.username.split('@')[0] %>'s goals</h5>
-      <ul id="archive-goals-list" class="collection light" style="text-align: left;">
+    <div class="row">
+      <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
+      <ul id="archive-goals-list" class="collection light">
         <% for (var key in  user.currentGoals) { %>
           <% if (key === user.activeGoal) { %>
             <li class="collection-item selected-collection-item"><%= user.currentGoals[key].name %></li>
@@ -23,6 +23,7 @@
       </ul>
     </div>
 
+    <!-- style me! -->
     <a class="btn" href="/goal/new">
       new goal
     </a>
@@ -30,33 +31,33 @@
   </div>
 
   <!-- activeGoal all submissions -->
-  <div class="col l8 s9">
+  <div class="col l9 m9 s12">
     <!-- weekly stuffs -->
     <% for (var i = 0; i < goal.subs[user._id].length; i++) { %>
       <% var weeklySubs = goal.subs[user._id][i] %>
 
-      <div class="archive-week row">
+      <div class="row archive-week">
         <div class="left-column col l2 s2">
-          <span class="thin" style="font-size: 1em; float: right">week <%= i + 1 %></span>
+          <div class="divider"></div>
+          <span class="archive-week-label thin">week <%= i + 1 %></span>
         </div>
 
         <div class="middle-column col s10">
-          <div class="row" style="margin: 0;">
+          <div class="row archive-box-row">
             <% for (var j = 0; j < goal.frequency; j++) { %>
               <div class="archive-box whet-stone whet-submission-box z-depth-1">
-
                 <% if (weeklySubs[j]) { %>
                   <a href="/submissions/<%= goal._id %>/<%= user._id %>/<%= i %>/<%= j %>">
                     <img class="valign" src="/<%= weeklySubs[j].filename %>">
                   </a>
                 <% } else { %>
-                  <div class="empty-submission">
-                    <%= j + 1 %>
-                  </div>
+                  <div class="empty-submission"></div>
                 <% } %>
-
               </div>
             <% } %>
+            <!-- this "stretch" span is required for even horizontal spacing -->
+            <span class="stretch"></span>
+
           </div>
         </div>
       </div>

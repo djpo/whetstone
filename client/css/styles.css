@@ -222,19 +222,43 @@
 
 /* archive
 ----------------------------------------------*/
+#archive-page col {
+  padding: 0;
+}
+#archive-goals-header {
+  margin-left: 10px;
+}
 #archive-goals-list {
   padding: 0;
+  text-align: left;
 }
 #archive-goals-list .selected-collection-item {
   background-color: rgba(141,179,161,1);
 }
+.archive-week {
+  margin: 0;
+  line-height: 1;
+}
+.archive-week .divider {
+  margin-top: 5px;
+}
+.archive-week-label {
+  position: relative;
+  font-size: 1em;
+  float: right;
+  margin-top: 15px;
+}
+.archive-box-row {
+  margin: 0;
+}
 .archive-box {
   display: inline-block;
-  position: relative;
   width: 50px;
   height: 50px;
+  vertical-align: top;
   background-color: rgba(69,90,100,.3);
   overflow: hidden;
+  margin: 5px;
 }
 .archive-box img {
   width: 100%;
