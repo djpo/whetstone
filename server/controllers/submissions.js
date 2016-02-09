@@ -60,7 +60,7 @@ router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
       var subToShow = goal.subs[userId][weekNum][subNum];
       return res.render('submissions/show',
         {
-          subDate: dateFormat(subToShow.created_at, "h:MM TT mmm dd"),
+          subDate: dateFormat(subToShow.created_at, "mmm dd h:MMtt"),
           subNote: subToShow.note,
           subFilename: subToShow.filename,
           subWeekNum: weekNum,
