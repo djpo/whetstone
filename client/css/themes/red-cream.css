@@ -6,6 +6,11 @@
 .whet-body-background {
   background-color: #FFFAF0;
 }
+.whet-panel-background {
+  background-color: white;
+  color: black;
+}
+
 input::-webkit-input-placeholder {
   color: darkolivegreen !important;
 }
@@ -41,6 +46,9 @@ input:-ms-input-placeholder {
 }
 .whet-topbar-background {
   background-color: #912C00;
+}
+#top-strip a {
+  color: #FFFAF0;
 }
 
 /*3. Dashboard elements

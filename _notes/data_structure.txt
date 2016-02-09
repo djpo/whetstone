@@ -1,3 +1,16 @@
+user: {
+  username        : String,
+  email           : { type: String, required: true, unique: true },
+  activeGoal      : String,
+  currentGoals    : {
+        goal_id : {
+            missableDays    : Number,
+            submitted_today : Boolean,
+            bankroll        : Number
+        }
+  }
+}
+
 goal: {
   name          : String,
   contentType   : String,
@@ -17,19 +30,6 @@ goal: {
       // week 0 submissions
       [sub_0, sub_1]
     ]
-  }
-}
-
-user: {
-  username        : String,
-  email           : { type: String, required: true, unique: true },
-  activeGoal      : String,
-  currentGoals    : {
-        goal_id : {
-            missableDays    : Number,
-            submitted_today : Boolean,
-            bankroll        : Number
-        }
   }
 }
 

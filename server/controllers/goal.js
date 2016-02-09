@@ -53,7 +53,7 @@ router.post('/save', function(req, res){
           //Callback to the async function when all members have been registered/added
           counter++;
           if(counter === array.length){
-            callback()
+            callback();
           }
         });
       });

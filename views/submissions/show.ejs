@@ -1,10 +1,33 @@
 <div class="row">
-    <div class="col m6 s12">
-        <img src="/<%= subFilename %>"class="z-depth-1" id="sub-view-img">
-        <p>Comments</p>
+  <div class="col l11 s12">
+      <div id="sub-view-header">
+        <span class="thin" style="float: left">week <%= subWeekNum + 1 %>: #<%= subNum + 1 %></span>
+        <span class="thin" style="float: right"><%= subDate %></span>
+      </div>
     </div>
-    <div class="col m6 s12">
-        <h4><%= subDate %></h4>
-        <p><%= subNote %></p>
+</div>
+
+<div class="row">
+  <div class="col m7 s12">
+    <img id="sub-view-img" class="materialboxed z-depth-1" src="/<%= subFilename %>">
+    <!-- <img src="/<%= subFilename %>" id="sub-view-img" class="z-depth-1"> -->
+  </div>
+  <div class="col l4 m5 s12">
+    <div id="sub-view-info">
+      <div class="divider"></div>
+      <div id="sub-view-note-label">submitted by <%= subUserName %></div>
+
+      <% if (subNote || subNote !== "") { %>
+        <div id="sub-view-note" class="whet-panel-background thin z-depth-1">
+          <p><%= subNote %></p>
+        </div>
+      <% } %>
+
+
+      <!-- <div>Comments</div> -->
     </div>
+
+    <div hidden id="sub-view-comments">
+    </div>
+  </div>
 </div>
