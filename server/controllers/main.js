@@ -69,7 +69,12 @@ router.get('/dashboard', function(req, res){
             var name = user.name;
             var submittedToday = user.currentGoals[goal.id].submitted_today;
             var weeklyProgress = goal.subs[user.id][goal.currentWeek].length;
-            friendStatus.push([name, submittedToday, weeklyProgress]);
+            friendStatus.push([
+                            name,
+                            submittedToday,
+                            weeklyProgress,
+                            member
+            ]);
             counter++;
             if(counter === array.length){
               callback();

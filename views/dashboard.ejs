@@ -91,24 +91,42 @@
   <div class="col m3 s12 ">
     <ul class="collapsible" data-collapsible="accordion">
 
-      <!-- TODO: this first li is currentUser, open by default -->
-      <!-- <li>
-        <div class="collapsible-header active">this one is active</div>
-        <div class="collapsible-body"><p>CONTENT CONTENT CONTENT MORE</p></div>
-      </li> -->
-
       <% for (var i = 0; i < friendStatus.length; i++) { %>
         <li>
-          <div class="collapsible-header"><%= friendStatus[i][0] %>
-            <% if (friendStatus[i][1]) { %>
-              <span class="badge new">1</span>
-            <% } %>
-          </div>
-          <div class="collapsible-body">
-            <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
-            <a href="/dashboard" class="btn">dashboard</a>
-            <a href="/archive" class="btn">archive</a>
-          </div>
+
+          <!-- if user is current user, expand and add buttons -->
+
+          <!-- TODO: figure out why below logic isn't working -->
+          <% console.log(friendStatus[i][3]); %>
+          <% console.log(currentUser.id); %>
+          <% console.log(currentUser.id === friendStatus[i][3]); %>
+            <!-- returning false... -->
+
+          <% if (friendStatus[i][3] === currentUser.id) { %>
+            <div class="collapsible-header active"><%= friendStatus[i][0] %>
+              <% if (friendStatus[i][1]) { %>
+                <span class="badge new">1</span>
+              <% } %>
+            </div>
+            <div class="collapsible-body">
+              <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
+              <a href="/dashboard" class="btn">dashboard</a>
+              <a href="/archive" class="btn">archive</a>
+            </div>
+
+          <!-- else, make a standard li with no buttons -->
+          <!-- TODO: add buttons to direct to other group members' dashboard and archive -->
+          <% } else { %>
+            <div class="collapsible-header"><%= friendStatus[i][0] %>
+              <% if (friendStatus[i][1]) { %>
+                <span class="badge new">1</span>
+              <% } %>
+            </div>
+            <div class="collapsible-body">
+              <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
+            </div>
+          <% } %>
+          
         </li>
       <% } %>
 
