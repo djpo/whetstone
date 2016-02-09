@@ -65,19 +65,12 @@ router.get('/dashboard', function(req, res){
       function getFriendStatus(callback){
         var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1, 3 instead of 0, 1, 2, 3
         goal.members.forEach(function(member, i, array){
-
           db.user.findOne({_id: member}, function(err, user){
-
             var name = user.name;
-              console.log(name);
             var submittedToday = user.currentGoals[goal.id].submitted_today;
-              console.log(submittedToday);
             var weeklyProgress = goal.subs[user.id][goal.currentWeek].length;
-              console.log(weeklyProgress);
-
             friendStatus.push([name, submittedToday, weeklyProgress]);
             counter++;
-
             if(counter === array.length){
               callback();
             }

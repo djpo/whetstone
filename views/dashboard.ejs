@@ -91,10 +91,11 @@
   <div class="col m3 s12 ">
     <ul class="collapsible" data-collapsible="accordion">
 
-      <li>
+      <!-- TODO: this first li is currentUser, open by default -->
+      <!-- <li>
         <div class="collapsible-header active">this one is active</div>
         <div class="collapsible-body"><p>CONTENT CONTENT CONTENT MORE</p></div>
-      </li>
+      </li> -->
 
       <% for (var i = 0; i < friendStatus.length; i++) { %>
         <li>
@@ -103,7 +104,11 @@
               <span class="badge new">1</span>
             <% } %>
           </div>
-          <div class="collapsible-body"><p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>)</p></div>
+          <div class="collapsible-body">
+            <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
+            <a href="/dashboard" class="btn">dashboard</a>
+            <a href="/archive" class="btn">archive</a>
+          </div>
         </li>
       <% } %>
 

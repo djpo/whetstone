@@ -49,24 +49,29 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
 
 router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
   var goalId  = req.params.goalId,
-      userId   = req.params.userId,
+      userId  = req.params.userId,
       weekNum = req.params.weekNum,
       subNum  = req.params.subNum;
   db.goal.findOne({_id: goalId}, function (err, goal) {
     if (err) return console.log(err);
-    if (goal.subs[userId][weekNum][subNum]) {
+    db.user.findOne({_id: userId}, function (err, user) {
+      if (err) return console.log(err);
+      var subUserName = user.name;
       var subToShow = goal.subs[userId][weekNum][subNum];
       return res.render('submissions/show',
         {
-          subDate: dateFormat(subToShow.created_at, "mmm dd h:MMtt"),
-          subNote: subToShow.note,
-          subFilename: subToShow.filename,
-          subWeekNum: weekNum,
-          subNum: subNum
+          subDate     : dateFormat(subToShow.created_at, "mmm dd h:MMtt"),
+          subNote     : subToShow.note,
+          subFilename : subToShow.filename,
+          subWeekNum  : weekNum,
+          subNum      : subNum,
+          subUserName : subUserName
         }
       );
-    }
-    console.log('submission not found');
+    });
+
+    // This is being printed... is that a problem? -DP (2/8)
+    // console.log('submission not found');
   });
 });
 

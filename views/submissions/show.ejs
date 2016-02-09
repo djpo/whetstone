@@ -15,10 +15,15 @@
   <div class="col l4 m5 s12">
     <div id="sub-view-info">
       <div class="divider"></div>
-      <div id="sub-view-note-label">submission note</div>
-      <div id="sub-view-note" class="whet-panel-background thin z-depth-1">
-        <p><%= subNote %></p>
-      </div>
+      <div id="sub-view-note-label">submitted by <%= subUserName %></div>
+
+      <% if (subNote || subNote !== "") { %>
+        <div id="sub-view-note" class="whet-panel-background thin z-depth-1">
+          <p><%= subNote %></p>
+        </div>
+      <% } %>
+
+
       <!-- <div>Comments</div> -->
     </div>
 
