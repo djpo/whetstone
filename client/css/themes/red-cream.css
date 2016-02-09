@@ -47,6 +47,9 @@ input:-ms-input-placeholder {
 .whet-topbar-background {
   background-color: #912C00;
 }
+#top-strip a {
+  color: #FFFAF0;
+}
 
 /*3. Dashboard elements
 ----------------------------------------------*/
