@@ -201,7 +201,7 @@
   font-size: 1.5em;
 }
 #sub-view-img {
-  max-height: 90%;
+  height: 100%;
   width: 100%;
 }
 #sub-view-info {}
