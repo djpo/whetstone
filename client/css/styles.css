@@ -158,8 +158,7 @@
 
 /* dashboard
 ----------------------------------------------*/
-#upload-box {
-}
+#upload-box {}
 #submit-button {
 	width: 100%;
 }
@@ -197,12 +196,12 @@
 
 /* submissions/show
 ----------------------------------------------*/
+#sub-view-header {}
 #sub-view-img {
   max-height: 90%;
   width: 100%;
 }
-#sub-view-info {
-}
+#sub-view-info {}
 #sub-view-note-label {
   padding: 2%;
   font-size: 1.2em;

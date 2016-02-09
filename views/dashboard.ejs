@@ -5,7 +5,7 @@
 
     <!-- goal info -->
     <div class="row z-depth-1">
-      <div class="col m12 s12 left-panel-box whet-leftpanel-background">
+      <div class="col m12 s12 right-align whet-leftpanel-background">
         <h5 class="light"><%= goal.name %></h5>
         <p class="light">
           <!-- week <%= goal.currentWeek + 1 %> of <%= goal.duration %><br> -->
@@ -19,7 +19,7 @@
 
     <!-- upload box -->
     <div class="row z-depth-1">
-      <div id="upload-box" class="col m12 s12 left-panel-box whet-leftpanel-background">
+      <div id="upload-box" class="col m12 s12 right-align whet-leftpanel-background">
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
           <h6>you uploaded for this goal today.<br>good job!</h6>
         <% } else { %>

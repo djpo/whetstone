@@ -10,7 +10,7 @@
 <div class="row">
   <div class="col s3">
 
-    <div class="row left-panel-box whet-leftpanel-background z-depth-1">
+    <div class="row right-align whet-leftpanel-background z-depth-1">
       <h5 class="light" style="margin-right: 10px;"><%= user.username.split('@')[0] %>'s goals</h5>
       <ul id="archive-goals-list" class="collection light" style="text-align: left;">
         <% for (var key in  user.currentGoals) { %>
@@ -46,7 +46,9 @@
               <div class="archive-box whet-stone whet-submission-box z-depth-1">
 
                 <% if (weeklySubs[j]) { %>
-                  <img class="valign" src="/<%= weeklySubs[j].filename %>">
+                  <a href="/submissions/<%= goal._id %>/<%= user._id %>/<%= i %>/<%= j %>">
+                    <img class="valign" src="/<%= weeklySubs[j].filename %>">
+                  </a>
                 <% } else { %>
                   <div class="empty-submission">
                     <%= j + 1 %>

@@ -62,7 +62,9 @@ router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
         {
           subDate: dateFormat(subToShow.created_at, "h:MM TT mmm dd"),
           subNote: subToShow.note,
-          subFilename: subToShow.filename
+          subFilename: subToShow.filename,
+          subWeekNum: weekNum,
+          subNum: subNum
         }
       );
     }
