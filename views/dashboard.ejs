@@ -89,16 +89,24 @@
 
   <!-- right column -->
   <div class="col m3 s12 ">
-    <!-- idea: collapsible list, to show more info and buttons relating to group members -->
-    <!-- <ul class="collection collapsible" data-collapsible="accordion"> -->
-    <ul class="collection z-depth-1">
+    <ul class="collapsible" data-collapsible="accordion">
+
+      <li>
+        <div class="collapsible-header active">this one is active</div>
+        <div class="collapsible-body"><p>CONTENT CONTENT CONTENT MORE</p></div>
+      </li>
+
       <% for (var i = 0; i < friendStatus.length; i++) { %>
-        <li class="collection-item"><%= friendStatus[i][0] %>
-          <% if (friendStatus[i][1]) { %>
-          <span class="badge new">1</span>
-          <% } %>
+        <li>
+          <div class="collapsible-header"><%= friendStatus[i][0] %>
+            <% if (friendStatus[i][1]) { %>
+              <span class="badge new">1</span>
+            <% } %>
+          </div>
+          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
         </li>
       <% } %>
+
     </ul>
   </div>
 

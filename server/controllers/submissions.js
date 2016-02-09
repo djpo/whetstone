@@ -22,13 +22,11 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
       newSubmission.user_id = user._id;
       newSubmission.created_at = new Date();
       newSubmission.note = req.body.note;
-      // Test if user and week arrays exist already
+      // Test if user and week arrays exist already; create blank if not
       if (goal.subs[user._id] === undefined) {
-        console.log("goal.subs[user._id] === undefined");
         goal.subs[user._id] = [];
       }
       if (goal.subs[user._id][goal.currentWeek] === undefined) {
-        console.log("goal.subs[user._id][goal.currentWeek] === undefined");
         goal.subs[user._id][goal.currentWeek] = [];
       }
       // Add submission to goal
