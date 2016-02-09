@@ -1,21 +1,18 @@
-<!-- archive
-  Link to create a new goal
-  View old goals
-  Renew old goals -->
-<!-- Page when goal is over / reviewing past goals (show)
+<!-- archive/goal end review
+  Renew old goals
   See all submissions
   See all people in group
   Not necessarily their submissions, but maybe some stats
   If betting any money, see money lost and paid to group --> 
-<!--
-style ideas:
-  Materialize sidenav
--->
+<!-- style ideas:
+  Materialize sidenav -->
+
 <div class="row">
   <div class="col s3">
+
     <div class="row left-panel-box whet-leftpanel-background z-depth-1">
       <h5 class="light" style="margin-right: 10px;"><%= user.username.split('@')[0] %>'s goals</h5>
-      <ul id="archive-goals-list" class="collection light" style="text-align: left">
+      <ul id="archive-goals-list" class="collection light" style="text-align: left;">
         <% for (var key in  user.currentGoals) { %>
           <% if (key === user.activeGoal) { %>
             <li class="collection-item selected-collection-item"><%= user.currentGoals[key].name %></li>
@@ -25,6 +22,11 @@ style ideas:
         <% } %>
       </ul>
     </div>
+
+    <a class="btn" href="/goal/new">
+      new goal
+    </a>
+
   </div>
 
   <!-- activeGoal all submissions -->

@@ -20,10 +20,8 @@
     <!-- upload box -->
     <div class="row z-depth-1">
       <div id="upload-box" class="col m12 s12 left-panel-box whet-leftpanel-background">
-
         <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
           <h6>you uploaded for this goal today.<br>good job!</h6>
-
         <% } else { %>
           <form action="/submissions/upload" enctype="multipart/form-data" method="post">
             <h5 class="light">upload</h5>
@@ -69,16 +67,17 @@
 
   <!-- middle column -->
   <div class="middle-column col m6 s12 center-align">
-    <h5 class="light center-align" style="margin-top: 0">week <%= goal.currentWeek + 1 %></h5>
+    <h5 class="light left-align" style="margin-top: 0; margin-left: 20px">week <%= goal.currentWeek + 1 %></h5>
 
     <div class="row">
       <% for (var i = 0; i < goal.frequency; i++) { %>
         <div class="submission-box whet-stone whet-submission-box z-depth-1">
           <% if (weeklySubs[i]) { %>
-            <img class="valign" src="/<%= weeklySubs[i].filename %>">
+            <a href="/submissions/<%= goal._id %>/<%= user._id %>/<%= goal.currentWeek %>/<%= i %>">
+              <img class="valign" src="/<%= weeklySubs[i].filename %>">
+            </a>
           <% } else { %>
-            <!-- <div class="empty-submission"> -->
-            <div class="empty-submission center-align">
+            <div class="empty-submission">
               <p>#<%= i + 1 %></p>
             </div>
           <% } %>
@@ -90,14 +89,16 @@
 
   <!-- right column -->
   <div class="col m3 s12 ">
-    <ul class="collection">
-      <% for (var i = 0; i < friendStatus.length; i++) {%>
-      <li class="collection-item"><%= friendStatus[i][0]%>
-        <% if (friendStatus[i][1]){%>
-        <span class="badge new">1</span>
-        <%}%>
-      </li>
-      <%}%>
+    <!-- idea: collapsible list, to show more info and buttons relating to group members -->
+    <!-- <ul class="collection collapsible" data-collapsible="accordion"> -->
+    <ul class="collection z-depth-1">
+      <% for (var i = 0; i < friendStatus.length; i++) { %>
+        <li class="collection-item"><%= friendStatus[i][0] %>
+          <% if (friendStatus[i][1]) { %>
+          <span class="badge new">1</span>
+          <% } %>
+        </li>
+      <% } %>
     </ul>
   </div>
 

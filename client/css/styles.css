@@ -1,91 +1,4 @@
-/* colors in use
-----------------------------------------------
-.custom-red {
-  background-color: #912C00;
-}
-.custom-orange {
-  background-color: #CEA85F;
-}
-.custom-cream {
-  background-color: #FFFAF0;
-}
-.custom-orange {
-  background-color: #CEA85F;
-}
-.custom-light-green {
-  background-color: rgba(164,188,164,.5)
-}
-.custom-gray {
-  background-color: #455a64;
-}
-.custom-black {
-  background-color: #2E2F2A;
-}
-*/
-
-/* color palette
-----------------------------------------------
-red/brown
-#912C00                       used
-#702B1C R: 112 G: 43 B: 28
-#592A21 R: 89 G: 42 B: 33
-
-tan/brown
-#DA9E7A
-#B37657 rgb(179,118,87)
-  rgba(179,118,87,.5)         used
-#8E5F40
-#804F39 R: 128 G: 79 B: 57
-
-mute orange
-#CEA85F                       used
-#C5A059
-#DDD3A0 R: 221 G: 211 B: 160
-
-orange
-#ffab40                       used (we should change)
-  Materialize default for 'important'
-
-light green
-#CEE8CF R: 206 G: 232 B: 207
-#A4BCA4 rgb(164,188,164)
-  rgba(164,188,164,.5)        used
-
-cerulean
-#8DB3A1 R: 141 G: 179 B: 161
-#719382 R: 113 G: 147 B: 130
-#576D61 R: 87 G: 109 B: 97
-
-turquoise
-#99C9C9 R: 153 G: 201 B: 201
-#87BBB9 R: 135 G: 187 B: 185
-#578D8F R: 87 G: 141 B: 143
-
-blue-gray
-#6F8D91 R: 111 G: 141 B: 145
-#455a64                       used
-  Materialize 'blue-grey darken-2'
-
-cream
-#FFFAF0                       used
-
-light gray
-#A5AAA3 R: 165 G: 170 B: 163
-#9B9598 R: 155 G: 149 B: 152
-
-black
-#2E2F2A R: 46 G: 47 B: 42     used
-#262721 R: 38 G: 39 B: 33
-#23241F R: 35 G: 36 B: 31
-#232520 R: 35 G: 37 B: 32
-*/
-
-/* ////////////////////
-style guidelines
-  border-radius: 2px (to match Material cards);
-*/
-
-/* Site-wide
+/* site-wide
 ----------------------------------------------*/
 .body-wrapper {
   position: relative;
@@ -103,7 +16,7 @@ style guidelines
   text-align: right;
 }
 
-/* Topbar
+/* topbar
 ----------------------------------------------*/
 #topbar {
   position: fixed;
@@ -115,7 +28,6 @@ style guidelines
   position: fixed;
   width: 100%;
   height: 40px;
-  /*background-color: #912C00;*/
 }
 .floatbox {
   position: fixed;
@@ -165,7 +77,7 @@ style guidelines
   border-right: 8px solid transparent;
 }
 
-/* Welcome
+/* welcome (older)
 ----------------------------------------------*/
 #splash {
   /*height: 90vh;*/
@@ -190,101 +102,7 @@ style guidelines
     font-size: 1.2rem;
 }
 
-/* goal/new_goal
-----------------------------------------------*/
-.goal-label {
-  text-align: right;
-}
-
-/* Dashboard
-----------------------------------------------*/
-#upload-box {
-}
-#submit-button {
-	width: 100%;
-}
-#upload-box .upload-button {
-  height: 50px;
-  font-size: 10px;
-}
-#upload-box .input-field {
-  width: 100%;
-  font-size: 10px;
-}
-#submit-button {
-  width: 100%;
-  font-size: 10px;
-  margin-bottom: 15px;
-}
-.middle-column {
-  position: relative;
-  /*top: -45px;*/
-  /*TODO fix these columns so they actually line up*/
-  /*I added a margin-top: 0 to the h5 style so it went up and didn't need top -45 anymore -RK*/
-}
-.submission-box {
-  display: inline-block;
-  position: relative;
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-}
-.submission-box img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
-.empty-submission {
-  /*position: absolute;*/
-  /*left: 10%;*/
-  /*font-family: "Roboto", sans-serif;*/
-  /*font-size: 3em;*/
-  color: white;
-  padding: 25%;
-  text-align: center;
-  text-size: 100px;
-}
-
-/* submissions/show
-----------------------------------------------*/
-#sub-view-img {
-  width: 100%;
-  margin: 25px 0;
-}
-
-/* archive
-----------------------------------------------*/
-#archive-goals-list {
-  padding: 0;
-}
-#archive-goals-list .selected-collection-item {
-  background-color: rgba(141,179,161,1);
-}
-
-
-.archive-box {
-  display: inline-block;
-  position: relative;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(69,90,100,.3);
-  overflow: hidden;
-}
-.archive-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.empty-submission {
-  font-size: 1em;
-  color: white;
-  padding: 25%;
-  text-align: center;
-}
-
-
-/*Home page
+/* welcome (newer)
 --------------------------------------------*/
 .front-page-full {
   position: relative;
@@ -330,4 +148,103 @@ style guidelines
 }
 #whet-footer-right i {
   font-size: 14px;
+}
+
+/* goal/new_goal
+----------------------------------------------*/
+.goal-label {
+  text-align: right;
+}
+
+/* dashboard
+----------------------------------------------*/
+#upload-box {
+}
+#submit-button {
+	width: 100%;
+}
+#upload-box .upload-button {
+  height: 50px;
+  font-size: 10px;
+}
+#upload-box .input-field {
+  width: 100%;
+  font-size: 10px;
+}
+#submit-button {
+  width: 100%;
+  font-size: 10px;
+  margin-bottom: 15px;
+}
+.middle-column {
+  position: relative;
+  /*top: -45px;*/
+  /*TODO fix these columns so they actually line up*/
+  /*I added a margin-top: 0 to the h5 style so it went up and didn't need top -45 anymore -RK*/
+}
+.submission-box {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+.submission-box img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* submissions/show
+----------------------------------------------*/
+#sub-view-img {
+  max-height: 90%;
+  width: 100%;
+}
+#sub-view-info {
+}
+#sub-view-note-label {
+  padding: 2%;
+  font-size: 1.2em;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  opacity: .5;
+}
+#sub-view-note {
+  min-height: 10em;
+  padding: 2%;
+}
+#sub-view-note p {
+  margin: 0;
+}
+
+/* archive
+----------------------------------------------*/
+#archive-goals-list {
+  padding: 0;
+}
+#archive-goals-list .selected-collection-item {
+  background-color: rgba(141,179,161,1);
+}
+.archive-box {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(69,90,100,.3);
+  overflow: hidden;
+}
+.archive-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.empty-submission {
+  font-size: 1em;
+  color: white;
+  padding: 25%;
+  text-align: center;
+}
+.collection-item {
+/*  padding: 0;*/
 }

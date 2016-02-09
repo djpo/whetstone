@@ -43,7 +43,7 @@ router.post('/save', function(req, res){
             name    : email.split('@')[0],
             username: email.trim()
           }
-        ), 'temporary', function(err, newUser, callback) {
+        ), 'temporary', function(err, newUser) {
           if (err) return console.log(err);
           //WARNING: only uncomment below when testing longer periods. will send you
           //emails every minute worst case. Can add up when running server.
@@ -53,7 +53,7 @@ router.post('/save', function(req, res){
           //Callback to the async function when all members have been registered/added
           counter++;
           if(counter === array.length){
-            callback()
+            callback();
           }
         });
       });
