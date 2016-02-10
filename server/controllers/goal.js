@@ -60,7 +60,7 @@ router.post('/save', function(req, res){
     }
 
     function initializeUser(thisUser) {
-      newGoal.members.push(thisUser._id);
+      newGoal.members.push(thisUser.id);
       newGoal.subs[thisUser._id] = [];
 
       // For each week (for each member) push an empty array

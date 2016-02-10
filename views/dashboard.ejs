@@ -91,45 +91,38 @@
   <div class="col m3 s12 ">
     <ul class="collapsible" data-collapsible="accordion">
 
-      <% for (var i = 0; i < friendStatus.length; i++) { %>
-        <li>
+      <!-- Display the current user's menu item, with body open -->
+      <li>
+        <div class="dash-menu-header collapsible-header active"><%= friendStatus[0].name %>
+          <% if (friendStatus[0].submittedToday) { %>
+            <span class="dash-menu-badge badge">
+              <span class="dash-menu-badge-content thin">new</span>
+            </span>
+          <% } %>
+        </div>
+        <div class="collapsible-body">
+          <p>(<%= friendStatus[0].weeklyProgress %>/<%= goal.frequency %>) this week</p>
+          <a href="/dashboard" class="btn">dashboard</a>
+          <a href="/archive" class="btn">archive</a>
+        </div>
+      </li>
 
-          <!-- if user is current user, expand and add buttons -->
-
-          <!-- TODO: figure out why below logic isn't working -->
-          <% console.log(friendStatus[i][3]); %>
-          <% console.log(currentUser.id); %>
-          <% console.log(currentUser.id === friendStatus[i][3]); %>
-            <!-- returning false... -->
-
-          <% if (friendStatus[i][3] === currentUser.id) { %>
-            <div class="dash-menu-header collapsible-header active"><%= friendStatus[i][0] %>
-              <% if (friendStatus[i][1]) { %>
-                <span class="badge new">1</span>
-              <% } %>
-            </div>
-            <div class="collapsible-body">
-              <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
-              <a href="/dashboard" class="btn">dashboard</a>
-              <a href="/archive" class="btn">archive</a>
-            </div>
-
-          <!-- else, make a standard li with no buttons -->
-          <!-- TODO: add buttons to direct to other group members' dashboard and archive -->
-          <% } else { %>
-            <div class="dash-menu-header collapsible-header"><%= friendStatus[i][0] %>
-              <% if (friendStatus[i][1]) { %>
+      <% if (friendStatus.length > 1) { %>
+        <!-- For other goal members, display a closed menu item -->
+        <% for (var i = 1; i < friendStatus.length; i++) { %>
+          <li>
+            <div class="dash-menu-header collapsible-header"><%= friendStatus[i].name %>
+              <% if (friendStatus[i].submittedToday) { %>
                 <span class="dash-menu-badge badge">
                   <span class="dash-menu-badge-content thin">new</span>
                 </span>
               <% } %>
             </div>
             <div class="collapsible-body">
-              <p>(<%= friendStatus[i][2] %>/<%= goal.frequency %>) this week</p>
+              <p>(<%= friendStatus[i].weeklyProgress %>/<%= goal.frequency %>) this week</p>
             </div>
-          <% } %>
-          
-        </li>
+          </li>
+        <% } %>
       <% } %>
 
     </ul>
