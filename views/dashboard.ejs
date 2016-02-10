@@ -103,7 +103,7 @@
             <!-- returning false... -->
 
           <% if (friendStatus[i][3] === currentUser.id) { %>
-            <div class="collapsible-header active"><%= friendStatus[i][0] %>
+            <div class="dash-menu-header collapsible-header active"><%= friendStatus[i][0] %>
               <% if (friendStatus[i][1]) { %>
                 <span class="badge new">1</span>
               <% } %>
@@ -117,9 +117,11 @@
           <!-- else, make a standard li with no buttons -->
           <!-- TODO: add buttons to direct to other group members' dashboard and archive -->
           <% } else { %>
-            <div class="collapsible-header"><%= friendStatus[i][0] %>
+            <div class="dash-menu-header collapsible-header"><%= friendStatus[i][0] %>
               <% if (friendStatus[i][1]) { %>
-                <span class="badge new">1</span>
+                <span class="dash-menu-badge badge">
+                  <span class="dash-menu-badge-content thin">new</span>
+                </span>
               <% } %>
             </div>
             <div class="collapsible-body">

@@ -2,19 +2,16 @@
 	<div id="top-strip" class="z-depth-1 whet-topbar-background">
 		<a href="/" id="brand-logo">W</a>
 		<% if (!currentUser) { %>
-
-		<div id="nav-home-list">
-			<a href="#signup-modal" class="waves-effect waves-teal modal-trigger btn-flat">Register</a>
-			<a href="#login-modal" class="waves-effect waves-teal modal-trigger btn-flat">Log In</a>
-		</div>
-
+			<div id="nav-home-list">
+				<a href="#signup-modal" class="waves-effect waves-teal modal-trigger btn-flat">Register</a>
+				<a href="#login-modal" class="waves-effect waves-teal modal-trigger btn-flat">Log In</a>
+			</div>
 		<% } else { %>
-
-		<div id="nav-home-list">
-			<a class="waves-effect waves-teal btn-flat valign-wrapper" href="/auth/logout">
-				<div class=" valign">Logout</div>
-			</a>
-		</div>
+			<div id="nav-home-list">
+				<a class="waves-effect waves-teal btn-flat valign-wrapper" href="/auth/logout">
+					<div class=" valign">Logout</div>
+				</a>
+			</div>
 		<% } %>
 	</div>
 </div>
