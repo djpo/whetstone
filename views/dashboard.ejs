@@ -38,8 +38,8 @@
               <%if(goal.contentType.indexOf('image') != -1) {%>
                 <img class="valign" src="/<%= weeklySubs[i].filename %>">
               <%} else {%>
-                <div class="valign" style="background-color: white; width: 100%; height: 100%">
-                  <p style="margin: 0; padding: 20px 0px; font-family: Courier; color: black;" class="thin">
+                <div class="valign" id="text-view-div">
+                  <p class="thin">
                     <%=weeklySubs[i].title%>
                     <br><small><%=weeklySubs[i].wordCount%></small>
                   </p>
