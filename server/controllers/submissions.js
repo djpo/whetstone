@@ -69,9 +69,6 @@ router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
         }
       );
     });
-
-    // This is being printed... is that a problem? -DP (2/8)
-    // console.log('submission not found');
   });
 });
 
