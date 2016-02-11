@@ -18,49 +18,7 @@
     </div>
 
     <!-- upload box -->
-    <div class="row z-depth-1">
-      <div id="upload-box" class="col m12 s12 right-align whet-leftpanel-background">
-        <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
-          <h6>you uploaded for this goal today.<br>good job!</h6>
-        <% } else { %>
-          <form action="/submissions/upload" enctype="multipart/form-data" method="post">
-            <h5 class="light">upload</h5>
-            <div class="row">
-
-              <!-- File chooser -->
-              <div class="file-field input-field col m5 s12">
-                <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
-                <div class="file-path-wrapper">
-                  <input required class="file-path validate" placeholder="Submission" type="text">
-                </div>
-                <!-- File chooser button -->
-                <div class="btn upload-button " style="width: 100%">
-                  <span>choose file</span>
-                  <input required type="file" name="submission" accept="<%=goal.contentType%>/*" class="validate">
-                </div>
-
-              </div>
-            </div>
-            <!-- User note field -->
-            <!--<div class="row">-->
-              <div class="input-field s12">
-                <!--<i class="material-icons prefix">label</i>-->
-                <input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">
-              </div>
-            <!--</div>-->
-            <!-- Submit button -->
-            <div class="col s12">
-              <button class=" upload-button btn waves-effect waves-light" type="submit"
-                      id="submit-button" name="action">
-                <i class="material-icons">send</i>
-              </button>
-            </div>
-
-          </form>
-        <% } %>
-
-      </div>
-    </div>
+    <%include ./partials/upload %>
     <!-- End of upload box -->
 
   </div>

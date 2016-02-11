@@ -1,3 +1,24 @@
+counter = function() {
+  var value = $('#text-entry').val();
+  var minimum = $('#wordCountMinimum').html();
+
+  if (value.length == 0) {
+    $('#wordCount').html(0);
+    return;
+  }
+
+  var regex = /\s+/gi;
+  var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+
+  if(wordCount >= minimum){
+    $('#text-file-save').removeAttr('disabled')
+  } else {
+    $('#text-file-save').attr('disabled', 'disabled')
+  }
+
+  $('#wordCount').html(wordCount);
+};
+
 $(document).ready(function() {
 
   // for Materialize modal
@@ -15,5 +36,11 @@ $(document).ready(function() {
      inDuration: 100,
      outDuration: 100
    });
+
+  $('#text-file-save').attr('disabled', 'disabled')
+  $('#text-entry').keydown(counter);
+
+
+
 
 });

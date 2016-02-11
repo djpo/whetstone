@@ -170,6 +170,22 @@
   width: 100%;
   font-size: 10px;
 }
+#text-submit-modal {
+  padding: 30px;
+  height: 90vh;
+  max-height: 100vh;
+  top: 5% !important;
+}
+#text-entry {
+  max-height: 350px;
+  overflow: scroll;
+}
+#text-submit-modal button {
+  position: fixed;
+  bottom: 15px;
+  right: 60px;
+  width: initial;
+}
 #submit-button {
   width: 100%;
   font-size: 10px;
