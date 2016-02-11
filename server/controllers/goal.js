@@ -39,7 +39,7 @@ router.post('/save', function(req, res){
       emailArray.forEach(function(email, i, array){
         db.user.register(new db.user(
           {
-            name    : email.split('@')[0],
+            name    : email.split('@')[0].trim(),
             username: email.trim()
           }
         ), 'temporary', function(err, newUser) {
@@ -60,7 +60,7 @@ router.post('/save', function(req, res){
     }
 
     function initializeUser(thisUser) {
-      newGoal.members.push(thisUser._id);
+      newGoal.members.push(thisUser.id);
       newGoal.subs[thisUser._id] = [];
 
       // For each week (for each member) push an empty array
@@ -93,7 +93,6 @@ router.post('/save', function(req, res){
       // Alert db that subs has changed (because subs is Schema.Types.Mixed)
       newGoal.markModified('subs');
       // Save the goal to the db
-      //console.log("Goal '" + goal.name + "' created.");
       newGoal.save(function (err){
         if (err) return console.error(err);
         res.redirect('/');
