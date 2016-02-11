@@ -18,9 +18,12 @@
     </div>
 
     <!-- upload box -->
-    <%include ./partials/upload %>
+    <%if(goal.contentType.indexOf('text') === -1) {%>
+      <%include ./partials/upload %>
+    <%} else { %>
+      <%include ./partials/textupload %>
+    <%}%>
     <!-- End of upload box -->
-
   </div>
 
   <!-- middle column -->
@@ -32,7 +35,16 @@
         <div class="submission-box whet-stone whet-submission-box z-depth-1">
           <% if (weeklySubs[i]) { %>
             <a href="/submissions/<%= goal._id %>/<%= user._id %>/<%= goal.currentWeek %>/<%= i %>">
-              <img class="valign" src="/<%= weeklySubs[i].filename %>">
+              <%if(goal.contentType.indexOf('image') != -1) {%>
+                <img class="valign" src="/<%= weeklySubs[i].filename %>">
+              <%} else {%>
+                <div class="valign" id="text-view-div">
+                  <p class="thin">
+                    <%=weeklySubs[i].title%>
+                    <br><small><%=weeklySubs[i].wordCount%></small>
+                  </p>
+                </div>
+              <%}%>
             </a>
           <% } else { %>
             <div class="empty-submission">

@@ -171,13 +171,13 @@
   font-size: 10px;
 }
 #text-submit-modal {
-  padding: 30px;
+  padding: 20px;
   height: 90vh;
   max-height: 100vh;
   top: 5% !important;
 }
 #text-entry {
-  max-height: 350px;
+  max-height: 300px;
   overflow: scroll;
 }
 #text-submit-modal button {
@@ -253,6 +253,30 @@ span.dash-menu-badge {
 }
 #sub-view-note p {
   margin: 0;
+}
+#text-submission-view {
+  margin-top: 0;
+  white-space: pre-wrap;
+}
+#text-submission-view h5 {
+  margin-top: 0;
+}
+#text-view-div {
+  background-color: white;
+  width: 100%;
+  height: 100%
+}
+#text-view-div p {
+  margin: 0;
+  padding: 50px 5px;
+  text-align: center;
+  font-family: Courier, Monospaced;
+  color: black;
+}
+@media (max-width: 400px) {
+  #text-submission-view {
+    font-size: .85rem;
+  }
 }
 
 /* archive

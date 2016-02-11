@@ -3,7 +3,7 @@ var db            = require('../models/index'),
     async         = require('async'),
     CronJob       = require('cron').CronJob;
 
-var job = new CronJob('1 * 10 * * 1', function() {
+var job = new CronJob('2 * * * * *', function() {
                       // Runs every minute (currently)
 
                   // Timing argument, for reference
@@ -78,11 +78,11 @@ var job = new CronJob('1 * 10 * * 1', function() {
             }
           } else {
           //  Else ' + user + ' did submit today, so reset flag
-            user.currentGoals[goal.id].submitted_today = false;
             console.log('~~~~~' + user.username + ' submitted. Good job ' + user.username + '!');
           }
 
           //console.log("\nSnapshot for " + user.username + " after user logic: \n" + user + "\n\n")
+          user.currentGoals[goal.id].submitted_today = false;
           user.markModified('currentGoals');
           user.save(function(err){
             if (err) console.log(err);
