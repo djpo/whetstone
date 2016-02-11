@@ -193,6 +193,25 @@
   height: 150px;
   object-fit: cover;
 }
+.dash-menu-header {
+  position: relative;
+}
+span.dash-menu-badge {
+  padding: 0 0;
+  right: 0;
+  height: 60%;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 8px;
+  /*right: 1rem;*/
+  background-color: rgba(141,179,161,1);;
+}
+.dash-menu-badge-content {
+  position: relative;
+  top: -40%;
+  font-size: .8rem;
+  color: white;
+}
 
 /* submissions/show
 ----------------------------------------------*/
