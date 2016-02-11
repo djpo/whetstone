@@ -1,6 +1,4 @@
 <div id="text-submit-modal" class="row modal">
-    <p>word count: <span id="wordCount">0</span> </p>
-    <p>minimum: <span id="wordCountMinimum"><%=goal.minimumWords%></span> </p>
     <form  method="post" action="/submissions/upload">
         <div class="row margin">
             <div class="input-field col s12">
@@ -9,10 +7,12 @@
             </div>
             <div class="input-field col s12">
                 <textarea id="text-entry" class="materialize-textarea" placeholder="" required></textarea>
-                <label for="text-entry">paste or type here </label>
+                <label for="text-entry">paste or type text here </label>
             </div>
             <!-- Submit button -->
             <div class="col s12">
+                <p style="margin: 0" class="light">word count: <span id="wordCount">0</span> </p>
+                <p style="margin: 0"class="light">minimum: <span id="wordCountMinimum"><%=goal.minimumWords%></span> </p>
                 <button class=" upload-button btn waves-effect waves-light" type="submit"
                         id="text-file-save" name="action">submit
                 </button>
