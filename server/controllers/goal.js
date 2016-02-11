@@ -40,7 +40,7 @@ router.post('/save', function(req, res){
 
         db.user.register(new db.user(
           {
-            name    : email.split('@')[0],
+            name    : email.split('@')[0].trim(),
             username: email.trim()
           }
         ), 'temporary', function(err, newUser) {
