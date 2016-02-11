@@ -1,18 +1,20 @@
 <div id="text-submit-modal" class="row modal">
-    <form  method="post" action="/submissions/upload">
+    <!--method="post" action="/submissions/upload"-->
+    <form  id="upload-text-form">
         <div class="row margin">
             <div class="input-field col s12">
-                <input id="text-title" name="text-title" required>
-                <label for="text-title">title</label>
+                <input id="text-title" name="text-title" placeholder="title" required>
             </div>
             <div class="input-field col s12">
-                <textarea id="text-entry" class="materialize-textarea" placeholder="" required></textarea>
+                <textarea id="text-entry" class="materialize-textarea" placeholder="" maxlength="30000"
+                          required></textarea>
                 <label for="text-entry">paste or type text here </label>
             </div>
             <!-- Submit button -->
             <div class="col s12">
+                <input id="text-note" name="text-note" placeholder="note" required>
                 <p style="margin: 0" class="light">word count: <span id="wordCount">0</span> </p>
-                <p style="margin: 0"class="light">minimum: <span id="wordCountMinimum"><%=goal.minimumWords%></span> </p>
+                <p style="margin: 0" class="light">minimum: <span id="wordCountMinimum"><%=goal.minimumWords%></span></p>
                 <button class=" upload-button btn waves-effect waves-light" type="submit"
                         id="text-file-save" name="action">submit
                 </button>

@@ -10,7 +10,8 @@ counter = function() {
   var regex = /\s+/gi;
   var wordCount = value.trim().replace(regex, ' ').split(' ').length;
 
-  if(wordCount >= minimum){
+  //Set an arbitrary upper limit so people can't dump in huge text files
+  if(wordCount >= minimum && wordCount <= 5000){
     $('#text-file-save').removeAttr('disabled')
   } else {
     $('#text-file-save').attr('disabled', 'disabled')
@@ -48,7 +49,27 @@ $(document).ready(function() {
   })
   $('#text-entry').keydown(counter);
 
+  $('#upload-text-form').submit(function(e){
+    e.preventDefault();
 
+    var textAreaContent = $('#text-entry').val();
+    var wordCount       = $('#wordCount').html();
+    var title           = $('#text-title').val();
+    var note            = $('#text-note').val();
+
+    $.ajax({
+      url: '/submissions/uploadtext',
+      method: 'post',
+      data: {newSubmission: textAreaContent, wordCount: wordCount.trim(), title: title.trim(), note: note.trim()},
+      success: function(data){
+        window.location.href = '/dashboard';
+      },
+      error: function(err){
+        window.location.href = '/dashboard';
+        console.log(err)
+      }
+    })
+  })
 
 
 });
