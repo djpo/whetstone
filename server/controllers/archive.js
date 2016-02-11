@@ -9,17 +9,29 @@ router.use(function(req, res, next){
 
 router.get('/', function(req, res){
   if (!req.user.activeGoal) return res.redirect('/goal/new');
-  // Find current user
-  db.user.findOne({_id: req.user.id}, function(err, currentUser){
+  var loggedInUser = req.user;
+  db.goal.findOne({_id: loggedInUser.activeGoal}, function(err, goal){
     if (err) return console.log(err);
-    // Find current user's current goal
-    db.goal.findOne({_id: currentUser.activeGoal}, function(err, goal){
+    res.render('archive',
+      { goal: goal,
+        user: loggedInUser
+      }
+    );
+  });
+});
+
+router.get('/:targetUserId', function(req, res){
+  var loggedInUser = req.user;
+  var targetUserId = req.params.targetUserId;
+  db.user.findOne({_id: targetUserId}, function (err, targetUser){
+    if (err) return console.log(err);
+    db.goal.findOne({_id: loggedInUser.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-      var counter = 0;
       res.render('archive',
         { goal: goal,
-          user: currentUser
-        });
+          user: targetUser
+        }
+      );
     });
   });
 });

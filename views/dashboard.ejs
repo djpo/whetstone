@@ -34,24 +34,22 @@
                   <input required class="file-path validate" placeholder="Submission" type="text">
                 </div>
                 <!-- File chooser button -->
-                <div class="btn upload-button " style="width: 100%">
+                <div class="btn upload-button" style="width: 100%">
                   <span>choose file</span>
                   <input required type="file" name="submission" accept="<%=goal.contentType%>/*" class="validate">
                 </div>
 
               </div>
             </div>
+
             <!-- User note field -->
-            <!--<div class="row">-->
-              <div class="input-field s12">
-                <!--<i class="material-icons prefix">label</i>-->
-                <input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">
-              </div>
-            <!--</div>-->
+            <div class="input-field s12">
+              <input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">
+            </div>
+
             <!-- Submit button -->
             <div class="col s12">
-              <button class=" upload-button btn waves-effect waves-light" type="submit"
-                      id="submit-button" name="action">
+              <button id="submit-button" class="upload-button btn waves-effect waves-light" type="submit" name="action">
                 <i class="material-icons">send</i>
               </button>
             </div>
@@ -120,6 +118,7 @@
             </div>
             <div class="collapsible-body">
               <p>(<%= friendStatus[i].weeklyProgress %>/<%= goal.frequency %>) this week</p>
+              <a href="/archive/<%= friendStatus[i].friendId %>/" class="btn">archive</a>
             </div>
           </li>
         <% } %>
