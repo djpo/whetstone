@@ -258,6 +258,14 @@ span.dash-menu-badge {
   margin-top: 0;
   white-space: pre-wrap;
 }
+#text-submission-view h5 {
+  margin-top: 0;
+}
+@media (max-width: 400px) {
+  #text-submission-view {
+    font-size: .85rem;
+  }
+}
 
 /* archive
 ----------------------------------------------*/

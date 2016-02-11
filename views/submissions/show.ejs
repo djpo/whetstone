@@ -12,15 +12,8 @@
     <%if(subFilename) {%>
       <img id="sub-view-img" class="materialboxed z-depth-1" src="/<%= subFilename %>">
     <%} else { %>
-    <style>
-      @media (max-width: 400px) {
-        #text-submission-view {
-          font-size: .65rem;
-        }
-      }
-    </style>
       <pre id="text-submission-view">
-        <h5 style="margin-top: 0"><%=subTitle%><br><small>word count: <%=subWordCount%></small></h5>
+        <h5><%=subTitle%><br><small>word count: <%=subWordCount%></small></h5>
         <%=subText%>
       </pre>
     <%}%>
