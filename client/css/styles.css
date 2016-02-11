@@ -2,8 +2,8 @@
 ----------------------------------------------*/
 .body-wrapper {
   position: relative;
-  top: 70px;
-  margin: 15px;
+  top: 60px;
+  /*margin: 15px;*/
   margin-bottom: 0;
 }
 /* padding and border do not increase element size */
@@ -241,11 +241,21 @@ span.dash-menu-badge {
 
 /* archive
 ----------------------------------------------*/
-#archive-page col {
-  padding: 0;
+#archive-page .col {
+  /*padding: 0;*/
+}
+@media (min-width: 600px) {
+  #archive-goals-list-panel {
+    position: fixed;
+    top: 60px;
+  }
+}
+@media (min-width: 992px) {
+  #archive-goals-list-panel {
+    padding-right: 5%;
+  }
 }
 #archive-goals-header {
-  margin-left: 10px;
 }
 #archive-goals-list {
   padding: 0;
@@ -253,6 +263,8 @@ span.dash-menu-badge {
 }
 #archive-goals-list .selected-collection-item {
   background-color: rgba(141,179,161,1);
+}
+#archive-submissions-panel {
 }
 .archive-week {
   margin: 0;

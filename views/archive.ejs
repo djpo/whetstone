@@ -9,7 +9,7 @@
 
 <div id="archive-page" class="row">
 
-  <div id="archive-goals-panel" class="col m3 s10">
+  <div id="archive-goals-list-panel" class="col m3 s10">
     <!-- display all target user's goals -->
     <div class="row">
       <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
@@ -32,7 +32,7 @@
   </div>
 
   <!-- activeGoal all submissions -->
-  <div class="col l9 m9 s12">
+  <div id="archive-submissions-panel" class="col m9 push-m3 s12">
     <!-- weekly stuffs -->
     <% for (var i = 0; i < goal.subs[user.id].length; i++) { %>
       <% var weeklySubs = goal.subs[user.id][i] %>
