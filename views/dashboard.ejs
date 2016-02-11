@@ -18,9 +18,12 @@
     </div>
 
     <!-- upload box -->
-    <%include ./partials/upload %>
+    <%if(goal.contentType.indexOf('text') === -1) {%>
+      <%include ./partials/upload %>
+    <%} else { %>
+      <%include ./partials/textupload %>
+    <%}%>
     <!-- End of upload box -->
-
   </div>
 
   <!-- middle column -->

@@ -38,6 +38,14 @@ $(document).ready(function() {
    });
 
   $('#text-file-save').attr('disabled', 'disabled')
+  $('#word-count-input').hide();
+  $('#content-type-selection').click(function(){
+    if($('#text').is(':checked')) {
+      $('#word-count-input').show();
+    } else {
+      $('#word-count-input').hide();
+    }
+  })
   $('#text-entry').keydown(counter);
 
 

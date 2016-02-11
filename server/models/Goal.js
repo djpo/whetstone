@@ -16,6 +16,7 @@ var Goal_Schema = new Schema({
   weekStartsOn  : Number,
   currentWeek   : Number,
   pot           : Number,
+  minimumWords  : Number,
   subs          : Schema.Types.Mixed
 });
 
