@@ -26,7 +26,6 @@ router.get('/dashboard', function(req, res){
   if (!req.user.activeGoal) return res.redirect('/goal/new');
   // Find current user
   db.user.findOne({_id: req.user.id}, function(err, currentUser){
-                                                    ///////////////// just changed
     if (err) return console.log(err);
     // Find current user's current goal
     db.goal.findOne({_id: currentUser.activeGoal}, function(err, goal){
@@ -60,10 +59,12 @@ router.get('/dashboard', function(req, res){
       };
 
       // Prepare data to send to view
-      var dayName = getDayName(goal.weekStartsOn);
       var weeklySubs = goal.subs[currentUser.id][goal.currentWeek] || [];
+      var dayName = getDayName(goal.weekStartsOn);
       var friendStatus = [];
+
       function getFriendStatus(callback){
+        var holdTheCurrentUser = {};
         var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1, 3 instead of 0, 1, 2, 3
         // extract data from each goal member to pass to nav menu
         goal.members.forEach(function(goalMember, i, array){
@@ -74,15 +75,24 @@ router.get('/dashboard', function(req, res){
               weeklyProgress  : goal.subs[memberUser.id][goal.currentWeek].length,
               friendId        : memberUser.id
             }
-            // Place the current user's info at friendStatus[0]
+            // Hold the current user's info temporarily
             if (memberUser.id === currentUser.id) {
-              friendStatus.unshift(objToPushToFriendStatus);
-            // Push the other member's user to the end of friendStatus
+              holdTheCurrentUser = objToPushToFriendStatus;
+            // Push the other member's info to friendStatus (unordered)
             } else {
               friendStatus.push(objToPushToFriendStatus);
             }
             counter++;
             if(counter === array.length){
+              // Alphabetize friendStatus (minus the current user)
+              friendStatus.sort(function(a, b){
+                var nameA = a.name.toUpperCase();
+                var nameB = b.name.toUpperCase();
+                return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+              });
+              // Place the current user's info at friendStatus[0]
+              friendStatus.unshift(holdTheCurrentUser);
+              // End the async function
               callback();
             }
           });
