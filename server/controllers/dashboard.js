@@ -16,39 +16,10 @@ router.get('/', function(req, res){
     // Find current user's current goal
     db.goal.findOne({_id: currentUser.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-
-      // Should this go in a separate script file? -DP
-      function getDayName(dayNumber){
-        switch(dayNumber) {
-          case 0:
-              return 'Sunday';
-              break;
-          case 1:
-              return 'Monday';
-              break;
-          case 1:
-              return 'Tuesday';
-              break;
-          case 1:
-              return 'Wednesday';
-              break;
-          case 1:
-              return 'Thursday';
-              break;
-          case 1:
-              return 'Friday';
-              break;
-          case 6:
-              return 'Saturday';
-              break;
-        }
-      };
-
       // Prepare data to send to view
       var weeklySubs = goal.subs[currentUser.id][goal.currentWeek] || [];
-      var dayName = getDayName(goal.weekStartsOn);
+      var dayName = require('../helpers/helper').getDayName(goal.weekStartsOn);
       var friendStatus = [];
-
       function getFriendStatus(callback){
         var holdTheCurrentUser = {};
         var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1, 3 instead of 0, 1, 2, 3
@@ -84,7 +55,6 @@ router.get('/', function(req, res){
           });
         });
       }
-
       // Send data to view and render
       async.series([
         getFriendStatus
@@ -98,7 +68,6 @@ router.get('/', function(req, res){
           }
         );
       });
-
     });
   });
 });
