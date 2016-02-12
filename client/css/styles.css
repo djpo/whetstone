@@ -110,7 +110,8 @@
   left: calc(-50vw + 50%);
   height: 600px;
   margin-bottom: 0;
-  padding: 100px 200px;
+  padding: 50px 50px;
+  text-align: center;
 }
 #whet-block-1 {
   margin-top: 250px;
