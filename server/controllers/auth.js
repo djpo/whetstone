@@ -19,7 +19,10 @@ router.post('/register', function(req, res) {
   });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
+router.post('/login', passport.authenticate('local', {
+  failureRedirect: '/',
+  failureFlash: 'Incorrect creds'}
+), function(req, res) {
   res.redirect('/');
 });
 

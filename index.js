@@ -2,6 +2,7 @@ var express       = require('express'),
     mongoose      = require('mongoose'),
     request       = require('request'),
     path          = require('path'),
+    flash         = require('connect-flash'),
     session       = require('express-session'),
     bodyParser    = require('body-parser'),
     ejsLayouts    = require("express-ejs-layouts"),
@@ -24,6 +25,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -34,7 +36,8 @@ passport.deserializeUser(db.user.deserializeUser());
 
 //Give the user info to the front end
 app.use(function(req,res,next){
-  res.locals.currentUser = req.user;
+  res.locals.currentUser  = req.user;
+  res.locals.alerts       = req.flash('error');
   next();
 });
 
