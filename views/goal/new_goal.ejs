@@ -17,7 +17,7 @@
           <div class="col s4 goal-label">
             <div class="valign right">content type</div>
           </div>
-          <div class="col s8 goal-input">
+          <div class="col s8 goal-input" id="content-type-selection">
             <input type="radio" id="image" name="contentType" value="image">
             <label for="image">image</label>
             <br>
@@ -29,12 +29,21 @@
           </div>
         </div>
 
+        <div class="row valign-wrapper input-field" id="word-count-input">
+            <div class="col s4 goal-label">
+                <div class="valign right">minimum word count</div>
+            </div>
+            <div class="col s8 goal-input">
+                <input type="number" id="minimumWords" name="minimumWords" placeholder="0" min="0">
+            </div>
+        </div>
+
         <div class="row valign-wrapper input-field">
           <div class="col s4 goal-label">
             <div class="valign right">submissions per week</div>
           </div>
           <div class="col s8 goal-input">
-            <input type="number" id="frequency" name="frequency" placeholder="5" min="1" max="10" class="validate">
+            <input type="number" id="frequency" name="frequency" placeholder="5" min="1" max="7" class="validate">
           </div>
         </div>
 

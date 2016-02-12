@@ -9,7 +9,14 @@
 
 <div class="row">
   <div class="col m7 s12">
-    <img id="sub-view-img" class="materialboxed z-depth-1" src="/<%= subFilename %>">
+    <%if(subFilename) {%>
+      <img id="sub-view-img" class="materialboxed z-depth-1" src="/<%= subFilename %>">
+    <%} else { %>
+      <pre id="text-submission-view">
+        <h5><%=subTitle%><br><small>word count: <%=subWordCount%></small></h5>
+        <%=subText%>
+      </pre>
+    <%}%>
     <!-- <img src="/<%= subFilename %>" id="sub-view-img" class="z-depth-1"> -->
   </div>
   <div class="col l4 m5 s12">

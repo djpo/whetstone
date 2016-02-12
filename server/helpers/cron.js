@@ -78,11 +78,11 @@ var job = new CronJob('00 00 00 * * *', function() {
             }
           } else {
           //  Else ' + user + ' did submit today, so reset flag
-            user.currentGoals[goal.id].submitted_today = false;
             console.log('~~~~~' + user.username + ' submitted. Good job ' + user.username + '!');
           }
 
           //console.log("\nSnapshot for " + user.username + " after user logic: \n" + user + "\n\n")
+          user.currentGoals[goal.id].submitted_today = false;
           user.markModified('currentGoals');
           user.save(function(err){
             if (err) console.log(err);

@@ -8,8 +8,9 @@
   Materialize sidenav -->
 
 <div id="archive-page" class="row">
-  <div class="col m3 s10">
 
+  <div id="archive-goals-list-panel" class="col m3 s10">
+    <!-- display all target user's goals -->
     <div class="row">
       <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
       <ul id="archive-goals-list" class="collection light">
@@ -22,32 +23,30 @@
         <% } %>
       </ul>
     </div>
-
-    <!-- style me! -->
-    <a class="btn whet-btn-1" href="/goal/new">
-      new goal
-    </a>
-
+    <!-- if currentUser is viewing own archive, show button to create new goal -->
+    <% if (user.id === currentUser.id) { %>
+      <a class="btn whet-btn-1" href="/goal/new">
+        new goal
+      </a>
+    <% } %>
   </div>
 
   <!-- activeGoal all submissions -->
-  <div class="col l9 m9 s12">
+  <div id="archive-submissions-panel" class="col m9 push-m3 s12">
     <!-- weekly stuffs -->
-    <% for (var i = 0; i < goal.subs[user._id].length; i++) { %>
-      <% var weeklySubs = goal.subs[user._id][i] %>
-
+    <% for (var i = 0; i < goal.subs[user.id].length; i++) { %>
+      <% var weeklySubs = goal.subs[user.id][i] %>
       <div class="row archive-week">
         <div class="left-column col l2 s2">
           <div class="divider"></div>
           <span class="archive-week-label thin">week <%= i + 1 %></span>
         </div>
-
         <div class="middle-column col s10">
           <div class="row archive-box-row">
             <% for (var j = 0; j < goal.frequency; j++) { %>
               <div class="archive-box whet-stone whet-submission-box z-depth-1">
                 <% if (weeklySubs[j]) { %>
-                  <a href="/submissions/<%= goal._id %>/<%= user._id %>/<%= i %>/<%= j %>">
+                  <a href="/submissions/<%= goal.id %>/<%= user.id %>/<%= i %>/<%= j %>">
                     <img class="valign" src="/<%= weeklySubs[j].filename %>">
                   </a>
                 <% } else { %>
@@ -57,11 +56,9 @@
             <% } %>
             <!-- this "stretch" span is required for even horizontal spacing -->
             <span class="stretch"></span>
-
           </div>
         </div>
       </div>
-
     <% } %>
   </div>
 

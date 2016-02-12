@@ -32,6 +32,7 @@ router.post('/save', function(req, res){
     newGoal.pot = 0;
     newGoal.subs = {};
 
+
     function registerNewMembers(callback){
       if (newGoal.friendsEmails.length == 0) return callback();
       var emailArray = newGoal.friendsEmails.split(",");

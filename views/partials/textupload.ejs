@@ -1,0 +1,19 @@
+<div class="row z-depth-1">
+    <div id="upload-box" class="col m12 s12 right-align whet-leftpanel-background">
+        <% if (currentUser.currentGoals[currentUser.activeGoal].submitted_today) { %>
+        <h6>you uploaded for this goal today.<br>good job!</h6>
+        <% } else { %>
+        <form action="/submissions/upload" enctype="multipart/form-data" method="post">
+            <h5 class="light">upload</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <a class="modal-trigger btn-flat btn" href="#text-submit-modal" style="width: 100%; color:
+                    white">open text editor</a>
+                </div>
+            </div>
+        </form>
+        <% } %>
+    </div>
+</div>
+
+<% include ./modals/textmodal%>
