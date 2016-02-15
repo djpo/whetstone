@@ -3,11 +3,13 @@ user: {
   email           : { type: String, required: true, unique: true },
   activeGoal      : String,
   currentGoals    : {
-        goal_id : {
-            missableDays    : Number,
-            submitted_today : Boolean,
-            bankroll        : Number
-        }
+    goal_id : {
+      missableDays    : Number,
+      submitted_today : Boolean,
+      bankroll        : Number,
+      portfolio       : [wk_0_sub_index, wk_1_sub_index, ...]
+        // 0 for 1st submission that week, -1 for no submission that week
+    }
   }
 }
 
@@ -26,9 +28,9 @@ goal: {
   subs: {
     user_id: [
       // week 0 submissions
-      [sub_0, sub_1],
+      [sub_0, sub_1, ...],
       // week 0 submissions
-      [sub_0, sub_1]
+      [sub_0, sub_1, ...]
     ]
   }
 }

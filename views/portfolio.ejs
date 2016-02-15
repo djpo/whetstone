@@ -2,3 +2,11 @@
 
 <!-- Public facing portfolio page
 	View favorited submissions organized by date range and/or goal -->
+
+<%= targetUser %>
+
+<div class="divider"></div>
+
+<% for (var key in targetUser.currentGoals) { %>
+  <p><%= key %></p>
+<% } %>

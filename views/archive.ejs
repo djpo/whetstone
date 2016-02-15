@@ -14,7 +14,7 @@
     <div class="row">
       <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
       <ul id="archive-goals-list" class="collection light">
-        <% for (var key in  user.currentGoals) { %>
+        <% for (var key in user.currentGoals) { %>
           <% if (key === user.activeGoal) { %>
             <li class="collection-item selected-collection-item"><%= user.currentGoals[key].name %></li>
           <% } else { %>
