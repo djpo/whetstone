@@ -15,6 +15,10 @@
 .left-panel-box {
   text-align: right;
 }
+.btn {
+  background-color: #1E88E5;
+  border-radius: 1px;
+}
 
 /* topbar
 ----------------------------------------------*/
@@ -357,7 +361,7 @@ span.dash-menu-badge {
 /*  padding: 0;*/
 }
 
-.btn {
-  background-color: #1E88E5;
-  border-radius: 1px;
-}
+/* portfolio
+----------------------------------------------*/
+#portfolio-page {}
+

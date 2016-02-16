@@ -59,14 +59,13 @@ router.get('/', function(req, res){
       async.series([
         getFriendStatus
       ], function(err){
-        res.render('dashboard',
-          { goal: goal,
-            user: currentUser,
-            weeklySubs: weeklySubs,
-            dayName: dayName,
-            friendStatus: friendStatus
-          }
-        );
+        res.render('dashboard', {
+          goal          : goal,
+          user          : currentUser,
+          weeklySubs    : weeklySubs,
+          dayName       : dayName,
+          friendStatus  : friendStatus
+        });
       });
     });
   });
