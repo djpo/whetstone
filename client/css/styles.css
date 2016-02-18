@@ -360,6 +360,9 @@ span.dash-menu-badge {
 .collection-item {
 /*  padding: 0;*/
 }
+.archive-portfolio-selection {
+  box-shadow: 0 0 5px 2px #912C00;
+}
 
 /* portfolio
 ----------------------------------------------*/

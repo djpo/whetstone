@@ -12,6 +12,10 @@ router.get('/', function(req, res){
   var loggedInUser = req.user;
   db.goal.findOne({_id: loggedInUser.activeGoal}, function(err, goal){
     if (err) return console.log(err);
+
+    // temporarily hard coding first four weeks' portfolio choices to each week's chosen portfolio sub index
+    loggedInUser.currentGoals[goal.id].portfolio = [2, 1, 0, 4];
+
     res.render('archive',
       { goal: goal,
         user: loggedInUser
@@ -27,6 +31,10 @@ router.get('/:targetUserId', function(req, res){
     if (err) return console.log(err);
     db.goal.findOne({_id: loggedInUser.activeGoal}, function(err, goal){
       if (err) return console.log(err);
+
+      // temporarily hard coding first four weeks' portfolio choices to each week's chosen portfolio sub index
+      targetUser.currentGoals[goal.id].portfolio = [2, 1, 0, 4];
+
       res.render('archive',
         { goal: goal,
           user: targetUser
