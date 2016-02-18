@@ -14,7 +14,7 @@ router.get('/', function(req, res){
     if (err) return console.log(err);
 
     // temporarily hard coding first four weeks' portfolio choices to each week's chosen portfolio sub index
-    loggedInUser.currentGoals[goal.id].portfolio = [2, 1, 0, 4];
+    loggedInUser.currentGoals[goal.id].portfolio = [2, 1, 0];
 
     res.render('archive',
       { goal: goal,
@@ -33,7 +33,7 @@ router.get('/:targetUserId', function(req, res){
       if (err) return console.log(err);
 
       // temporarily hard coding first four weeks' portfolio choices to each week's chosen portfolio sub index
-      targetUser.currentGoals[goal.id].portfolio = [2, 1, 0, 4];
+      targetUser.currentGoals[goal.id].portfolio = [2, 1, 0];
 
       res.render('archive',
         { goal: goal,
@@ -42,6 +42,11 @@ router.get('/:targetUserId', function(req, res){
       );
     });
   });
+});
+
+router.post('/savePortSelection', function(req, res){
+  console.log("You selected sub with index " + req.body.portSelect + " for your portfolio.");
+  res.send("You selected sub with index " + req.body.portSelect + " for your portfolio.");
 });
 
 module.exports = router;

@@ -358,10 +358,19 @@ span.dash-menu-badge {
   text-align: center;
 }
 .collection-item {
-/*  padding: 0;*/
+/*padding: 0;*/
 }
 .archive-portfolio-selection {
+  /* temporary color */
   box-shadow: 0 0 5px 2px #912C00;
+}
+
+.archive-week .col {
+  border: 1px solid purple;
+}
+.archive-port-select-btn {
+  width: 100%;
+  max-height: 25px;
 }
 
 /* portfolio
@@ -374,9 +383,6 @@ span.dash-menu-badge {
 }
 .portfolio-week {
   border-top: 1px solid black;
-}
-.portfolio-week .col {
-  /*border: 1px solid pink;*/
 }
 .portfolio-sub-image {
   /*max-height: 200px;*/

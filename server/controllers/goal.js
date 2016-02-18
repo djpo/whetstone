@@ -69,14 +69,15 @@ router.post('/save', function(req, res){
         newGoal.subs[thisUser._id].push([]);
       }
       // Set user's activeGoal to this goal id, save user
-      thisUser.activeGoal = newGoal._id;
+      thisUser.activeGoal = newGoal.id;
       //Initialize mixed type currentGoals, then initialize values
       thisUser.currentGoals = thisUser.currentGoals || {};
-      thisUser.currentGoals[newGoal._id] = {};
-      thisUser.currentGoals[newGoal._id].name = newGoal.name;
-      thisUser.currentGoals[newGoal._id].missableDays = 7 - newGoal.frequency;
-      thisUser.currentGoals[newGoal._id].submitted_today = false;
-      thisUser.currentGoals[newGoal._id].bankroll = 0;
+      thisUser.currentGoals[newGoal.id] = {};
+      thisUser.currentGoals[newGoal.id].name = newGoal.name;
+      thisUser.currentGoals[newGoal.id].missableDays = 7 - newGoal.frequency;
+      thisUser.currentGoals[newGoal.id].submitted_today = false;
+      thisUser.currentGoals[newGoal.id].bankroll = 0;
+      thisUser.currentGoals[newGoal.id].portfolio = [];
 
       thisUser.markModified('currentGoals');
       thisUser.save(function(err){

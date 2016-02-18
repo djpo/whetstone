@@ -40,6 +40,19 @@
         <div class="left-column col l2 s2">
           <div class="divider"></div>
           <span class="archive-week-label thin">week <%= i + 1 %></span>
+
+          <% if (user.currentGoals[goal.id].hasOwnProperty('portfolio')) { %>
+            <% if (user.currentGoals[goal.id].portfolio[i] === undefined) { %>
+              <br>
+              <div style="border: 1px solid blue; background-color: gray;">
+                <form method="post" action="/archive/savePortSelection">
+                  <input type="number" id="portSelect" name="portSelect" placeholder="" min="0" max="<%= goal.frequency - 1 %>" class="validate">
+                </form>
+              </div>
+            <% } %>
+          <% } %>
+
+
         </div>
         <div class="middle-column col s10">
           <div class="row archive-box-row">
