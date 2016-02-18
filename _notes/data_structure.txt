@@ -38,14 +38,14 @@ goal: {
 submission: {
   user_id     : String,
   created_at  : Date,
-  content     : {
-    fieldname   : String,
-    originalname: String,
-    encoding    : String,
-    mimetype    : String,
-    destination : String,
-    filename    : {type: String, require: true, unique: true},
-    path        : String,
-    size        : Number
+  note        : String,
+  size        : Number
+  fieldname   : String,
+  originalname: String,
+  encoding    : String,
+  mimetype    : String,
+  destination : String,
+  filename    : {type: String, require: true, unique: true},
+  path        : String
   }
 }

@@ -4,16 +4,48 @@
 
 <!-- borrowing some html from archive.ejs -->
 <div id="portfolio-page" class="row">
+  <div class="col m10 offset-m1 s12">
 
-<% targetGoals.forEach(function(goal) { %>
-  <div style="border: 1px solid orange;">
-    <%= goal.name %>
+
+    <h4><%= user.name %>' portfolio</h4>
+
+    <!-- for each goal -->
+    <% targetGoals.forEach(function(goal){ %>
+      <div class="portfolio-goal">
+        <h5><%= goal.name %></h5>
+        <br>
+
+        <!-- for now, user.currentGoals[goal.id].portfolio = [2, 1, 0, 4]; -->
+        <% user.currentGoals[goal.id].portfolio.forEach(function(choice, i, array){ %>
+          <div class="portfolio-week row">
+            <div class="col s2">
+              <span class="thin">week <%= i + 1 %>: #<%= choice + 1 %></span>
+            </div>
+
+            <div class="col s4 portfolio-sub-image">
+              <% if (goal.subs[user.id][i][choice]) { %>
+                <!-- link not working yet -->
+                <a href="/submissions/<%= goal.id %>/<%= user.id %>/<%= i %>/<%= choice %>">
+                  <img src="/<%= goal.subs[user.id][i][choice].filename %>">
+                </a>
+              <% } else { %>
+                <span class="thin">(there is no submission here)</span>
+              <% } %>
+            </div>
+
+            <div class="col s6">
+              <% if (goal.subs[user.id][i][choice]) { %>
+                <span class="thin"><%= goal.subs[user.id][i][choice].note %></span>
+              <% } else { %>
+                <span class="thin">(no description)</span>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+
+
+      </div>
+    <% }); %>
+
   </div>
-<% }); %>
-
 </div>
-
-
-<!-- to access submission for week 4 -->
-<!-- targetUser.currentGoals.goal_id.portfolio[3] -->
-  <!-- evauates to submission object -->
