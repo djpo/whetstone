@@ -1,5 +1,6 @@
 var express     = require('express'),
     db          = require('../models/index'),
+    async       = require('async'),
     router      = express.Router();
 
 router.use(function(req, res, next){
@@ -12,10 +13,6 @@ router.get('/', function(req, res){
   var loggedInUser = req.user;
   db.goal.findOne({_id: loggedInUser.activeGoal}, function(err, goal){
     if (err) return console.log(err);
-
-    // temporarily hard coding first four weeks' portfolio choices to each week's chosen portfolio sub index
-    loggedInUser.currentGoals[goal.id].portfolio = [2, 1, 0];
-
     res.render('archive',
       { goal: goal,
         user: loggedInUser
@@ -31,10 +28,6 @@ router.get('/:targetUserId', function(req, res){
     if (err) return console.log(err);
     db.goal.findOne({_id: loggedInUser.activeGoal}, function(err, goal){
       if (err) return console.log(err);
-
-      // temporarily hard coding first four weeks' portfolio choices to each week's chosen portfolio sub index
-      targetUser.currentGoals[goal.id].portfolio = [2, 1, 0];
-
       res.render('archive',
         { goal: goal,
           user: targetUser
@@ -45,8 +38,19 @@ router.get('/:targetUserId', function(req, res){
 });
 
 router.post('/savePortSelection', function(req, res){
-  console.log("You selected sub with index " + req.body.portSelect + " for your portfolio.");
-  res.send("You selected sub with index " + req.body.portSelect + " for your portfolio.");
+  var goalSelect = req.body.goalSelect,
+      weekSelect = req.body.weekSelect,
+      portSelect = req.body.portSelect;
+  db.user.findOne({_id: req.user.id}, function (err, user){
+    if (err) return console.log(err);
+    console.log("You selected week " + weekSelect + ", sub index " + portSelect + " for your portfolio.");
+    user.currentGoals[goalSelect].portfolio[weekSelect] = parseInt(portSelect);
+    user.markModified('currentGoals');
+    user.save(function (err){
+      if (err) return console.error(err);
+      res.redirect('/archive');
+    });
+  });
 });
 
 module.exports = router;

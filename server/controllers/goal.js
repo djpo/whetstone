@@ -21,8 +21,10 @@ router.post('/save', function(req, res){
     // Create new goal
     var newGoal = new db.goal(req.body);
     // Initialize goal
-      // Will have to change this if goal does not start immediately on goal creation
     var now = new Date();
+    // for testing, to start the goal at a specified date:
+    // var now = new Date("February 1, 2016 11:11:11");
+
     newGoal.startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var endTime = new Date(newGoal.startDate.getTime() + (7 * newGoal.duration * 86400000));
     newGoal.endDate = new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate());
