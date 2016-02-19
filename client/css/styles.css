@@ -364,14 +364,24 @@ span.dash-menu-badge {
   /* temporary color */
   box-shadow: 0 0 5px 2px #912C00;
 }
-
-.archive-week .col {
-  border: 1px solid purple;
-}
 .archive-port-select-btn {
   width: 100%;
   max-height: 25px;
 }
+.current-week {
+  background-color: rgba(141,179,161,.6);
+}
+.future-week {
+  position: relative;
+}
+.future-week-film {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(162,172,177,.7);
+}
+
 
 /* portfolio
 ----------------------------------------------*/

@@ -33,38 +33,53 @@
 
   <!-- activeGoal all submissions -->
   <div id="archive-submissions-panel" class="col m9 push-m3 s12">
+
     <!-- each week -->
     <% for (var i = 0; i < goal.subs[user.id].length; i++) { %>
       <% var weeklySubs = goal.subs[user.id][i] %>
+
+      <!-- change week background based on future, present, past -->
+      <% if (i === goal.currentWeek) { %>
+      <div class="row archive-week current-week">
+      <% } else if (i > goal.currentWeek) { %>
+      <div class="row archive-week future-week">
+        <div class="future-week-film"></div>
+      <% } else { %>
       <div class="row archive-week">
+      <% } %>
+
         <div class="left-column col l2 s2">
           <div class="divider"></div>
           <span class="archive-week-label thin">week <%= i + 1 %></span>
-
+          
+          <!-- temporary, remove after wiping old users from db -->
           <% if (user.currentGoals[goal.id].hasOwnProperty('portfolio')) { %>
-            <% if (user.currentGoals[goal.id].portfolio[i] === undefined) { %>
+            <!-- if this week has no portfolio selection, display a form for selecting -->
+            <% if (i < goal.currentWeek && user.currentGoals[goal.id].portfolio[i] === undefined) { %>
               <br>
-              <div style="border: 1px solid blue; background-color: gray;">
+              <div style="border: 1px solid blue; background-color: yellow;">
                 <form method="post" action="/archive/savePortSelection">
                   <input type="number" id="portSelect" name="portSelect" placeholder="" min="0" max="<%= goal.frequency - 1 %>" class="validate">
                 </form>
               </div>
             <% } %>
+          <!-- temporary, remove after wiping old users from db -->
           <% } %>
-
 
         </div>
         <div class="middle-column col s10">
           <div class="row archive-box-row">
             <% for (var j = 0; j < goal.frequency; j++) { %>
 
-              <!-- if this sub is the selected portfolio sub for this week, give it a box-shadow -->
+              <!-- temporary, remove after wiping old users from db -->
               <% if (user.currentGoals[goal.id].hasOwnProperty('portfolio')) { %>
+                <!-- if this sub is the selected portfolio sub for this week, give it a box-shadow -->
                 <% if (user.currentGoals[goal.id].portfolio[i] === j) { %>
                   <div class="archive-portfolio-selection archive-box whet-stone whet-submission-box z-depth-1">
                 <% } else { %>
                   <div class="archive-box whet-stone whet-submission-box z-depth-1">
                 <% } %>
+              <!-- temporary, remove after wiping old users from db -->
               <% } else { %>
                 <div class="archive-box whet-stone whet-submission-box z-depth-1">
               <% } %>
@@ -79,7 +94,7 @@
               </div>
 
             <% } %>
-            <!-- this "stretch" span is required for even horizontal spacing -->
+            <!-- this "stretch" span is required for even horizontal spacing... or is it? -->
             <span class="stretch"></span>
           </div>
         </div>
