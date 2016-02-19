@@ -39,11 +39,10 @@ router.get('/:targetUserId', function(req, res){
 
 router.post('/savePortSelection', function(req, res){
   var goalSelect = req.body.goalSelect,
-      weekSelect = req.body.weekSelect,
-      portSelect = req.body.portSelect;
+      weekSelect = parseInt(req.body.weekSelect),
+      portSelect = parseInt(req.body.portSelect) - 1;
   db.user.findOne({_id: req.user.id}, function (err, user){
     if (err) return console.log(err);
-    console.log("You selected week " + weekSelect + ", sub index " + portSelect + " for your portfolio.");
     user.currentGoals[goalSelect].portfolio[weekSelect] = parseInt(portSelect);
     user.markModified('currentGoals');
     user.save(function (err){

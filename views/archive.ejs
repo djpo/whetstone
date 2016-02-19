@@ -57,10 +57,9 @@
                 <br>
                 <div style="border: 1px solid blue; background-color: yellow;">
                   <form method="post" action="/archive/savePortSelection">
-                    <input type="number" id="portSelect" name="portSelect" placeholder="" min="0" max="<%= goal.frequency - 1 %>" class="validate">
+                    <input type="number" id="portSelect" name="portSelect" placeholder="" min="1" max="<%= goal.subs[user.id][i].length %>" class="validate">
                     <input type="hidden" name="goalSelect" value="<%= goal.id %>">
                     <input type="hidden" name="weekSelect" value="<%= i %>">
-                      <!-- TODO: prevent the selection of empty submissions -->
                   </form>
                 </div>
               <% } %>
