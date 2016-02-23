@@ -50,19 +50,25 @@
 
             <div class="left-column col l2 s2">
               <div class="divider"></div>
-              <span class="archive-week-label thin">week <%= i + 1 %></span>
 
               <!-- if this past week isn't empty, and has no portfolio selection, then display a form for selecting -->
-              <% if (i < goal.currentWeek && goal.subs[user.id][i].length > 0 && user.currentGoals[goal.id].portfolio[i] === undefined) { %>
-                <br>
-                <div style="border: 1px solid blue; background-color: yellow;">
+              <% if (i < goal.currentWeek && goal.subs[user.id][i].length > 0 && user.currentGoals[goal.id].portfolio[i] === -1) { %>
+
+<!--                 <br>
+                  <div style="border: 1px solid blue; background-color: yellow;">
                   <form method="post" action="/archive/savePortSelection">
                     <input type="number" id="portSelect" name="portSelect" placeholder="" min="1" max="<%= goal.subs[user.id][i].length %>" class="validate">
                     <input type="hidden" name="goalSelect" value="<%= goal.id %>">
                     <input type="hidden" name="weekSelect" value="<%= i %>">
                   </form>
-                </div>
+                </div> -->
+
+                <div class="archive-week-label thin port-select-toggle-button">
+              <% } else { %>
+                <div class="archive-week-label thin">
               <% } %>
+                  week <%= i + 1 %>
+                </div>
 
             </div>
 

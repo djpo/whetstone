@@ -19,18 +19,11 @@ router.post('/upload', upload.single('submission'), function(req, res, next){
       if (err) return console.log(err);
       // Create new submission, add metadata
       var newSubmission = req.file;
-      newSubmission.user_id = user._id;
+      newSubmission.user_id = user.id;
       newSubmission.created_at = new Date();
       newSubmission.note = req.body.note;
-      // Test if user and week arrays exist already; create blank if not
-      if (goal.subs[user._id] === undefined) {
-        goal.subs[user._id] = [];
-      }
-      if (goal.subs[user._id][goal.currentWeek] === undefined) {
-        goal.subs[user._id][goal.currentWeek] = [];
-      }
       // Add submission to goal
-      goal.subs[user._id][goal.currentWeek].push(newSubmission);
+      goal.subs[user.id][goal.currentWeek].push(newSubmission);
       // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
       goal.markModified('subs');
       // Save goal

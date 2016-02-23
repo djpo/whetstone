@@ -22,9 +22,8 @@ router.post('/save', function(req, res){
     var newGoal = new db.goal(req.body);
     // Initialize goal
     var now = new Date();
-    // for testing, to start the goal at a specified date:
-    // var now = new Date("February 1, 2016 11:11:11");
-
+      // for development, to start the goal at a specified date:
+      // var now = new Date("February 1, 2016 11:11:11");
     newGoal.startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var endTime = new Date(newGoal.startDate.getTime() + (7 * newGoal.duration * 86400000));
     newGoal.endDate = new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate());
@@ -33,7 +32,6 @@ router.post('/save', function(req, res){
     newGoal.isActive = true;
     newGoal.pot = 0;
     newGoal.subs = {};
-
 
     function registerNewMembers(callback){
       if (newGoal.friendsEmails.length == 0) return callback();
@@ -48,10 +46,8 @@ router.post('/save', function(req, res){
           }
         ), 'temporary', function(err, newUser) {
           if (err) return console.log(err);
-          //WARNING: only uncomment below when testing longer periods. will send you
-          //emails every minute worst case. Can add up when running server.
+          //WARNING: only uncomment below when testing longer periods. Will send emails.
           //invitemailer(user.username)
-
           initializeUser(newUser)
           //Callback to the async function when all members have been registered/added
           counter++;
@@ -64,12 +60,8 @@ router.post('/save', function(req, res){
 
     function initializeUser(thisUser) {
       newGoal.members.push(thisUser.id);
-      newGoal.subs[thisUser._id] = [];
+      newGoal.subs[thisUser.id] = [];
 
-      // For each week (for each member) push an empty array
-      for (var j = 0; j < newGoal.duration; j++) {
-        newGoal.subs[thisUser._id].push([]);
-      }
       // Set user's activeGoal to this goal id, save user
       thisUser.activeGoal = newGoal.id;
       //Initialize mixed type currentGoals, then initialize values
@@ -80,6 +72,13 @@ router.post('/save', function(req, res){
       thisUser.currentGoals[newGoal.id].submitted_today = false;
       thisUser.currentGoals[newGoal.id].bankroll = 0;
       thisUser.currentGoals[newGoal.id].portfolio = [];
+
+      for (var i = 0; i < newGoal.duration; i++) {
+        // For each week, push an empty submissions array
+        newGoal.subs[thisUser.id].push([]);
+        // For each week, push an element to user's portfolio array (-1 means no selection)
+        thisUser.currentGoals[newGoal.id].portfolio.push(-1);
+      }
 
       thisUser.markModified('currentGoals');
       thisUser.save(function(err){

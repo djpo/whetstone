@@ -27,7 +27,7 @@ $(document).ready(function() {
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
     opacity: .6, // Opacity of modal background
     in_duration: 100, // Transition in duration
-    out_duration: 100, // Transition out duration
+    out_duration: 100 // Transition out duration
   });
 
   // for Materialize dropdown menu button
@@ -68,8 +68,13 @@ $(document).ready(function() {
         window.location.href = '/dashboard';
         console.log(err)
       }
-    })
-  })
+    });
+  });
 
+  // Selecting submissions for portfolio from archive view
+  $('.port-select-toggle-button').on('click', function(){
+    $(this).css('background-color', 'red');
+    console.log("You clicked.");
+  });
 
 });
