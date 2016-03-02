@@ -1,4 +1,46 @@
-<h3>portfolio</h3>
-
 <!-- Public facing portfolio page
-	View favorited submissions organized by date range and/or goal -->
+  View favorited submissions organized by date range and/or goal -->
+
+<div id="portfolio-page" class="row">
+  <div class="col m10 offset-m1 s12">
+    <h4><%= user.name %>'s portfolio</h4>
+
+    <!-- for each goal -->
+    <% targetGoals.forEach(function(goal){ %>
+      <div class="portfolio-goal">
+        <h5><%= goal.name %></h5>
+        <br>
+
+        <% user.currentGoals[goal.id].portfolio.forEach(function(choice, i, array){ %>
+          <% if (choice !== -1) { %>
+            <div class="portfolio-week row">
+              <div class="col s2">
+                <span class="thin">week <%= i + 1 %>: #<%= choice + 1 %></span>
+              </div>
+
+              <div class="col s4 portfolio-sub-image">
+                <% if (goal.subs[user.id][i][choice]) { %>
+                  <a href="/submissions/<%= goal.id %>/<%= user.id %>/<%= i %>/<%= choice %>">
+                    <img src="/<%= goal.subs[user.id][i][choice].filename %>">
+                  </a>
+                <% } else { %>
+                  <span class="thin">(there is no submission here)</span>
+                <% } %>
+              </div>
+
+              <div class="col s6">
+                <% if (goal.subs[user.id][i][choice]) { %>
+                  <span class="thin"><%= goal.subs[user.id][i][choice].note %></span>
+                <% } else { %>
+                  <span class="thin">(no description)</span>
+                <% } %>
+              </div>
+            </div>
+          <% } %>
+        <% }); %>
+
+      </div>
+    <% }); %>
+
+  </div>
+</div>

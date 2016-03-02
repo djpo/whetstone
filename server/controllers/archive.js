@@ -1,5 +1,6 @@
 var express     = require('express'),
     db          = require('../models/index'),
+    async       = require('async'),
     router      = express.Router();
 
 router.use(function(req, res, next){
@@ -32,6 +33,21 @@ router.get('/:targetUserId', function(req, res){
           user: targetUser
         }
       );
+    });
+  });
+});
+
+router.post('/savePortSelection', function(req, res){
+  var goalSelect = req.body.goalSelect,
+      weekSelect = parseInt(req.body.weekSelect),
+      portSelect = parseInt(req.body.portSelect) - 1;
+  db.user.findOne({_id: req.user.id}, function (err, user){
+    if (err) return console.log(err);
+    user.currentGoals[goalSelect].portfolio[weekSelect] = parseInt(portSelect);
+    user.markModified('currentGoals');
+    user.save(function (err){
+      if (err) return console.error(err);
+      res.redirect('/archive');
     });
   });
 });
