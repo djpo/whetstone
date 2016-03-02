@@ -15,6 +15,10 @@
 .left-panel-box {
   text-align: right;
 }
+.btn {
+  background-color: #1E88E5;
+  border-radius: 1px;
+}
 
 /* topbar
 ----------------------------------------------*/
@@ -324,12 +328,6 @@ span.dash-menu-badge {
 .archive-week .divider {
   margin-top: 5px;
 }
-.archive-week-label {
-  position: relative;
-  font-size: 1em;
-  float: right;
-  margin-top: 15px;
-}
 .archive-box-row {
   margin: 0;
 }
@@ -354,10 +352,61 @@ span.dash-menu-badge {
   text-align: center;
 }
 .collection-item {
-/*  padding: 0;*/
+/*padding: 0;*/
+}
+.archive-portfolio-selection {
+  /* temporary color */
+  box-shadow: 0 0 5px 2px black;
+}
+.archive-port-select-btn {
+  width: 100%;
+  max-height: 25px;
+}
+.current-week {
+  background-color: rgba(141,179,161,.6);
+}
+.future-week {
+  position: relative;
+}
+.future-week-film {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(162,172,177,.7);
+}
+.archive-week-label {
+  position: relative;
+  font-size: 1em;
+  float: right;
+  margin-top: 15px;
+}
+.port-select-toggle-button {
+  padding: 3px;
+  background-color: gray;
+  color: white;
+  border: 2px solid black;
+  cursor: pointer;
 }
 
-.btn {
-  background-color: #1E88E5;
-  border-radius: 1px;
+/* portfolio
+----------------------------------------------*/
+#portfolio-page {}
+.portfolio-goal {
+  height: 100%;
+  margin: 10px 0;
+  border: 2px solid gray;
+}
+.portfolio-week {
+  border-top: 1px solid black;
+}
+.portfolio-sub-image {
+  /*max-height: 200px;*/
+  /*max-width: 200px;*/
+  /*overflow: hidden;*/
+}
+.portfolio-sub-image img {
+  width: 100%;
+  height: 100%;
+  /*object-fit: cover;*/
 }
