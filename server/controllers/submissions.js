@@ -91,8 +91,8 @@ router.post('/uploadtext', function(req, res){
 router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res){
   var goalId  = req.params.goalId,
       userId  = req.params.userId,
-      weekNum = req.params.weekNum,
-      subNum  = req.params.subNum;
+      weekNum = parseInt(req.params.weekNum),
+      subNum  = parseInt(req.params.subNum);
   db.goal.findOne({_id: goalId}, function (err, goal) {
     if (err) return console.log(err);
     db.user.findOne({_id: userId}, function (err, user) {
