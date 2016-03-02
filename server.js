@@ -55,7 +55,7 @@ mongoose.connect('mongodb://dbadmin:whetwdi123@ds059135.mongolab.com:59135/whets
 mongoose.connection.once('open', function(){
 
   // Start the cron job (comment to disable cron)
-   runCron;
+  runCron;
 
   console.log("Running on the smooth sounds of port 3000");
   app.listen(process.env.PORT || 3000);

@@ -1,7 +1,7 @@
 var express     = require('express'),
     router      = express.Router();
 
-router.get('/', function(req, res){
+router.get('/', function(req, res) {
   if (!req.user) {
     // If user is not logged in, show welcome view
     res.render('welcome');

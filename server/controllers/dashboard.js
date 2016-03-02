@@ -3,29 +3,29 @@ var express     = require('express'),
     async       = require('async'),
     router      = express.Router();
 
-router.use(function(req, res, next){
+router.use(function(req, res, next) {
   if (!req.user) return res.redirect('/');
   next();
 });
 
-router.get('/', function(req, res){
+router.get('/', function(req, res) {
   if (!req.user.activeGoal) return res.redirect('/goal/new');
   // Find current user
-  db.user.findOne({_id: req.user.id}, function(err, currentUser){
+  db.user.findOne({_id: req.user.id}, function(err, currentUser) {
     if (err) return console.log(err);
     // Find current user's current goal
-    db.goal.findOne({_id: currentUser.activeGoal}, function(err, goal){
+    db.goal.findOne({_id: currentUser.activeGoal}, function(err, goal) {
       if (err) return console.log(err);
       // Prepare data to send to view
       var weeklySubs = goal.subs[currentUser.id][goal.currentWeek] || [];
       var dayName = require('../helpers/helper').getDayName(goal.weekStartsOn);
       var friendStatus = [];
-      function getFriendStatus(callback){
+      function getFriendStatus(callback) {
         var holdTheCurrentUser = {};
         var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1, 3 instead of 0, 1, 2, 3
         // extract data from each goal member to pass to nav menu
-        goal.members.forEach(function(goalMember, i, array){
-          db.user.findOne({_id: goalMember}, function(err, memberUser){
+        goal.members.forEach(function(goalMember, i, array) {
+          db.user.findOne({_id: goalMember}, function(err, memberUser) {
             objToPushToFriendStatus = {
               name            : memberUser.name,
               submittedToday  : memberUser.currentGoals[goal.id].submitted_today,
@@ -42,7 +42,7 @@ router.get('/', function(req, res){
             counter++;
             if(counter === array.length){
               // Alphabetize friendStatus (minus the current user)
-              friendStatus.sort(function(a, b){
+              friendStatus.sort(function(a, b) {
                 var nameA = a.name.toUpperCase();
                 var nameB = b.name.toUpperCase();
                 return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
@@ -59,14 +59,13 @@ router.get('/', function(req, res){
       async.series([
         getFriendStatus
       ], function(err){
-        res.render('dashboard',
-          { goal: goal,
-            user: currentUser,
-            weeklySubs: weeklySubs,
-            dayName: dayName,
-            friendStatus: friendStatus
-          }
-        );
+        res.render('dashboard', {
+          goal          : goal,
+          user          : currentUser,
+          weeklySubs    : weeklySubs,
+          dayName       : dayName,
+          friendStatus  : friendStatus
+        });
       });
     });
   });

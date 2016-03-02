@@ -3,9 +3,9 @@ var db            = require('../models/index'),
     async         = require('async'),
     CronJob       = require('cron').CronJob;
 
+
 var job = new CronJob('00 00 00 * * *', function() {
 // Runs every night at 12AM
-
                   // Timing argument, for reference
                     // Seconds: 0-59
                     // Minutes: 0-59
@@ -17,7 +17,6 @@ var job = new CronJob('00 00 00 * * *', function() {
   console.log('\n\n~~~~~NEW DAY');
   var now = new Date();
   console.log("~~~~~The current time is:", now, ".");
-
   var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     db.goal.find({isActive: true}).
@@ -61,7 +60,7 @@ var job = new CronJob('00 00 00 * * *', function() {
             if(!user.currentGoals[goal.id].missableDays) {
               //User loses his/her incentive...
               user.currentGoals[goal.id].bankroll -= goal.incentive;
-              console.log(user.username + "'s bankroll DECREASED BY " + goal.incentive);
+              console.log("~~~~~" + user.username + "'s bankroll DECREASED BY " + goal.incentive);
               user.markModified('currentGoals');
               user.save(function(err){
                 //...and pays the pot

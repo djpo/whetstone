@@ -74,6 +74,7 @@
           <p>(<%= friendStatus[0].weeklyProgress %>/<%= goal.frequency %>) this week</p>
           <a href="/dashboard" class="btn">dashboard</a>
           <a href="/archive" class="btn">archive</a>
+          <a href="/portfolio/<%= currentUser.id %>" class="btn">portfolio</a>
         </div>
       </li>
 
@@ -90,7 +91,8 @@
             </div>
             <div class="collapsible-body">
               <p>(<%= friendStatus[i].weeklyProgress %>/<%= goal.frequency %>) this week</p>
-              <a href="/archive/<%= friendStatus[i].friendId %>/" class="btn">archive</a>
+              <a href="/archive/<%= friendStatus[i].friendId %>" class="btn">archive</a>
+              <a href="/portfolio/<%= friendStatus[i].friendId %>" class="btn">portfolio</a>
             </div>
           </li>
         <% } %>

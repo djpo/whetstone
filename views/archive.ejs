@@ -3,9 +3,7 @@
   See all submissions
   See all people in group
   Not necessarily their submissions, but maybe some stats
-  If betting any money, see money lost and paid to group --> 
-<!-- style ideas:
-  Materialize sidenav -->
+  If betting any money, see money lost and paid to group -->
 
 <div id="archive-page" class="row">
 
@@ -14,7 +12,7 @@
     <div class="row">
       <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
       <ul id="archive-goals-list" class="collection light">
-        <% for (var key in  user.currentGoals) { %>
+        <% for (var key in user.currentGoals) { %>
           <% if (key === user.activeGoal) { %>
             <li class="collection-item selected-collection-item"><%= user.currentGoals[key].name %></li>
           <% } else { %>
@@ -33,33 +31,65 @@
 
   <!-- activeGoal all submissions -->
   <div id="archive-submissions-panel" class="col m9 push-m3 s12">
-    <!-- weekly stuffs -->
+
+    <!-- each week -->
     <% for (var i = 0; i < goal.subs[user.id].length; i++) { %>
       <% var weeklySubs = goal.subs[user.id][i] %>
-      <div class="row archive-week">
-        <div class="left-column col l2 s2">
-          <div class="divider"></div>
-          <span class="archive-week-label thin">week <%= i + 1 %></span>
-        </div>
-        <div class="middle-column col s10">
-          <div class="row archive-box-row">
-            <% for (var j = 0; j < goal.frequency; j++) { %>
-              <div class="archive-box whet-stone whet-submission-box z-depth-1">
-                <% if (weeklySubs[j]) { %>
-                  <a href="/submissions/<%= goal.id %>/<%= user.id %>/<%= i %>/<%= j %>">
-                    <img class="valign" src="/<%= weeklySubs[j].filename %>">
-                  </a>
-                <% } else { %>
-                  <div class="empty-submission"></div>
-                <% } %>
-              </div>
-            <% } %>
-            <!-- this "stretch" span is required for even horizontal spacing -->
-            <span class="stretch"></span>
-          </div>
-        </div>
-      </div>
-    <% } %>
-  </div>
 
+        <!-- change week background based on future, present, past -->
+        <% if (i === goal.currentWeek) { %>
+          <div class="row archive-week current-week">
+        <% } else if (i > goal.currentWeek) { %>
+          <div class="row archive-week future-week">
+            <div class="future-week-film"></div>
+        <% } else { %>
+          <div class="row archive-week">
+        <% } %>
+
+            <div class="left-column col l2 s2">
+              <div class="divider"></div>
+              <!-- if this past week isn't empty, and has no portfolio selection, then display a form for selecting -->
+              <% if (i < goal.currentWeek && goal.subs[user.id][i].length > 0 && user.currentGoals[goal.id].portfolio[i] === -1) { %>
+                <div class="archive-week-label thin port-select-toggle-button" week="<%= i %>">
+              <% } else { %>
+                <div class="archive-week-label thin">
+              <% } %>
+                  week <%= i + 1 %>
+                </div>
+            </div>
+
+            <div class="middle-column col s10">
+              <div class="row archive-box-row">
+                <% for (var j = 0; j < goal.frequency; j++) { %>
+                  <!-- submission-box -->
+                  <!-- if this sub is the selected portfolio sub for this week, give it a box-shadow -->
+                  <% if (user.currentGoals[goal.id].portfolio[i] === j) { %>
+                    <div class="archive-portfolio-selection archive-box whet-stone whet-submission-box z-depth-1">
+                  <% } else { %>
+                    <div class="archive-box whet-stone whet-submission-box z-depth-1">
+                  <% } %>
+
+                    <!-- if there is a filled submission in this box, display it -->
+                    <% if (weeklySubs[j]) { %>
+                      <a href="/submissions/<%= goal.id %>/<%= user.id %>/<%= i %>/<%= j %>">
+                        <img class="valign" src="/<%= weeklySubs[j].filename %>">
+                      </a>
+                    <% } else { %>
+                      <div class="empty-submission"></div>
+                    <% } %>
+
+                    <!-- end submission-box -->
+                    </div>
+                <% } %>
+                <!-- this "stretch" span is required for even horizontal spacing... or is it? -->
+                <span class="stretch"></span>
+              </div>
+            <!-- end middle-column -->
+            </div>
+          <!-- end archive-week -->
+          </div>
+    <% } %>
+  <!-- end archive-submissions-panel -->
+  </div>
+<!-- end archive-page -->
 </div>

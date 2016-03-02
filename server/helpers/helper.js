@@ -2,7 +2,7 @@ var Whet = Whet || {};
 
 //Put any helper functions in here
 Whet = {
-  getDayName: function(dayNumber){
+  getDayName: function(dayNumber) {
     switch(dayNumber) {
       case 0:
         return 'Sunday';
@@ -30,6 +30,5 @@ Whet = {
     }
   }
 };
-
 
 module.exports = Whet;

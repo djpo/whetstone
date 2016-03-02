@@ -8,8 +8,10 @@ module.exports = {
     // for creating a new goal
   '/dashboard'    : require('./controllers/dashboard'),
     // for viewing the current week dashboard
-  '/archive'    : require('./controllers/archive'),
+  '/archive'      : require('./controllers/archive'),
     // for viewing all goals
-  '/submissions'  : require('./controllers/submissions')
+  '/submissions'  : require('./controllers/submissions'),
     // for uploading subs, viewing individual sub
+  '/portfolio'    : require('./controllers/portfolio')
+    // for viewing user's portfolio page, and making portfolio selections
 };

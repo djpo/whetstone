@@ -9,32 +9,25 @@
 
 <div class="row">
   <div class="col m7 s12">
-    <%if(subFilename) {%>
+    <% if(subFilename){ %>
       <img id="sub-view-img" class="materialboxed z-depth-1" src="/<%= subFilename %>">
     <%} else { %>
       <pre id="text-submission-view">
-        <h5><%=subTitle%><br><small>word count: <%=subWordCount%></small></h5>
-        <%=subText%>
+        <h5><%= subTitle %><br><small>word count: <%= subWordCount %></small></h5>
+        <%= subText %>
       </pre>
-    <%}%>
-    <!-- <img src="/<%= subFilename %>" id="sub-view-img" class="z-depth-1"> -->
+    <% } %>
   </div>
   <div class="col l4 m5 s12">
     <div id="sub-view-info">
       <div class="divider"></div>
       <div id="sub-view-note-label">submitted by <%= subUserName %></div>
-
       <% if (subNote || subNote !== "") { %>
         <div id="sub-view-note" class="whet-panel-background thin z-depth-1">
           <p><%= subNote %></p>
         </div>
       <% } %>
-
-
-      <!-- <div>Comments</div> -->
     </div>
-
-    <div hidden id="sub-view-comments">
-    </div>
+    <div hidden id="sub-view-comments"></div>
   </div>
 </div>
