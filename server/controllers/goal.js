@@ -1,21 +1,21 @@
-var express     = require('express'),
-    db          = require('../models/index'),
-    invitemailer= require('../helpers/invitemailer'),
-    async       = require('async'),
-    router      = express.Router();
+var express       = require('express'),
+    db            = require('../models/index'),
+    invitemailer  = require('../helpers/invitemailer'),
+    async         = require('async'),
+    router        = express.Router();
 
-router.use(function(req, res, next){
+router.use(function(req, res, next) {
   if (!req.user) return res.redirect('/');
   next();
 });
 
-router.get('/new', function(req, res){
+router.get('/new', function(req, res) {
   res.render('goal/new_goal');
 });
 
-router.post('/save', function(req, res){
+router.post('/save', function(req, res) {
   // Find the current user
-  db.user.findOne({_id: req.user.id}, function(err, user){
+  db.user.findOne({_id: req.user.id}, function(err, user) {
     if (err) console.log(err);
 
     // Create new goal
@@ -33,11 +33,11 @@ router.post('/save', function(req, res){
     newGoal.pot = 0;
     newGoal.subs = {};
 
-    function registerNewMembers(callback){
+    function registerNewMembers(callback) {
       if (newGoal.friendsEmails.length == 0) return callback();
       var emailArray = newGoal.friendsEmails.split(",");
       var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1 3 instead of 0, 1, 2, 3
-      emailArray.forEach(function(email, i, array){
+      emailArray.forEach(function(email, i, array) {
 
         db.user.register(new db.user(
           {
@@ -81,7 +81,7 @@ router.post('/save', function(req, res){
       }
 
       thisUser.markModified('currentGoals');
-      thisUser.save(function(err){
+      thisUser.save(function(err) {
           if (err) console.log(err);
         });
     }
@@ -96,7 +96,7 @@ router.post('/save', function(req, res){
       // Alert db that subs has changed (because subs is Schema.Types.Mixed)
       newGoal.markModified('subs');
       // Save the goal to the db
-      newGoal.save(function (err){
+      newGoal.save(function (err) {
         if (err) return console.error(err);
         res.redirect('/');
       });

@@ -1,6 +1,6 @@
 var nodemailer  = require('nodemailer');
 
-var mailer = function(userEmail){
+var mailer = function(userEmail) {
   // create reusable transporter object using the default SMTP transport
   var transporter = nodemailer.createTransport('smtps://loki.bera%40gmail.com:mycat123@smtp.gmail.com');
 
@@ -14,7 +14,7 @@ var mailer = function(userEmail){
   };
 
 // send mail with defined transport object
-  transporter.sendMail(mailOptions, function(error, info){
+  transporter.sendMail(mailOptions, function(error, info) {
     if(error){
       return console.log(error);
     }
@@ -23,4 +23,3 @@ var mailer = function(userEmail){
 };
 
 module.exports = mailer;
-

@@ -1,17 +1,14 @@
-<!-- Public facing portfolio page
-  View favorited submissions organized by date range and/or goal -->
-
 <div id="portfolio-page" class="row">
   <div class="col m10 offset-m1 s12">
     <h4><%= user.name %>'s portfolio</h4>
 
     <!-- for each goal -->
-    <% targetGoals.forEach(function(goal){ %>
+    <% targetGoals.forEach(function(goal) { %>
       <div class="portfolio-goal">
         <h5><%= goal.name %></h5>
         <br>
 
-        <% user.currentGoals[goal.id].portfolio.forEach(function(choice, i, array){ %>
+        <% user.currentGoals[goal.id].portfolio.forEach(function(choice, i, array) { %>
           <% if (choice !== -1) { %>
             <div class="portfolio-week row">
               <div class="col s2">

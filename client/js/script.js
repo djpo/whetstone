@@ -8,10 +8,10 @@ counter = function() {
   var regex = /\s+/gi;
   var wordCount = value.trim().replace(regex, ' ').split(' ').length;
   //Set an arbitrary upper limit so people can't dump in huge text files
-  if(wordCount >= minimum && wordCount <= 5000){
+  if (wordCount >= minimum && wordCount <= 5000) {
     $('#text-file-save').removeAttr('disabled')
   } else {
-    $('#text-file-save').attr('disabled', 'disabled')
+    $('#text-file-save').attr('disabled', 'disabled');
   }
   $('#wordCount').html(wordCount);
 };
@@ -45,7 +45,7 @@ $(document).ready(function() {
     }
   });
   $('#text-entry').keydown(counter);
-  $('#upload-text-form').submit(function(e){
+  $('#upload-text-form').submit(function(e) {
     e.preventDefault();
     var textAreaContent = $('#text-entry').val();
     var wordCount       = $('#wordCount').html();
@@ -60,10 +60,10 @@ $(document).ready(function() {
         title         : title.trim(),
         note          : note.trim()
       },
-      success: function(data){
+      success: function(data) {
         window.location.href = '/dashboard';
       },
-      error: function(err){
+      error: function(err) {
         console.log(err);
         window.location.href = '/dashboard';
       }
@@ -71,7 +71,7 @@ $(document).ready(function() {
   });
 
   // Selecting submissions for portfolio from archive view
-  $('.port-select-toggle-button').on('click', function(){
+  $('.port-select-toggle-button').on('click', function() {
     $(this).css('background-color', 'red');
     var selectedWeek = $(this).attr('week');
     var weekOneIndexed = Number(selectedWeek) + 1;
@@ -83,10 +83,10 @@ $(document).ready(function() {
         selectedWeek: selectedWeek,
         selectedSub: selectedSub
       },
-      success: function(data){
+      success: function(data) {
         window.location.href = '/archive';
       },
-      error: function(err){
+      error: function(err) {
         console.log(err);
       }
     });

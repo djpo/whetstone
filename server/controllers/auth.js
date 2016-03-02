@@ -7,8 +7,8 @@ var express   = require('express'),
 router.post('/register', function(req, res) {
   User.register(new User(
     {
-      name    : req.body.name,
-      username: req.body.username,
+      name            : req.body.name,
+      username        : req.body.username,
       submitted_today : false
     }
   ), req.body.password, function(err, user) {
