@@ -52,4 +52,16 @@ router.post('/savePortSelection', function(req, res) {
   });
 });
 
+router.put('/changeActiveGoal', function(req, res){
+  var goalId = req.body.goalId;
+  db.user.findOne({_id: req.user.id}, function(err, user){
+    if (err) return console.log(err);
+    user.activeGoal = goalId;
+    user.save(function(err){
+      if (err) return console.error(err);
+      res.sendStatus(200);
+    })
+  })
+})
+
 module.exports = router;

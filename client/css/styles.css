@@ -342,8 +342,8 @@ span.dash-menu-badge {
 }
 .archive-box {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   vertical-align: top;
   background-color: rgba(69,90,100,.3);
   overflow: hidden;
@@ -354,11 +354,24 @@ span.dash-menu-badge {
   height: 100%;
   object-fit: cover;
 }
+.archive-nav{
+  margin-bottom: 20px;
+}
+.archive-nav .btn{
+  width: 100%;
+  margin-bottom: 10px;
+}
 .empty-submission {
   font-size: 1em;
   color: white;
   padding: 25%;
   text-align: center;
+}
+.change-active-goal {
+  cursor: pointer;
+}
+.change-active-goal:hover {
+  text-decoration: underline;
 }
 .collection-item {
 /*padding: 0;*/
@@ -382,7 +395,7 @@ span.dash-menu-badge {
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: rgba(162,172,177,.7);
+  /*background-color: rgba(162,172,177,.7);*/
 }
 .archive-week-label {
   position: relative;

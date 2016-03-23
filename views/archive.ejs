@@ -12,21 +12,39 @@
     <div class="row">
       <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
       <ul id="archive-goals-list" class="collection light">
-        <% for (var key in user.currentGoals) { %>
-          <% if (key === user.activeGoal) { %>
-            <li class="collection-item selected-collection-item"><%= user.currentGoals[key].name %></li>
-          <% } else { %>
-            <li class="collection-item"><%= user.currentGoals[key].name %></li>
+        <% if (currentUser == user){ %>
+          <% for (var key in user.currentGoals) { %>
+            <% if (key === user.activeGoal) { %>
+              <li class="collection-item selected-collection-item change-active-goal" id="<%= key %>"><%= user
+                        .currentGoals[key].name %></li>
+            <% } else { %>
+              <li class="collection-item change-active-goal" id="<%= key %>"><%= user.currentGoals[key].name %></li>
+            <% } %>
           <% } %>
-        <% } %>
+        <%} else {%>
+          <% for (var key in user.currentGoals) { %>
+          <% if (key === user.activeGoal) { %>
+          <li class="collection-item selected-collection-item"><%= user
+                    .currentGoals[key].name %></li>
+          <% } else { %>
+          <li class="collection-item"><%= user.currentGoals[key].name %></li>
+          <% } %>
+          <% } %>
+        <%}%>
       </ul>
     </div>
-    <!-- if currentUser is viewing own archive, show button to create new goal -->
-    <% if (user.id === currentUser.id) { %>
+    <div class="archive-nav">
+      <a class="btn whet-btn-1 " href="/dashboard">
+        dashboard
+      </a>
+      <!-- if currentUser is viewing own archive, show button to create new goal -->
+      <% if (user.id === currentUser.id) { %>
       <a class="btn whet-btn-1" href="/goal/new">
         new goal
       </a>
-    <% } %>
+      <% } %>
+    </div>
+
   </div>
 
   <!-- activeGoal all submissions -->
@@ -50,9 +68,9 @@
               <div class="divider"></div>
               <!-- if this past week isn't empty, and has no portfolio selection, then display a form for selecting -->
               <% if (i < goal.currentWeek && goal.subs[user.id][i].length > 0 && user.currentGoals[goal.id].portfolio[i] === -1) { %>
-                <div class="archive-week-label thin port-select-toggle-button" week="<%= i %>">
+                <div class="archive-week-label light port-select-toggle-button" week="<%= i %>">
               <% } else { %>
-                <div class="archive-week-label thin">
+                <div class="archive-week-label light">
               <% } %>
                   week <%= i + 1 %>
                 </div>

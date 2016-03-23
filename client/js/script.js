@@ -99,4 +99,21 @@ $(document).ready(function() {
       $(this).css('background-color', 'gray');
   });
 
+  $('.change-active-goal').on('click', function(){
+    var goalId = $(this).attr('id');
+    $.ajax({
+      url: '/archive/changeActiveGoal',
+      type: 'put',
+      data: {
+        goalId: goalId
+      },
+      success: function(data){
+        window.location.href = '/archive';
+      },
+      error: function(err){
+        console.log(err)
+      }
+    })
+  })
+
 });
