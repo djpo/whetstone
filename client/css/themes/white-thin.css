@@ -10,6 +10,9 @@
   background-color: white;
   color: black;
 }
+.btn {
+  background-color: #1E88E5;
+}
 
 input::-webkit-input-placeholder {
   color: darkgray !important;

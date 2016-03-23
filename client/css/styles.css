@@ -243,6 +243,15 @@ span.dash-menu-badge {
   font-size: .8rem;
   color: white;
 }
+.dash-btn {
+  width: 85%;
+  font-size: 12px;
+  margin: 5px 0;
+}
+.collapsible-body {
+  text-align: center;
+  padding: 2.5px;
+}
 
 /* submissions/show
 ----------------------------------------------*/
