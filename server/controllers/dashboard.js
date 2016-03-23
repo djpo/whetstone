@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
       if (err) return console.log(err);
       // Prepare data to send to view
       var weeklySubs = goal.subs[currentUser.id][goal.currentWeek] || [];
-      var dayName = require('../helpers/helper').getDayName(goal.weekStartsOn);
+      var dayName = require('../helpers/whet').getDayName(goal.weekStartsOn);
       var friendStatus = [];
       function getFriendStatus(callback) {
         var holdTheCurrentUser = {};
