@@ -96,6 +96,11 @@ router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res) {
       subNum  = parseInt(req.params.subNum);
   db.goal.findOne({_id: goalId}, function (err, goal) {
     if (err) return console.log(err);
+
+    if (goal.members.indexOf(req.user.id) == -1){
+      res.sendStatus(403)
+    }
+
     db.user.findOne({_id: userId}, function (err, user) {
       if (err) return console.log(err);
       var subUserName = user.name;
