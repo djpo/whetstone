@@ -18,9 +18,11 @@
     </div>
 
     <!-- upload box -->
-    <%if(goal.contentType.indexOf('text') === -1) {%>
+    <%if(goal.contentType.indexOf('image') !== -1) {%>
       <%include ./partials/upload %>
-    <%} else { %>
+    <%} else if (goal.contentType.indexOf('text') !== -1){ %>
+      <%include ./partials/textupload %>
+    <%} else {%>
       <%include ./partials/textupload %>
     <%}%>
     <!-- End of upload box -->
@@ -41,7 +43,7 @@
                 <div class="valign" id="text-view-div">
                   <p class="thin">
                     <%=weeklySubs[i].title%>
-                    <br><small><%=weeklySubs[i].wordCount%> words</small>
+                    <br><small><%=weeklySubs[i].wordCount%></small>
                   </p>
                 </div>
               <%}%>

@@ -1,4 +1,4 @@
-counter = function() {
+var counter = function() {
   var value = $('#text-entry').val();
   var minimum = $('#wordCountMinimum').html();
   if (value.length == 0) {
@@ -57,6 +57,29 @@ $(document).ready(function() {
       data: {
         newSubmission : textAreaContent,
         wordCount     : wordCount.trim(),
+        title         : title.trim(),
+        note          : note.trim()
+      },
+      success: function(data) {
+        window.location.href = '/dashboard';
+      },
+      error: function(err) {
+        console.log(err);
+        window.location.href = '/dashboard';
+      }
+    });
+  });
+
+  $('#upload-link-form').submit(function(e) {
+    e.preventDefault();
+    var title = $('#link-title').val();
+    var link  = $('#link-entry').val();
+    var note  = $('#link-note').val();
+    $.ajax({
+      url: '/submissions/uploadtext',
+      method: 'post',
+      data: {
+        newSubmission : link.trim(),
         title         : title.trim(),
         note          : note.trim()
       },

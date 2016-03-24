@@ -7,7 +7,11 @@
         <h5 class="light">upload</h5>
         <div class="row">
           <div class="input-field col s12">
-            <a class="modal-trigger btn-flat btn" href="#text-submit-modal" style="width: 100%; color: white">open text editor</a>
+            <%if (goal.contentType.indexOf('text') !== -1){ %>
+             <a class="modal-trigger btn-flat btn" href="#text-submit-modal" style="width: 100%; color: white">open text editor</a>
+            <%} else {%>
+              <a class="modal-trigger btn-flat btn" href="#link-submit-modal" style="width: 100%; color: white">open text editor</a>
+            <%}%>
           </div>
         </div>
       </form>
@@ -15,4 +19,8 @@
   </div>
 </div>
 
-<% include ./modals/textmodal %>
+<%if (goal.contentType.indexOf('text') !== -1){ %>
+  <%include ./modals/textmodal %>
+<%} else {%>
+  <%include ./modals/linkmodal %>
+<%}%>

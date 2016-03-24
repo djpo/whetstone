@@ -210,6 +210,10 @@ textarea.materialize-textarea {
   font-size: 10px;
   margin-bottom: 15px;
 }
+#link-submit-modal {
+  padding: 20px;
+  top: 5% !important;
+}
 .middle-column {
   position: relative;
   /*top: -45px;*/
@@ -269,7 +273,7 @@ span.dash-menu-badge {
 }
 #sub-view-info {}
 #sub-view-note-label {
-  padding: 2%;
+  padding: 2% 4%;
   font-size: 1.2em;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
@@ -277,10 +281,11 @@ span.dash-menu-badge {
 }
 #sub-view-note {
   min-height: 10em;
-  padding: 2%;
+  padding: 4%;
 }
 #sub-view-note p {
   margin: 0;
+  font-weight: 300;
 }
 #text-submission-view {
   margin-top: 0;
