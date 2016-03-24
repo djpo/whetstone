@@ -10,7 +10,7 @@
   <div id="archive-goals-list-panel" class="col m3 s10">
     <!-- display all target user's goals -->
     <div class="row">
-      <h5 id="archive-goals-header" class="light"><%= user.username.split('@')[0] %>'s goals</h5>
+      <h5 id="archive-goals-header" class="light"><%= user.name %>'s goals</h5>
       <ul id="archive-goals-list" class="collection light">
         <% if (currentUser == user){ %>
           <% for (var key in user.currentGoals) { %>
@@ -90,7 +90,16 @@
                     <!-- if there is a filled submission in this box, display it -->
                     <% if (weeklySubs[j]) { %>
                       <a href="/submissions/<%= goal.id %>/<%= user.id %>/<%= i %>/<%= j %>">
+                        <%if(goal.contentType.indexOf('image') != -1) {%>
                         <img class="valign" src="/<%= weeklySubs[j].filename %>">
+                        <%} else {%>
+                        <div class="valign" id="text-view-div">
+                          <p style="font-size: 12px">
+                            <%=weeklySubs[j].title%>
+                            <br><small><%=weeklySubs[j].wordCount%> words</small>
+                          </p>
+                        </div>
+                        <%}%>
                       </a>
                     <% } else { %>
                       <div class="empty-submission"></div>

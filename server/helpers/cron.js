@@ -1,5 +1,6 @@
 var db            = require('../models/index'),
   warningmailer = require('./warningmailer'),
+  chargemailer  = require('./chargemailer'),
   async         = require('async'),
   CronJob       = require('cron').CronJob;
 
@@ -64,13 +65,12 @@ var job = new CronJob('0 0 * * * *', function() {
                 user.markModified('currentGoals');
                 user.save(function(err){
                   //...and pays the pot
+                  chargemailer(user.username, user.currentGoals[goal.id].name)
                   goal.pot += goal.incentive;
                   goal.save()
                 });
               } else {
                 //User didn't submit but still has missable days
-                //WARNING: only uncomment below when testing longer periods. will send you
-                //emails every minute worst case. Can add up when running server.
                 user.currentGoals[goal.id].missableDays--;
                 console.log('~~~~~' + user.username + ' does not get charged but missableDays get decremented.');
 

@@ -46,6 +46,14 @@ var routes = require('./server/routes');
 _.each(routes, function(controller, route) {
   app.use(route, controller);
 });
+// Error handlers
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+app.use(function(req, res){
+  res.render('404');
+})
 
 // Connect to mongo, run server
 mongoose.connect('mongodb://localhost:27017/whetstone' || process.env.MONGOLAB_URI);
