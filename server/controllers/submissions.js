@@ -1,6 +1,6 @@
 var express     = require('express'),
     multer      = require('multer'),
-    upload      = multer({ dest: 'uploads/' }),
+    upload      = multer({ dest: 'uploads/', limits: {fileSize: 5000000} }).single('submission'),
     db          = require('../models/index'),
     dateFormat  = require('dateformat'),
     router      = express.Router();
@@ -10,34 +10,42 @@ router.use(function(req, res, next) {
   next();
 });
 
-router.post('/upload', upload.single('submission'), function(req, res, next) {
-  // Find the current user
-  db.user.findOne({_id: req.user.id}, function(err, user) {
-    if (err) return console.log(err);
-    // Find the current user's activeGoal
-    db.goal.findOne({_id: user.activeGoal}, function(err, goal) {
-      if (err) return console.log(err);
-      // Create new submission, add metadata
-      var newSubmission = req.file;
-      newSubmission.user_id = user.id;
-      newSubmission.created_at = new Date();
-      newSubmission.note = req.body.note;
-      // Add submission to goal
-      goal.subs[user.id][goal.currentWeek].push(newSubmission);
-      // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
-      goal.markModified('subs');
-      // Save goal
-      goal.save(function(err) {
+router.post('/upload', function(req, res, next) {
+  upload(req, res, function(err){
+    if (err){
+      req.flash('error', 'error: file size too big, 5mb max.')
+      res.redirect('/dashboard')
+    } else {
+      // Find the current user
+      db.user.findOne({_id: req.user.id}, function(err, user) {
         if (err) return console.log(err);
-        user.currentGoals[goal.id].submitted_today = true;
-        user.markModified('currentGoals');
-        user.save(function(err) {
+        // Find the current user's activeGoal
+        db.goal.findOne({_id: user.activeGoal}, function(err, goal) {
           if (err) return console.log(err);
-          res.redirect('/dashboard');
-        })
+          // Create new submission, add metadata
+          var newSubmission = req.file;
+          newSubmission.user_id = user.id;
+          newSubmission.created_at = new Date();
+          newSubmission.note = req.body.note;
+          // Add submission to goal
+          goal.subs[user.id][goal.currentWeek].push(newSubmission);
+          // Alert db that subs has changed (bc subs is Schema.Types.Mixed)
+          goal.markModified('subs');
+          // Save goal
+          goal.save(function(err) {
+            if (err) return console.log(err);
+            user.currentGoals[goal.id].submitted_today = true;
+            user.markModified('currentGoals');
+            user.save(function(err) {
+              if (err) return console.log(err);
+              res.redirect('/dashboard');
+            })
+          });
+        });
       });
-    });
-  });
+    }
+  })
+
 });
 
 router.post('/uploadtext', function(req, res) {

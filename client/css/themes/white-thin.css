@@ -50,6 +50,9 @@ input:-ms-input-placeholder {
 .whet-topbar-background {
   background-color: #f8f8f8;
 }
+#nav-alert {
+  color: orangered;
+}
 
 /*3. Dashboard elements
 ----------------------------------------------*/

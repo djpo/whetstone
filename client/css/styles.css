@@ -87,8 +87,10 @@
   border-right: 8px solid transparent;
 }
 #nav-alert {
-  color: orangered;
   margin-right: 5px;
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: 15px;
 }
 
 /* welcome (older)
@@ -173,13 +175,15 @@
 
 /* dashboard
 ----------------------------------------------*/
+textarea.materialize-textarea {
+  padding: 0;
+}
 #upload-box {}
 #submit-button {
 	width: 100%;
 }
 #upload-box .upload-button {
-  height: 50px;
-  font-size: 10px;
+  font-size: 12px;
 }
 #upload-box .input-field {
   width: 100%;

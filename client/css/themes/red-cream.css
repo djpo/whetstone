@@ -14,6 +14,22 @@
   background-color: #1E88E5;
 }
 
+textarea::-webkit-input-placeholder {
+  color: darkolivegreen !important;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+  color: darkolivegreen !important;
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+  color: darkolivegreen !important;
+}
+
+textarea:-ms-input-placeholder {
+  color: darkolivegreen !important;
+}
+
 input::-webkit-input-placeholder {
   color: darkolivegreen !important;
 }
@@ -52,6 +68,9 @@ input:-ms-input-placeholder {
 }
 #top-strip a {
   color: #FFFAF0;
+}
+#nav-alert {
+  color: white;
 }
 
 /*3. Dashboard elements

@@ -13,7 +13,7 @@
         <div class="file-field input-field col m5 s12">
           <!-- Chosen file path - TODO: change appearance, or make 'choose file' button change if this path is filled -->
           <div class="file-path-wrapper">
-            <input required class="file-path validate" placeholder="Submission" type="text">
+            <input required class="file-path validate" placeholder="5mb max" type="text">
           </div>
           <!-- File chooser button -->
           <div class="btn upload-button " style="width: 100%">
@@ -23,11 +23,21 @@
         </div>
       </div>
 
-      <!-- User note field -->
-      <div class="input-field s12">
-        <!--<i class="material-icons prefix">label</i>-->
-        <input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">
+      <div class="row">
+        <div class="input-field col m5 s12">
+          <!-- User note field -->
+          <div class="input-field s12">
+            <!--<i class="material-icons prefix">label</i>-->
+            <textarea placeholder="Write a note" type="text" name="note" class="materialize-textarea validate"></textarea>
+            <!--<input id="icon_prefix" placeholder="Write a note"  type="text" name="note" class="validate">-->
+          </div>
+        </div>
       </div>
+      <!-- User note field -->
+      <!--<div class="input-field s12">-->
+        <!--&lt;!&ndash;<i class="material-icons prefix">label</i>&ndash;&gt;-->
+        <!--<textarea placeholder="Write a note" type="text" name="note" class="materialize-textarea validate"></textarea>-->
+      <!--</div>-->
 
       <!-- Submit button -->
       <div class="col s12">
