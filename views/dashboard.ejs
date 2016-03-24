@@ -61,16 +61,31 @@
 
   <!-- right column -->
   <div class="col m3 s12 ">
+      <ul id="archive-goals-list" class="collection light collapsible" data-collapsible="accordion">
+        <li>
+          <div class="dash-menu-header collapsible-header">
+            <strong>your goals</strong>
+          </div>
+        </li>
+        <% for (var key in user.currentGoals) { %>
+        <% if (key === user.activeGoal) { %>
+        <li class="collection-item selected-collection-item" id="<%= key %>"><%= user
+                  .currentGoals[key].name %></li>
+        <% } else { %>
+        <li class="collection-item change-active-goal" id="<%= key %>"><%= user.currentGoals[key].name %></li>
+        <% } %>
+        <%}%>
+      </ul>
     <ul class="collapsible" data-collapsible="accordion">
       <li>
         <div class="dash-menu-header collapsible-header">
-          <strong>goal members</strong>
+          <strong>active goal's members</strong>
         </div>
       </li>
 
       <!-- Display the current user's menu item, with body open -->
       <li>
-        <div class="dash-menu-header collapsible-header active"><%= friendStatus[0].name %>
+        <div class="dash-menu-header collapsible-header active">me
           <small>(<%= friendStatus[0].weeklyProgress %>/<%= goal.frequency %>) this week</small>
           <% if (friendStatus[0].submittedToday) { %>
             <span class="dash-menu-badge badge">
@@ -79,10 +94,8 @@
           <% } %>
         </div>
         <div class="collapsible-body">
-          <!--<p>(<%= friendStatus[0].weeklyProgress %>/<%= goal.frequency %>) this week</p>-->
-          <!--<a href="/dashboard" class="btn dash-btn">dashboard</a>-->
           <a href="/archive" class="btn dash-btn">archive</a>
-          <a href="/portfolio/<%= currentUser.name %>" class="btn dash-btn">portfolio</a>
+          <a href="/portfolio/<%= currentUser.id %>" class="btn dash-btn">portfolio</a>
         </div>
       </li>
 

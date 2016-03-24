@@ -159,7 +159,7 @@ $(document).ready(function() {
         goalId: goalId
       },
       success: function(data){
-        window.location.href = '/archive';
+        location.reload()
       },
       error: function(err){
         console.log(err)

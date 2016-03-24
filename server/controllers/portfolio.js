@@ -3,10 +3,10 @@ var express     = require('express'),
     async       = require('async'),
     router      = express.Router();
 
-router.get('/:targetUserName', function(req, res) {
-  var targetUserName = req.params.targetUserName;
+router.get('/:targetUserId', function(req, res) {
+  var targetUserId = req.params.targetUserId;
   var targetGoals = [];
-  db.user.findOne({name: targetUserName}, function (err, targetUser) {
+  db.user.findOne({_id: targetUserId}, function (err, targetUser) {
     if (err) return console.log(err);
     function getTargetGoals(callback) {
       var goalKeys = Object.keys(targetUser.currentGoals);
