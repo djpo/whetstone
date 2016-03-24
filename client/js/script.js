@@ -93,6 +93,34 @@ $(document).ready(function() {
     });
   });
 
+  $('#submit-comment').submit(function(e){
+    e.preventDefault();
+    var content = $('#comment').val();
+    var date = new Date();
+    var path = window.location.pathname.split('/');
+    $.ajax({
+      url: '/submissions/comment',
+      method: 'post',
+      data: {
+        content: content,
+        date: date,
+        goalId: path[2],
+        userId: path[3],
+        weekNum: path[4],
+        subNum: path[5]
+      },
+      success: function(data){
+        $('#comment').val("")
+        $('#comments-container').prepend('<div class="comment z-depth-1"><p>' + content + '</p><small>' + data.author
+          + ' @ ' + date + '</small></div>')
+      },
+      error: function(data){
+        console.log(err);
+        window.location.href = '/dashboard';
+      }
+    })
+  })
+
   // Selecting submissions for portfolio from archive view
   $('.port-select-toggle-button').on('click', function() {
     $(this).css('background-color', 'red');

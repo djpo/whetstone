@@ -263,6 +263,11 @@ span.dash-menu-badge {
 
 /* submissions/show
 ----------------------------------------------*/
+.comment {
+  background-color: white;
+  margin: 5px 0;
+  padding: 4%;
+}
 #sub-view-header {}
 #sub-view-header > span {
   font-size: 1.5em;

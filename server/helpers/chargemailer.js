@@ -8,7 +8,7 @@ var mailer = function(userEmail, goalName) {
   var mailOptions = {
     from: 'Whetstone <loki.bera@gmail.com>', // sender address
     to: userEmail, // list of receivers
-    subject: goalName + ' - You have been charged', // Subject line
+    subject: goalName + ' - You have missed a day', // Subject line
     text: 'Body', // plaintext body
     html: 'You have no days left for your goal "' + goalName + '" and have lost your incentive for the day. Get your' +
     ' shit together. - The Whetstone Team' // html body

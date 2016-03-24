@@ -31,6 +31,28 @@
         </div>
       <% } %>
     </div>
-    <div hidden id="sub-view-comments"></div>
+    <div id="sub-view-comments">
+      <form id="submit-comment">
+        <div class="row margin">
+          <div class="input-field col s12">
+            <input id="comment" name="comment" placeholder="comment here" required>
+          </div>
+          <div class="col s12">
+            <button class=" upload-button btn waves-effect waves-light"
+                    type="submit" name="action">submit comment</button>
+          </div>
+        </div>
+      </form>
+      <div id="comments-container">
+        <%if (subComments){%>
+          <%for(var i = subComments.length - 1; i >= 0; i--){%>
+            <div class="comment z-depth-1">
+              <p><%=subComments[i].content%></p>
+              <small><%=subComments[i].author%> @ <%=subComments[i].date%></small>
+            </div>
+          <%}%>
+        <%}%>
+      </div>
+    </div>
   </div>
 </div>

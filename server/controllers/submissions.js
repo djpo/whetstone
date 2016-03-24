@@ -89,6 +89,30 @@ router.post('/uploadtext', function(req, res) {
   });
 })
 
+router.post('/comment', function(req, res){
+  var content = req.body.content,
+    goalId = req.body.goalId,
+    userId = req.body.userId,
+    weekNum = req.body.weekNum,
+    subNum = req.body.subNum,
+    date = req.body.date;
+  db.goal.findOne({_id: goalId}, function(err, goal){
+    if (err) return console.log(err)
+
+      var author = req.user.name;
+      var subToComment = goal.subs[userId][weekNum][subNum];
+
+      subToComment.comments = subToComment.comments || [];
+      subToComment.comments.push({content: content, author: author, date: date})
+
+      goal.markModified('subs');
+      goal.save(function(err){
+        if (err) return console.log(err);
+        res.send({author: author})
+      })
+    })
+})
+
 router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res) {
   var goalId  = req.params.goalId,
       userId  = req.params.userId,
@@ -115,7 +139,8 @@ router.get('/:goalId/:userId/:weekNum/:subNum', function(req, res) {
           subUserName : subUserName,
           subText     : subToShow.text,
           subTitle    : subToShow.title,
-          subWordCount: subToShow.wordCount
+          subWordCount: subToShow.wordCount,
+          subComments : subToShow.comments
         }
       );
     });
