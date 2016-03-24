@@ -7,7 +7,7 @@
 
 <div id="archive-page" class="row">
 
-  <div id="archive-goals-list-panel" class="col m3 s10">
+  <div id="archive-goals-list-panel" class="col m3 s12">
     <!-- display all target user's goals -->
     <div class="row">
       <h5 id="archive-goals-header" class="light"><%= user.name %>'s goals</h5>
@@ -34,12 +34,12 @@
       </ul>
     </div>
     <div class="archive-nav">
-      <a class="btn whet-btn-1 " href="/dashboard">
+      <a class="btn" href="/dashboard">
         dashboard
       </a>
       <!-- if currentUser is viewing own archive, show button to create new goal -->
       <% if (user.id === currentUser.id) { %>
-      <a class="btn whet-btn-1" href="/goal/new">
+      <a class="btn" href="/goal/new">
         new goal
       </a>
       <% } %>
@@ -94,7 +94,7 @@
                         <img class="valign" src="/<%= weeklySubs[j].filename %>">
                         <%} else {%>
                         <div class="valign" id="text-view-div">
-                          <p style="font-size: 12px">
+                          <p style="font-size: 12px; padding: 35px 5px">
                             <%=weeklySubs[j].title%>
                             <br><small><%=weeklySubs[j].wordCount%> words</small>
                           </p>
