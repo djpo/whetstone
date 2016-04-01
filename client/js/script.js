@@ -118,7 +118,7 @@ $(document).ready(function() {
         console.log(err);
         window.location.href = '/dashboard';
       }
-    })
+    });
   })
 
   // Selecting submissions for portfolio from archive view
@@ -162,9 +162,9 @@ $(document).ready(function() {
         location.reload()
       },
       error: function(err){
-        console.log(err)
+        console.log(err);
       }
-    })
-  })
+    });
+  });
 
 });

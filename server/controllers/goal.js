@@ -22,8 +22,8 @@ router.post('/save', function(req, res) {
     var newGoal = new db.goal(req.body);
     // Initialize goal
     var now = new Date();
-    // for development, to start the goal at a specified date:
-    // var now = new Date("February 1, 2016 11:11:11");
+      // for development, to start the goal at a specified date:
+      // var now = new Date("February 1, 2016 11:11:11");
     newGoal.startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var endTime = new Date(newGoal.startDate.getTime() + (7 * newGoal.duration * 86400000));
     newGoal.endDate = new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate());
@@ -38,13 +38,10 @@ router.post('/save', function(req, res) {
       var emailArray = newGoal.friendsEmails.split(",");
       var counter = 0; // Need an external counter because i is asynchronous, may go 0, 2, 1 3 instead of 0, 1, 2, 3
       emailArray.forEach(function(email, i, array){
-
         db.user.findOne({username: email.trim()}, function(err, foundUser){
           if (err){
-            return console.log(err)
-          }
-          else if(foundUser == null){
-            console.log(err)
+            return console.log(err);
+          } else if (foundUser == null) {
             db.user.register(new db.user(
               {
                 name    : email.split('@')[0].trim(),
@@ -65,11 +62,11 @@ router.post('/save', function(req, res) {
           } else {
             initializeUser(foundUser)
             counter++;
-            if(counter === array.length){
+            if (counter === array.length) {
               callback();
             }
           }
-        })
+        });
       });
     }
 
